@@ -193,7 +193,7 @@ export default function Home() {
       {/* Header */}
       <header className="bg-gradient-to-r from-primary to-orange-400 text-white p-4 sticky top-0 z-50">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">🍽️ 점심뭐먹지?</h1>
+          <h1 className="text-xl font-bold">🍽️ 오늘뭐먹지?</h1>
           <div className="text-sm opacity-90 flex items-center">
             <Clock className="w-4 h-4 mr-1" />
             <span>{currentTime}</span>

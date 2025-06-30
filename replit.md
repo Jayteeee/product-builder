@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a Korean lunch menu recommendation web application called "점심뭐먹지?" (What should I eat for lunch?). The application helps office workers discover lunch options based on their preferences for food category, price range, and spice level. It's built as a full-stack web application with a React frontend and Express backend, featuring a step-by-step recommendation wizard interface.
+This is a Korean food menu recommendation web application called "오늘뭐먹지?" (What should I eat today?). The application helps office workers discover food options based on their preferences for food category, price range, and spice level. It's built as a full-stack web application with a React frontend and Express backend, featuring a step-by-step recommendation wizard interface with extensive menu variety.
 
 ## System Architecture
 
@@ -94,6 +94,11 @@ The application is configured for deployment with the following setup:
 ```
 Changelog:
 - June 30, 2025. Initial setup
+- June 30, 2025. Enhanced menu variety with 29 food items across all categories and price ranges
+- June 30, 2025. Fixed recommendation algorithm to properly match user price preferences
+- June 30, 2025. Improved image matching for menu items
+- June 30, 2025. Changed app title from "점심뭐먹지?" to "오늘뭐먹지?"
+- June 30, 2025. Added randomization to recommendations for variety in repeat usage
 ```
 
 ## User Preferences
