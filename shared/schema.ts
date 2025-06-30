@@ -15,7 +15,6 @@ export const foodRecommendations = pgTable("food_recommendations", {
   priceRange: text("price_range").notNull(),
   spiceLevel: text("spice_level").notNull(),
   price: integer("price").notNull(),
-  rating: text("rating").notNull(),
   description: text("description").notNull(),
   imageUrl: text("image_url"),
   imageUrls: text("image_urls").array(),

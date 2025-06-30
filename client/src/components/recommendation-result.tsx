@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+
 import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
 import type { FoodRecommendation } from "@shared/schema";
@@ -59,12 +59,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
           
           <p className="text-gray-600 mb-4">{recommendation.description}</p>
           
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center">
-              <Star className="w-4 h-4 text-yellow-500 fill-current" />
-              <span className="ml-1 font-semibold">{recommendation.rating}</span>
-              <span className="text-gray-500 ml-1">평점</span>
-            </div>
+          <div className="flex items-center justify-end mb-4">
             <div className="text-lg font-bold text-primary">
               {recommendation.price.toLocaleString()}원
             </div>
@@ -121,10 +116,6 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
                 >
                   <h5 className="font-medium text-sm">{option.name}</h5>
                   <p className="text-xs text-gray-500">{option.price.toLocaleString()}원</p>
-                  <div className="flex items-center mt-1">
-                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                    <span className="text-xs text-gray-500 ml-1">{option.rating}</span>
-                  </div>
                 </div>
               </div>
             ))}
