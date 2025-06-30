@@ -51,6 +51,9 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
         src={images[currentIndex]} 
         alt={`${alt} - 이미지 ${currentIndex + 1}`}
         className="w-full h-full object-cover transition-opacity duration-300"
+        style={{
+          objectFit: className?.includes('object-contain') ? 'contain' : 'cover'
+        }}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
           target.src = "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300";
