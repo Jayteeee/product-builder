@@ -20,7 +20,14 @@ export class MemStorage implements IStorage {
   }
 
   private initializeFoodData() {
-    this.foodRecommendations = [
+    // Helper function to create imageUrls from imageUrl for temporary compatibility
+    const createImageUrls = (imageUrl: string) => [
+      imageUrl,
+      "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+      "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+    ];
+
+    const baseItems = [
       // Korean Food - Budget
       {
         id: 1,
@@ -32,6 +39,13 @@ export class MemStorage implements IStorage {
         rating: "4.8",
         description: "얼큰하고 시원한 김치찌개로 속을 채워보세요! 따뜻한 국물이 몸을 데워줄 거예요.",
         imageUrl: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        imageUrls: [
+          "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+        ],
         tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함", "🥬 반찬 3종"]
       },
       {
@@ -44,6 +58,11 @@ export class MemStorage implements IStorage {
         rating: "4.6",
         description: "구수한 된장찌개로 든든한 한 끼를 즐겨보세요.",
         imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        imageUrls: [
+          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+        ],
         tags: ["🥛 순한맛", "🍚 밥 포함", "🥬 반찬 포함"]
       },
       {
@@ -56,6 +75,12 @@ export class MemStorage implements IStorage {
         rating: "4.7",
         description: "신선한 나물과 고추장으로 버무린 건강한 비빔밥이에요.",
         imageUrl: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        imageUrls: [
+          "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1611599238845-7f3c32eadb3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+        ],
         tags: ["🌶️🌶️ 보통맛", "🥬 나물 듬뿍", "🥚 계란후라이"]
       },
       {
@@ -68,6 +93,11 @@ export class MemStorage implements IStorage {
         rating: "4.5",
         description: "매콤하고 진한 국물의 육개장으로 든든하게!",
         imageUrl: "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        imageUrls: [
+          "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+        ],
         tags: ["🌶️🌶️🌶️ 매운맛", "🥩 소고기", "🍚 밥 포함"]
       },
       
@@ -81,7 +111,14 @@ export class MemStorage implements IStorage {
         price: 12000,
         rating: "4.9",
         description: "달콤하고 부드러운 불고기로 특별한 점심을 만들어보세요.",
-        imageUrl: "https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        imageUrl: "https://images.unsplash.com/photo-1598515213692-d4238af99ad6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        imageUrls: [
+          "https://images.unsplash.com/photo-1598515213692-d4238af99ad6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1590777461479-2b68d2616bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1605809138252-14c62e7b9fe3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+          "https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+        ],
         tags: ["🥛 순한맛", "🥩 프리미엄 고기", "🍚 밥 포함"]
       },
       {
@@ -393,6 +430,12 @@ export class MemStorage implements IStorage {
         tags: ["🌶️🌶️ 보통맛", "🍖 순대", "🧂 소금 포함"]
       }
     ];
+
+    // Map through all items to add imageUrls property
+    this.foodRecommendations = baseItems.map(item => ({
+      ...item,
+      imageUrls: createImageUrls(item.imageUrl)
+    }));
   }
 
   async getUser(id: number): Promise<User | undefined> {

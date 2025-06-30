@@ -132,6 +132,20 @@ export default function Home() {
     }
   });
 
+  const handleSwapRecommendation = (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => {
+    if (!recommendation) return;
+    
+    // Remove the new recommendation from alternatives and add current one
+    const updatedAlternatives = recommendation.alternatives.filter(alt => alt.id !== newRecommendation.id);
+    updatedAlternatives.push(currentRecommendation);
+    
+    // Update the recommendation state
+    setRecommendation({
+      recommendation: newRecommendation,
+      alternatives: updatedAlternatives
+    });
+  };
+
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -294,6 +308,7 @@ export default function Home() {
           <RecommendationResult 
             recommendation={recommendation.recommendation}
             alternatives={recommendation.alternatives}
+            onSwapRecommendation={handleSwapRecommendation}
           />
         )}
       </main>

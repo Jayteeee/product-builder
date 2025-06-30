@@ -1,12 +1,30 @@
 import { Star } from "lucide-react";
+import { ImageCarousel } from "./image-carousel";
 import type { FoodRecommendation } from "@shared/schema";
 
 interface RecommendationResultProps {
   recommendation: FoodRecommendation;
   alternatives: FoodRecommendation[];
+  onSwapRecommendation?: (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => void;
 }
 
-export function RecommendationResult({ recommendation, alternatives }: RecommendationResultProps) {
+export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
+  const handleAlternativeClick = (alternative: FoodRecommendation) => {
+    if (onSwapRecommendation) {
+      onSwapRecommendation(alternative, recommendation);
+    }
+  };
+
+  // Create image arrays for carousel - use imageUrls if available, otherwise create array from imageUrl
+  const getImageUrls = (food: FoodRecommendation) => {
+    if (food.imageUrls && food.imageUrls.length > 0) {
+      return food.imageUrls;
+    }
+    if (food.imageUrl) {
+      return [food.imageUrl];
+    }
+    return [];
+  };
   return (
     <div className="step fade-in">
       <div className="text-center mb-6">
@@ -16,13 +34,11 @@ export function RecommendationResult({ recommendation, alternatives }: Recommend
 
       {/* Recommended Food Card */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6 bounce-in">
-        {recommendation.imageUrl && (
-          <img 
-            src={recommendation.imageUrl} 
-            alt={recommendation.name}
-            className="w-full h-48 object-cover"
-          />
-        )}
+        <ImageCarousel 
+          images={getImageUrls(recommendation)}
+          alt={recommendation.name}
+          className="w-full h-48"
+        />
         
         <div className="p-6">
           <div className="flex items-center justify-between mb-3">
@@ -68,11 +84,29 @@ export function RecommendationResult({ recommendation, alternatives }: Recommend
             {alternatives.map((option) => (
               <div 
                 key={option.id}
-                className="flex-shrink-0 bg-white rounded-lg p-3 shadow-md cursor-pointer min-w-[120px]"
+                className="flex-shrink-0 bg-white rounded-lg p-3 shadow-md cursor-pointer min-w-[120px] hover:shadow-lg hover:scale-105 transition-all duration-200"
+                onClick={() => handleAlternativeClick(option)}
               >
-                <div className="text-2xl mb-1">{getCategoryIcon(option.category)}</div>
+                <div className="relative">
+                  {option.imageUrl && (
+                    <img 
+                      src={option.imageUrl} 
+                      alt={option.name}
+                      className="w-full h-16 object-cover rounded mb-2"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                  )}
+                  <div className="text-2xl mb-1">{getCategoryIcon(option.category)}</div>
+                </div>
                 <h5 className="font-medium text-sm">{option.name}</h5>
                 <p className="text-xs text-gray-500">{option.price.toLocaleString()}원</p>
+                <div className="flex items-center mt-1">
+                  <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                  <span className="text-xs text-gray-500 ml-1">{option.rating}</span>
+                </div>
               </div>
             ))}
           </div>

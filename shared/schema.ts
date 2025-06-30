@@ -18,6 +18,7 @@ export const foodRecommendations = pgTable("food_recommendations", {
   rating: text("rating").notNull(),
   description: text("description").notNull(),
   imageUrl: text("image_url"),
+  imageUrls: text("image_urls").array(),
   tags: text("tags").array(),
 });
 
