@@ -14,18 +14,18 @@ export function ImageModal({ images, alt, trigger }: ImageModalProps) {
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
-      <DialogContent className="max-w-[90vw] max-h-[90vh] w-full h-full p-4 bg-black/95 border-none">
+      <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-black/95 border-none flex items-center justify-center">
         <VisuallyHidden asChild>
           <DialogTitle>{alt} 이미지</DialogTitle>
         </VisuallyHidden>
         <VisuallyHidden asChild>
           <DialogDescription>{alt}의 상세 이미지를 확인하세요</DialogDescription>
         </VisuallyHidden>
-        <div className="relative w-full h-full rounded-lg overflow-hidden">
+        <div className="w-full h-[85vh] flex items-center justify-center">
           <ImageCarousel 
             images={images} 
             alt={alt} 
-            className="w-full h-full bg-transparent modal-image"
+            className="w-full h-full bg-black modal-image flex items-center justify-center"
           />
         </div>
       </DialogContent>

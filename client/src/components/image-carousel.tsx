@@ -44,16 +44,22 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const isModalImage = className?.includes('modal-image');
+  
   return (
-    <div className={cn("relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden", className)}>
+    <div className={cn(
+      "relative w-full bg-gray-100 rounded-lg overflow-hidden",
+      isModalImage ? "h-full flex items-center justify-center bg-transparent" : "h-48",
+      className
+    )}>
       {/* Main Image */}
       <img 
         src={images[currentIndex]} 
         alt={`${alt} - 이미지 ${currentIndex + 1}`}
-        className="w-full h-full object-cover transition-opacity duration-300"
-        style={{
-          objectFit: className?.includes('object-contain') ? 'contain' : 'cover'
-        }}
+        className={cn(
+          "transition-opacity duration-300",
+          isModalImage ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
+        )}
         onError={(e) => {
           const target = e.target as HTMLImageElement;
           target.src = "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300";

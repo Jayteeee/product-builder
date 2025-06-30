@@ -5,12 +5,19 @@
 @tailwind utilities;
 
 /* Modal image styling */
+.modal-image {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+}
+
 .modal-image img {
   object-fit: contain !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
 }
 
 :root {
