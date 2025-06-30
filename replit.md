@@ -99,6 +99,9 @@ Changelog:
 - June 30, 2025. Improved image matching for menu items
 - June 30, 2025. Changed app title from "점심뭐먹지?" to "오늘뭐먹지?"
 - June 30, 2025. Added randomization to recommendations for variety in repeat usage
+- June 30, 2025. Added image carousel with navigation arrows and dot indicators
+- June 30, 2025. Implemented menu swapping functionality for alternative recommendations
+- June 30, 2025. Added modal functionality for viewing enlarged images when clicking on photos
 ```
 
 ## User Preferences
