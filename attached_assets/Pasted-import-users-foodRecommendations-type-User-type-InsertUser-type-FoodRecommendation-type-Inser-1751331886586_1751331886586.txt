@@ -1,0 +1,149 @@
+import { users, foodRecommendations, type User, type InsertUser, type FoodRecommendation, type InsertFoodRecommendation, type RecommendationRequest } from "@shared/schema";
+
+export interface IStorage {
+  getUser(id: number): Promise<User | undefined>;
+  getUserByUsername(username: string): Promise<User | undefined>;
+  createUser(user: InsertUser): Promise<User>;
+  getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation>;
+  getAlternativeRecommendations(category: string, excludeId?: number): Promise<FoodRecommendation[]>;
+}
+
+export class MemStorage implements IStorage {
+  private users: Map<number, User>;
+  private foodRecommendations: FoodRecommendation[] = [];
+  currentId: number;
+
+  constructor() {
+    this.users = new Map();
+    this.currentId = 1;
+    this.initializeFoodData();
+  }
+
+  private initializeFoodData() {
+    // Helper function to create authentic Korean food imageUrls
+    const createKoreanFoodImages = (dishName: string) => {
+      const koreanFoodImages: { [key: string]: string[] } = {
+        "김치찌개": [
+          "https://www.10000recipe.com/recipe/6875776"
+        ],
+        "비빔밥": [
+          "https://www.flickr.com/photos/28604754@N00/5896614484"
+        ],
+        "불고기": [
+          "https://seasonedbyjin.com/korean-beef-bulgogi-recipe/"
+        ],
+        "떡볶이": [
+          "https://wtable.co.kr/recipes/mbgSa5ekLhRQgPUCPxTCCxbt"
+        ]
+      };
+      return koreanFoodImages[dishName] || ["https://example.com/default-food.jpg"];
+    };
+
+    const baseItems = [
+      {
+        id: 1,
+        name: "김치찌개",
+        category: "korean",
+        priceRange: "budget",
+        spiceLevel: "medium",
+        price: 8000,
+        description: "얼큰하고 시원한 김치찌개로 속을 채워보세요! 따뜻한 국물이 몸을 데워줄 거예요.",
+        tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함", "🥬 반찬 3종"]
+      },
+      {
+        id: 2,
+        name: "비빔밥",
+        category: "korean",
+        priceRange: "budget",
+        spiceLevel: "medium",
+        price: 8500,
+        description: "신선한 나물과 고추장으로 버무린 건강한 비빔밥이에요.",
+        tags: ["🌶️🌶️ 보통맛", "🥬 나물 듬뿍", "🥚 계란후라이"]
+      },
+      {
+        id: 3,
+        name: "불고기",
+        category: "korean",
+        priceRange: "moderate",
+        spiceLevel: "mild",
+        price: 12000,
+        description: "달콤하고 부드러운 불고기로 특별한 점심을 만들어보세요.",
+        tags: ["🥛 순한맛", "🥩 프리미엄 고기", "🍚 밥 포함"]
+      },
+      {
+        id: 4,
+        name: "떡볶이",
+        category: "street",
+        priceRange: "budget",
+        spiceLevel: "medium",
+        price: 4000,
+        description: "매콤달콤한 떡볶이로 간단하게 배를 채워보세요.",
+        tags: ["🌶️🌶️ 보통맛", "🍢 어묵 포함", "🥚 계란 추가 가능"]
+      }
+    ];
+
+    this.foodRecommendations = baseItems.map(item => ({
+      ...item,
+      imageUrls: createKoreanFoodImages(item.name),
+      imageUrl: createKoreanFoodImages(item.name)[0]  // 대표 이미지 설정
+    }));
+  }
+
+  async getUser(id: number): Promise<User | undefined> {
+    return this.users.get(id);
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      (user) => user.username === username
+    );
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const id = this.currentId++;
+    const user: User = { ...insertUser, id };
+    this.users.set(id, user);
+    return user;
+  }
+
+  async getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
+    const exactMatches = this.foodRecommendations.filter(food => 
+      food.category === request.category &&
+      food.priceRange === request.priceRange &&
+      food.spiceLevel === request.spiceLevel
+    );
+
+    if (exactMatches.length > 0) {
+      return exactMatches[Math.floor(Math.random() * exactMatches.length)];
+    }
+
+    const categoryPriceMatches = this.foodRecommendations.filter(food => 
+      food.category === request.category &&
+      food.priceRange === request.priceRange
+    );
+
+    if (categoryPriceMatches.length > 0) {
+      return categoryPriceMatches[Math.floor(Math.random() * categoryPriceMatches.length)];
+    }
+
+    const categoryMatches = this.foodRecommendations.filter(food => 
+      food.category === request.category
+    );
+
+    if (categoryMatches.length > 0) {
+      return categoryMatches[Math.floor(Math.random() * categoryMatches.length)];
+    }
+
+    return this.foodRecommendations[Math.floor(Math.random() * this.foodRecommendations.length)];
+  }
+
+  async getAlternativeRecommendations(category: string, excludeId?: number): Promise<FoodRecommendation[]> {
+    const alternatives = this.foodRecommendations
+      .filter(food => food.category === category && food.id !== excludeId);
+
+    const shuffled = alternatives.sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  }
+}
+
+export const storage = new MemStorage();

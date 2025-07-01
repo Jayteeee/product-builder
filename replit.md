@@ -102,6 +102,8 @@ Changelog:
 - June 30, 2025. Added image carousel with navigation arrows and dot indicators
 - June 30, 2025. Implemented menu swapping functionality for alternative recommendations
 - June 30, 2025. Added modal functionality for viewing enlarged images when clicking on photos
+- June 30, 2025. Enhanced modal image display with proper full-size scaling and centering
+- June 30, 2025. Automated image mapping system - createFoodImages() function now auto-matches images to food names
 ```
 
 ## User Preferences

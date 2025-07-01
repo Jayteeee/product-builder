@@ -20,9 +20,9 @@ export class MemStorage implements IStorage {
   }
 
   private initializeFoodData() {
-    // Helper function to create authentic Korean food imageUrls
-    const createKoreanFoodImages = (dishName: string) => {
-      const koreanFoodImages: { [key: string]: string[] } = {
+    // Helper function to create food images based on dish name
+    const createFoodImages = (dishName: string): string[] => {
+      const foodImageMap: { [key: string]: string[] } = {
         "김치찌개": [
           "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
           "https://images.unsplash.com/photo-1612428978309-0b7d97e7e924?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
@@ -119,7 +119,7 @@ export class MemStorage implements IStorage {
         ]
       };
       
-      return koreanFoodImages[dishName] || [
+      return foodImageMap[dishName] || [
         "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
         "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
         "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
@@ -516,11 +516,15 @@ export class MemStorage implements IStorage {
       }
     ];
 
-    // Map through all items to add imageUrls property
-    this.foodRecommendations = baseItems.map(item => ({
-      ...item,
-      imageUrls: createKoreanFoodImages(item.name)
-    }));
+    // Map through all items to add imageUrls and imageUrl properties
+    this.foodRecommendations = baseItems.map(item => {
+      const imageUrls = createFoodImages(item.name);
+      return {
+        ...item,
+        imageUrls,
+        imageUrl: imageUrls[0] // Set first image as the main image
+      };
+    });
   }
 
   async getUser(id: number): Promise<User | undefined> {
