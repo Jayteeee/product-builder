@@ -64,6 +64,11 @@ const translations = {
     last_recommendation: "Last recommendation",
     total_recommendations: "Total recommendations",
     recent_recommendations: "Recent Recommendations (max 8)",
+    contact_title: "Affiliate Inquiry",
+    label_name: "Name",
+    label_email: "Email",
+    label_message: "Message",
+    submit_button: "Send Inquiry",
     footer: "Note: This recommender is a random generator for fun and to help with menu selection.",
   },
   ko: {
@@ -80,6 +85,11 @@ const translations = {
     last_recommendation: "마지막 추천",
     total_recommendations: "총 추천 횟수",
     recent_recommendations: "최근 추천 기록 (최대 8개)",
+    contact_title: "제휴 문의",
+    label_name: "이름",
+    label_email: "이메일",
+    label_message: "문의 내용",
+    submit_button: "문의 보내기",
     footer: "참고: 본 추천기는 재미용 랜덤 생성기이며, 메뉴 선택에 도움을 주기 위한 것입니다.",
   },
 };
