@@ -7,10 +7,10 @@ const btnTheme = document.getElementById("btnTheme");
 function applyTheme(theme) {
   if (theme === "light") {
     document.documentElement.setAttribute("data-theme", "light");
-    btnTheme.textContent = "다크 모드";
+    btnTheme.textContent = "Dark Mode";
   } else {
     document.documentElement.removeAttribute("data-theme");
-    btnTheme.textContent = "화이트 모드";
+    btnTheme.textContent = "Light Mode";
   }
 }
 
@@ -44,15 +44,17 @@ const btnClear = document.getElementById("btnClear");
 
 const HISTORY_MAX = 8;
 const LUNCH_MENUS = [
-  "김치찌개", "된장찌개", "부대찌개", "순두부찌개", "청국장",
-  "제육볶음", "오징어볶음", "불고기", "돈까스", "카레",
-  "짜장면", "짬뽕", "볶음밥", "탕수육", "마파두부",
-  "초밥", "우동", "라멘", "소바", "회덮밥",
-  "쌀국수", "분짜", "팟타이", "나시고랭", "미고랭",
-  "파스타", "피자", "리조또", "스테이크", "햄버거",
-  "샌드위치", "샐러드", "타코", "부리또", "퀘사디아",
-  "비빔밥", "냉면", "칼국수", "수제비", "떡볶이"
+  "Kimchi Jjigae", "Doenjang Jjigae", "Budae Jjigae", "Sundubu Jjigae", "Cheonggukjang",
+  "Jeyuk Bokkeum", "Ojingeo Bokkeum", "Bulgogi", "Donkkaseu", "Curry",
+  "Jajangmyeon", "Jjamppong", "Bokkeumbap", "Tangsuyuk", "Mapadubu",
+  "Sushi", "Udon", "Ramen", "Soba", "Hoe-deopbap",
+  "Pho", "Bun Cha", "Pad Thai", "Nasi Goreng", "Mi Goreng",
+  "Pasta", "Pizza", "Risotto", "Steak", "Hamburger",
+  "Sandwich", "Salad", "Taco", "Burrito", "Quesadilla",
+  "Bibimbap", "Naengmyeon", "Kalguksu", "Sujebi", "Tteokbokki"
 ];
+
+const PIZZA_IMAGE_URL = "https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
 let lastMenu = null;
 let count = 0;
@@ -67,7 +69,11 @@ function pickMenu() {
 }
 
 function render(menu) {
-  resultEl.innerHTML = `<div class="menu-result">${menu}</div>`;
+  if (menu === "Pizza") {
+    resultEl.innerHTML = `<img src="${PIZZA_IMAGE_URL}" alt="Pizza" class="pizza-image">`;
+  } else {
+    resultEl.innerHTML = `<div class="menu-result">${menu}</div>`;
+  }
 }
 
 function addHistory(menu) {
@@ -105,7 +111,7 @@ btnCopy.onclick = () => {
 
 btnClear.onclick = () => {
   historyEl.innerHTML = "";
-  resultEl.innerHTML = `<span class="hint">아래 버튼을 눌러 점심 메뉴를 추천받아 보세요.</span>`;
+  resultEl.innerHTML = `<span class="hint">Press the button below to get a lunch menu recommendation.</span>`;
   lastMenu = null;
   count = 0;
   lastTimeEl.textContent = "-";
