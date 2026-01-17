@@ -70,7 +70,7 @@ const translations = {
     label_email: "Email",
     label_message: "Message",
     submit_button: "Send Inquiry",
-    footer: "Note: This recommender is a random generator for fun and to help with menu selection.",
+    footer_text: "Note: This recommender is a random generator for fun and to help with menu selection.",
   },
   ko: {
     title: "점심 메뉴 추천기",
@@ -92,7 +92,7 @@ const translations = {
     label_email: "이메일",
     label_message: "문의 내용",
     submit_button: "문의 보내기",
-    footer: "참고: 본 추천기는 재미용 랜덤 생성기이며, 메뉴 선택에 도움을 주기 위한 것입니다.",
+    footer_text: "참고: 본 추천기는 재미용 랜덤 생성기이며, 메뉴 선택에 도움을 주기 위한 것입니다.",
   },
 };
 
