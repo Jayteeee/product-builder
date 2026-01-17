@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lunch Menu Recommender</title>
+    <title data-lang="title">Lunch Menu Recommender</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
@@ -12,42 +12,47 @@
     <div class="wrap">
       <header>
         <div class="title-area">
-          <h1>Lunch Menu Recommender</h1>
-          <p>
+          <h1 data-lang="heading">Lunch Menu Recommender</h1>
+          <p data-lang="subheading">
             Press the button to get a lunch menu recommendation!
           </p>
         </div>
-        <button class="theme-toggle" id="btnTheme" type="button">
-          Light Mode
-        </button>
+        <div class="header-buttons">
+          <button class="theme-toggle" id="btnTheme" type="button" data-lang="theme_light">
+            Light Mode
+          </button>
+          <button class="lang-toggle" id="btnLang" type="button">
+            한국어
+          </button>
+        </div>
       </header>
 
       <main>
         <div id="result" class="result" aria-live="polite">
-          <span class="hint"
+          <span class="hint" data-lang="hint"
             >Press the button below to get a lunch menu recommendation.</span
           >
         </div>
 
         <div class="controls">
-          <button class="primary" id="btnPick">Recommend Menu</button>
-          <button id="btnRepick" disabled>Re-recommend</button>
-          <button id="btnCopy" disabled>Copy</button>
-          <button id="btnClear">Clear History</button>
+          <button class="primary" id="btnPick" data-lang="recommend_button">Recommend Menu</button>
+          <button id="btnRepick" disabled data-lang="rerecommend_button">Re-recommend</button>
+          <button id="btnCopy" disabled data-lang="copy_button">Copy</button>
+          <button id="btnClear" data-lang="clear_history_button">Clear History</button>
         </div>
 
         <div class="meta">
-          <div>Last recommendation: <span id="lastTime">-</span></div>
-          <div>Total recommendations: <span id="count">0</span></div>
+          <div><span data-lang="last_recommendation">Last recommendation</span>: <span id="lastTime">-</span></div>
+          <div><span data-lang="total_recommendations">Total recommendations</span>: <span id="count">0</span></div>
         </div>
 
         <section class="history">
-          <h2>Recent Recommendations (max 8)</h2>
+          <h2 data-lang="recent_recommendations">Recent Recommendations (max 8)</h2>
           <ul id="history" class="history-list"></ul>
         </section>
       </main>
 
-      <footer>
+      <footer data-lang="footer">
         Note: This recommender is a random generator for fun and to help with menu selection.
       </footer>
     </div>
