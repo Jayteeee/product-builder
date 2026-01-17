@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="google-adsense-account" content="ca-pub-9065869497785181">
+    <meta name="description" content="Play Rock Paper Scissors against an AI powered by TensorFlow.js. Test your luck or strategy against our machine learning model. Uses webcam or image upload.">
     <title>AI Rock Paper Scissors</title>
 
     <!-- Google AdSense -->
@@ -88,10 +89,31 @@
                 <span class="value" id="score-lose">0</span>
             </div>
         </div>
+
+        <!-- Educational Content Section -->
+        <section class="info-content" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); width: 100%;">
+            <article>
+                <h2 style="font-size: 1.2rem; color: var(--text);">How Does This Work?</h2>
+                <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+                    This game utilizes <strong>TensorFlow.js</strong> and a custom model trained with <strong>Teachable Machine</strong>. 
+                    The AI analyzes the pixel data from your webcam or uploaded image in real-time to identify patterns that match the shapes of "Rock", "Paper", or "Scissors". 
+                    Unlike traditional programmed games, this AI "learned" to recognize these hand gestures by seeing thousands of examples during its training phase.
+                </p>
+            </article>
+            <article style="margin-top: 20px;">
+                <h2 style="font-size: 1.2rem; color: var(--text);">The Psychology of Rock Paper Scissors</h2>
+                <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+                    While theoretically a game of chance, human players often follow predictable patterns. 
+                    For example, winners tend to stick with their winning move, while losers often switch to the move that would have beaten their previous opponent. 
+                    However, our AI opponent chooses its moves completely randomly, making it a true test of probability!
+                </p>
+            </article>
+        </section>
       </main>
 
       <footer>
-        Powered by Teachable Machine & TensorFlow.js
+        <div style="margin-bottom: 8px;">Powered by Teachable Machine & TensorFlow.js</div>
+        <a href="privacy.html" style="color: var(--muted); text-decoration: underline; font-size: 0.85rem;">Privacy Policy</a>
       </footer>
     </div>
 
