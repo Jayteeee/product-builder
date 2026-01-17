@@ -47,6 +47,7 @@ function applyLang(lang) {
     }
   });
   btnLang.textContent = lang === "en" ? "한국어" : "English";
+  renderHistory();
 }
 
 const savedLang = localStorage.getItem(LANG_KEY);
@@ -105,29 +106,66 @@ const btnCopy = document.getElementById("btnCopy");
 const btnClear = document.getElementById("btnClear");
 
 const HISTORY_MAX = 8;
-const LUNCH_MENUS = [
-  "Kimchi Jjigae", "Doenjang Jjigae", "Budae Jjigae", "Sundubu Jjigae", "Cheonggukjang",
-  "Jeyuk Bokkeum", "Ojingeo Bokkeum", "Bulgogi", "Donkkaseu", "Curry",
-  "Jajangmyeon", "Jjamppong", "Bokkeumbap", "Tangsuyuk", "Mapadubu",
-  "Sushi", "Udon", "Ramen", "Soba", "Hoe-deopbap",
-  "Pho", "Bun Cha", "Pad Thai", "Nasi Goreng", "Mi Goreng",
-  "Pasta", "Pizza", "Risotto", "Steak", "Hamburger",
-  "Sandwich", "Salad", "Taco", "Burrito", "Quesadilla",
-  "Bibimbap", "Naengmyeon", "Kalguksu", "Sujebi", "Tteokbokki"
-];
-
+const LUNCH_MENUS = {
+  "Kimchi Jjigae": "김치찌개",
+  "Doenjang Jjigae": "된장찌개",
+  "Budae Jjigae": "부대찌개",
+  "Sundubu Jjigae": "순두부찌개",
+  "Cheonggukjang": "청국장",
+  "Jeyuk Bokkeum": "제육볶음",
+  "Ojingeo Bokkeum": "오징어볶음",
+  "Bulgogi": "불고기",
+  "Donkkaseu": "돈까스",
+  "Curry": "카레",
+  "Jajangmyeon": "짜장면",
+  "Jjamppong": "짬뽕",
+  "Bokkeumbap": "볶음밥",
+  "Tangsuyuk": "탕수육",
+  "Mapadubu": "마파두부",
+  "Sushi": "초밥",
+  "Udon": "우동",
+  "Ramen": "라멘",
+  "Soba": "소바",
+  "Hoe-deopbap": "회덮밥",
+  "Pho": "쌀국수",
+  "Bun Cha": "분짜",
+  "Pad Thai": "팟타이",
+  "Nasi Goreng": "나시고랭",
+  "Mi Goreng": "미고랭",
+  "Pasta": "파스타",
+  "Pizza": "피자",
+  "Risotto": "리조또",
+  "Steak": "스테이크",
+  "Hamburger": "햄버거",
+  "Sandwich": "샌드위치",
+  "Salad": "샐러드",
+  "Taco": "타코",
+  "Burrito": "부리또",
+  "Quesadilla": "퀘사디아",
+  "Bibimbap": "비빔밥",
+  "Naengmyeon": "냉면",
+  "Kalguksu": "칼국수",
+  "Sujebi": "수제비",
+  "Tteokbokki": "떡볶이",
+};
 const PEXELS_API_KEY = "YOUR_PEXELS_API_KEY";
 
 let lastMenu = null;
 let count = 0;
+let history = [];
 
 function now() {
   return new Date().toLocaleString();
 }
 
 function pickMenu() {
-  const randomIndex = Math.floor(Math.random() * LUNCH_MENUS.length);
-  return LUNCH_MENUS[randomIndex];
+  const menuKeys = Object.keys(LUNCH_MENUS);
+  const randomIndex = Math.floor(Math.random() * menuKeys.length);
+  const menuKey = menuKeys[randomIndex];
+  return {
+    en: menuKey,
+    ko: LUNCH_MENUS[menuKey],
+  };
 }
 
 async function getMenuImage(menu) {
@@ -145,22 +183,30 @@ async function getMenuImage(menu) {
 
 async function render(menu) {
   resultEl.innerHTML = `<div class="loader"></div>`;
-  const imageUrl = await getMenuImage(menu);
+  const imageUrl = await getMenuImage(menu.en);
   if (imageUrl) {
-    resultEl.innerHTML = `<img src="${imageUrl}" alt="${menu}" class="menu-image">`;
+    resultEl.innerHTML = `<img src="${imageUrl}" alt="${menu[currentLang]}" class="menu-image">`;
   } else {
-    resultEl.innerHTML = `<div class="menu-result">${menu}</div>`;
+    resultEl.innerHTML = `<div class="menu-result">${menu[currentLang]}</div>`;
   }
 }
 
 function addHistory(menu) {
-  const li = document.createElement("li");
-  li.className = "history-item";
-  li.textContent = menu;
-  historyEl.prepend(li);
-  while (historyEl.children.length > HISTORY_MAX) {
-    historyEl.removeChild(historyEl.lastElementChild);
+  history.unshift(menu);
+  if (history.length > HISTORY_MAX) {
+    history.pop();
   }
+  renderHistory();
+}
+
+function renderHistory() {
+  historyEl.innerHTML = "";
+  history.forEach((menu) => {
+    const li = document.createElement("li");
+    li.className = "history-item";
+    li.textContent = menu[currentLang];
+    historyEl.appendChild(li);
+  });
 }
 
 async function pick() {
@@ -183,10 +229,11 @@ btnRepick.onclick = pick;
 
 btnCopy.onclick = () => {
   if (!lastMenu) return;
-  navigator.clipboard.writeText(lastMenu);
+  navigator.clipboard.writeText(lastMenu[currentLang]);
 };
 
 btnClear.onclick = () => {
+  history = [];
   historyEl.innerHTML = "";
   resultEl.innerHTML = `<span class="hint">${translations[currentLang].hint}</span>`;
   lastMenu = null;
