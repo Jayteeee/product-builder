@@ -105,7 +105,7 @@ const btnClear = document.getElementById("btnClear");
 ===================== */
 let lastMenu = null;
 let count = 0;
-let history = [];
+let menuHistory = [];
 
 // Language State
 const savedLang = localStorage.getItem(LANG_KEY);
@@ -124,7 +124,7 @@ function now() {
 
 function renderHistory() {
   historyEl.innerHTML = "";
-  history.forEach((menu) => {
+  menuHistory.forEach((menu) => {
     const li = document.createElement("li");
     li.className = "history-item";
     li.textContent = menu[currentLang];
@@ -216,9 +216,9 @@ async function render(menu) {
 }
 
 function addHistory(menu) {
-  history.unshift(menu);
-  if (history.length > HISTORY_MAX) {
-    history.pop();
+  menuHistory.unshift(menu);
+  if (menuHistory.length > HISTORY_MAX) {
+    menuHistory.pop();
   }
   renderHistory();
 }
@@ -262,7 +262,7 @@ btnCopy.onclick = () => {
 };
 
 btnClear.onclick = () => {
-  history = [];
+  menuHistory = [];
   historyEl.innerHTML = "";
   resultEl.innerHTML = `<span class="hint">${translations[currentLang].hint}</span>`;
   lastMenu = null;
