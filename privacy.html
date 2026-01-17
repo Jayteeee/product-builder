@@ -21,50 +21,118 @@
         .back-btn {
             display: inline-block;
             margin-bottom: 20px;
-            color: var(--primary-bg1);
+            color: var(--text);
             text-decoration: none;
             font-weight: bold;
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 8px;
         }
+        .lang-switch {
+            float: right;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        .hidden { display: none; }
+        a { color: var(--primary-bg1); filter: brightness(1.2); }
     </style>
 </head>
 <body>
     <div class="content-wrap">
-        <a href="index.html" class="back-btn">&larr; Back to Home</a>
+        <a href="index.html" class="back-btn">&larr; Home</a>
+        <button id="langBtn" class="lang-switch">한국어</button>
         
-        <h1>Privacy Policy</h1>
-        <p>Last updated: January 17, 2026</p>
+        <!-- English Content -->
+        <div id="content-en">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: January 17, 2026</p>
 
-        <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
+            <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
 
-        <h2>Interpretation and Definitions</h2>
-        <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
+            <h2>Interpretation and Definitions</h2>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
 
-        <h2>Collecting and Using Your Personal Data</h2>
-        <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
-        <ul>
-            <li>Usage Data</li>
-        </ul>
+            <h2>Collecting and Using Your Personal Data</h2>
+            <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
+            <ul>
+                <li>Usage Data (e.g., IP address, browser type)</li>
+            </ul>
 
-        <h2>Usage Data</h2>
-        <p>Usage Data is collected automatically when using the Service. Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+            <h2>Cookies and Tracking Technologies</h2>
+            <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service.</p>
+            <p>We use <strong>Google AdSense</strong> to display ads. Google uses cookies to serve ads based on your prior visits to our website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our sites and/or other sites on the Internet.</p>
+            <p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ads Settings</a>.</p>
+            
+            <h2>Camera Usage</h2>
+            <p>For the "Rock Paper Scissors" game feature, we use your device's camera (webcam) or file upload. <strong>No image data is sent to our servers.</strong> All processing happens locally in your browser using TensorFlow.js.</p>
 
-        <h2>Cookies and Tracking Technologies</h2>
-        <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service.</p>
-        <p>We use Google AdSense to display ads. Google uses cookies to serve ads based on your prior visits to our website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our sites and/or other sites on the Internet.</p>
-        <p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" style="color: var(--text);">Google Ads Settings</a>.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, You can contact us via the "Affiliate Inquiry" form on our homepage.</p>
+        </div>
 
-        <h2>Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, You can contact us:</p>
-        <ul>
-            <li>By visiting this page on our website: <a href="#" id="contactLink" style="color: var(--text);">Affiliate Inquiry</a></li>
-        </ul>
+        <!-- Korean Content -->
+        <div id="content-ko" class="hidden">
+            <h1>개인정보처리방침</h1>
+            <p>최종 수정일: 2026년 1월 17일</p>
+
+            <p>본 개인정보처리방침은 귀하가 본 서비스를 이용할 때 귀하의 정보를 수집, 사용 및 공개하는 것에 대한 당사의 정책 및 절차를 설명하며, 귀하의 개인정보보호 권리와 법이 귀하를 보호하는 방법에 대해 알려드립니다.</p>
+
+            <h2>수집하는 개인정보 항목</h2>
+            <p>당사는 서비스 제공 및 개선을 위해 다음과 같은 정보를 수집할 수 있습니다:</p>
+            <ul>
+                <li>사용 데이터 (예: IP 주소, 브라우저 유형, 방문 페이지 등) - 이는 서비스 이용 시 자동으로 수집됩니다.</li>
+            </ul>
+
+            <h2>쿠키 및 추적 기술</h2>
+            <p>당사는 서비스 내 활동을 추적하고 특정 정보를 저장하기 위해 쿠키 및 유사한 추적 기술을 사용합니다.</p>
+            <p><strong>Google AdSense 광고:</strong> 당사는 광고 게재를 위해 Google AdSense를 사용합니다. Google은 쿠키를 사용하여 귀하의 당사 웹사이트 또는 인터넷상의 다른 웹사이트 방문 기록을 바탕으로 광고를 제공합니다.</p>
+            <p>귀하는 <a href="https://www.google.com/settings/ads" target="_blank">Google 광고 설정</a>을 방문하여 개인 맞춤 광고 설정을 해제할 수 있습니다.</p>
+
+            <h2>카메라 및 이미지 사용</h2>
+            <p>"가위바위보 게임" 기능은 귀하의 기기 카메라(웹캠) 또는 이미지 업로드를 사용합니다. <strong>어떠한 이미지 데이터도 서버로 전송되지 않습니다.</strong> 모든 처리는 TensorFlow.js를 사용하여 귀하의 브라우저 내에서 로컬로 이루어집니다.</p>
+
+            <h2>문의하기</h2>
+            <p>본 개인정보처리방침에 대해 궁금한 점이 있으시면, 홈페이지의 "제휴 문의" 폼을 통해 문의해 주시기 바랍니다.</p>
+        </div>
+
     </div>
     <script>
-        // Simple theme applier based on localStorage to match main site
+        const langBtn = document.getElementById('langBtn');
+        const enDiv = document.getElementById('content-en');
+        const koDiv = document.getElementById('content-ko');
+        
+        let currentLang = localStorage.getItem('lunch_lang') || 'en';
+
+        function updateView() {
+            if (currentLang === 'ko') {
+                enDiv.classList.add('hidden');
+                koDiv.classList.remove('hidden');
+                langBtn.textContent = 'English';
+            } else {
+                koDiv.classList.add('hidden');
+                enDiv.classList.remove('hidden');
+                langBtn.textContent = '한국어';
+            }
+        }
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ko' : 'en';
+            // Note: We don't save to localStorage here to avoid overwriting main site pref if user just wants to read policy in diff lang, 
+            // but for consistency let's save it or just toggle local state. Let's save it.
+            localStorage.setItem('lunch_lang', currentLang); 
+            updateView();
+        });
+
         const theme = localStorage.getItem("lunch_theme");
         if (theme === "light") {
             document.documentElement.setAttribute("data-theme", "light");
         }
+
+        updateView();
     </script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us - Lunch Menu Recommender</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+        h1 { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.4rem; color: var(--primary-bg1); filter: brightness(1.3); }
+        p { margin-bottom: 15px; color: var(--muted); }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        .lang-switch {
+            float: right;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="content-wrap">
+        <a href="index.html" class="back-btn">&larr; Home</a>
+        <button id="langBtn" class="lang-switch">한국어</button>
+        
+        <!-- English Content -->
+        <div id="content-en">
+            <h1>About Us</h1>
+            
+            <h2>Our Mission</h2>
+            <p>
+                "What should I eat for lunch?"<br>
+                It's a question we face every single day. The <strong>Lunch Menu Recommender</strong> was born to solve this trivial yet stressful dilemma. 
+                Our goal is to help you make quick, fun, and satisfying decisions so you can focus your energy on what truly matters.
+            </p>
+
+            <h2>Technology</h2>
+            <p>
+                This project utilizes modern web technologies to provide a fast and accessible experience.
+                <ul>
+                    <li><strong>Frontend:</strong> Vanilla JavaScript, HTML5, CSS3</li>
+                    <li><strong>AI:</strong> TensorFlow.js & Teachable Machine (for the Rock Paper Scissors game)</li>
+                    <li><strong>Deployment:</strong> GitHub Pages</li>
+                </ul>
+            </p>
+
+            <h2>Disclaimer</h2>
+            <p>
+                This website provides random recommendations for entertainment purposes. 
+                Please consider your own dietary restrictions and allergies when choosing your meal.
+            </p>
+        </div>
+
+        <!-- Korean Content -->
+        <div id="content-ko" class="hidden">
+            <h1>사이트 소개</h1>
+            
+            <h2>제작 배경</h2>
+            <p>
+                "오늘 점심 뭐 먹지?"<br>
+                매일 반복되는 이 고민, 지겹지 않으신가요? <strong>점심 메뉴 추천기</strong>는 현대인의 가장 큰 난제 중 하나인 점심 메뉴 선정을 돕기 위해 만들어졌습니다.
+                결정의 고통을 줄이고, 의외의 메뉴를 만나는 즐거움을 드리는 것이 저희의 목표입니다.
+            </p>
+
+            <h2>기술 스택</h2>
+            <p>
+                이 웹사이트는 빠르고 직관적인 사용자 경험을 제공하기 위해 다음과 같은 기술로 제작되었습니다.
+                <ul>
+                    <li><strong>프론트엔드:</strong> 순수 JavaScript, HTML5, CSS3</li>
+                    <li><strong>인공지능:</strong> TensorFlow.js 및 Teachable Machine (가위바위보 게임)</li>
+                    <li><strong>배포:</strong> GitHub Pages</li>
+                </ul>
+            </p>
+
+            <h2>면책 조항</h2>
+            <p>
+                이 웹사이트는 재미를 위한 랜덤 추천 서비스를 제공합니다. 
+                실제 식사 선택 시에는 개인의 알레르기나 식이 조절 필요성을 반드시 고려해 주시기 바랍니다.
+            </p>
+        </div>
+
+    </div>
+    <script>
+        const langBtn = document.getElementById('langBtn');
+        const enDiv = document.getElementById('content-en');
+        const koDiv = document.getElementById('content-ko');
+        
+        // Check stored language or default to English
+        let currentLang = localStorage.getItem('lunch_lang') || 'en';
+
+        function updateView() {
+            if (currentLang === 'ko') {
+                enDiv.classList.add('hidden');
+                koDiv.classList.remove('hidden');
+                langBtn.textContent = 'English';
+            } else {
+                koDiv.classList.add('hidden');
+                enDiv.classList.remove('hidden');
+                langBtn.textContent = '한국어';
+            }
+        }
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ko' : 'en';
+            localStorage.setItem('lunch_lang', currentLang); // Sync with main site preference
+            updateView();
+        });
+
+        // Apply theme
+        const theme = localStorage.getItem("lunch_theme");
+        if (theme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+
+        updateView();
+    </script>
+</body>
+</html>
