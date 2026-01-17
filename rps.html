@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="rps.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="title-area">
+          <h1>AI Rock Paper Scissors</h1>
+          <p>Challenge the AI! Show your hand to the camera.</p>
+        </div>
+        <a href="index.html" class="back-link">Back to Lunch Menu</a>
+      </header>
+
+      <main class="game-container">
+        <div class="game-area">
+            <!-- User Side -->
+            <div class="player-area">
+                <h2>You</h2>
+                <div id="webcam-container" class="webcam-container">
+                    <div class="placeholder">Loading Camera...</div>
+                </div>
+                <div class="prediction-bar">
+                    <span id="user-move">-</span>
+                </div>
+            </div>
+
+            <!-- VS -->
+            <div class="vs-badge">VS</div>
+
+            <!-- Computer Side -->
+            <div class="player-area">
+                <h2>AI</h2>
+                <div class="computer-placeholder">
+                    <span id="computer-emoji">🤖</span>
+                </div>
+                <div class="prediction-bar">
+                    <span id="computer-move">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="btnStartGame" class="primary" disabled>Start Game</button>
+            <div id="message" class="game-message">Wait for camera...</div>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <span class="label">Win</span>
+                <span class="value" id="score-win">0</span>
+            </div>
+            <div class="score-item">
+                <span class="label">Draw</span>
+                <span class="value" id="score-draw">0</span>
+            </div>
+            <div class="score-item">
+                <span class="label">Lose</span>
+                <span class="value" id="score-lose">0</span>
+            </div>
+        </div>
+      </main>
+
+      <footer>
+        Powered by Teachable Machine & TensorFlow.js
+      </footer>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
+    <!-- Game Script -->
+    <script src="rps.js"></script>
+  </body>
+</html>
