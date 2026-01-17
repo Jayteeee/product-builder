@@ -40,6 +40,8 @@ const translations = {
 
 function applyLang(lang) {
   document.documentElement.lang = lang;
+  if (!translations[lang]) return; // Guard clause
+  
   Object.keys(translations[lang]).forEach((key) => {
     const element = document.querySelector(`[data-lang="${key}"]`);
     if (element) {
@@ -51,7 +53,8 @@ function applyLang(lang) {
 }
 
 const savedLang = localStorage.getItem(LANG_KEY);
-let currentLang = savedLang || "en";
+// Validate savedLang to be either 'en' or 'ko'
+let currentLang = (savedLang === 'en' || savedLang === 'ko') ? savedLang : 'en';
 applyLang(currentLang);
 
 btnLang.addEventListener("click", () => {
@@ -148,6 +151,9 @@ const LUNCH_MENUS = {
   "Sujebi": "수제비",
   "Tteokbokki": "떡볶이",
 };
+
+// IMPORTANT: Replace the placeholder below with your actual Pexels API Key directly in this file.
+// The .env file is not used in this client-side setup.
 const PEXELS_API_KEY = "YOUR_PEXELS_API_KEY";
 
 let lastMenu = null;
@@ -170,15 +176,28 @@ function pickMenu() {
 
 async function getMenuImage(menu) {
   if (PEXELS_API_KEY === "YOUR_PEXELS_API_KEY") {
+    // API Key not set, fail gracefully (return null will show text only)
     return null;
   }
-  const response = await fetch(`https://api.pexels.com/v1/search?query=${menu}&per_page=1`, {
-    headers: {
-      Authorization: PEXELS_API_KEY,
-    },
-  });
-  const data = await response.json();
-  return data.photos.length > 0 ? data.photos[0].src.large : null;
+  
+  try {
+    const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(menu)}&per_page=1`, {
+      headers: {
+        Authorization: PEXELS_API_KEY,
+      },
+    });
+
+    if (!response.ok) {
+      console.warn(`Pexels API Error: ${response.status} ${response.statusText}`);
+      return null;
+    }
+
+    const data = await response.json();
+    return data.photos && data.photos.length > 0 ? data.photos[0].src.large : null;
+  } catch (error) {
+    console.error("Failed to fetch image from Pexels:", error);
+    return null;
+  }
 }
 
 async function render(menu) {
