@@ -1,0 +1,117 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Container */
+.modal-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-overlay.open .modal-container {
+  transform: translateY(0);
+}
+
+/* Close Button */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  min-height: auto;
+}
+
+.modal-close:hover {
+  color: var(--text);
+  background: transparent;
+}
+
+/* Modal Header */
+.modal-header h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: var(--text);
+}
+
+/* Contact Form inside Modal */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2); /* Slightly darker input bg for contrast */
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+/* Light mode adjustments for inputs if needed, handled by vars */
+html[data-theme="light"] .form-group input,
+html[data-theme="light"] .form-group textarea {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-border);
+  box-shadow: 0 0 0 2px var(--primary-bg2);
+}
+
+.contact-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}

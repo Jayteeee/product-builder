@@ -210,53 +210,6 @@ button.primary {
   font-size: 13px;
 }
 
-/* Contact Form */
-.contact {
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-
-.contact h2 {
-  font-size: 18px;
-  margin-bottom: 16px;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--primary-border);
-  box-shadow: 0 0 0 2px var(--primary-bg2);
-}
-
 /* Footer */
 footer {
   padding: 14px;

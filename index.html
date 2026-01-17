@@ -7,6 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="modal.css" />
   </head>
   <body>
     <div class="wrap">
@@ -50,33 +51,44 @@
           <h2 data-lang="recent_recommendations">Recent Recommendations (max 8)</h2>
           <ul id="history" class="history-list"></ul>
         </section>
-
-        <section class="contact">
-          <h2 data-lang="contact_title">Affiliate Inquiry</h2>
-          <form action="https://formspree.io/f/xeeeevdz" method="POST" class="contact-form">
-            <div class="form-group">
-              <label for="name" data-lang="label_name">Name</label>
-              <input type="text" name="name" id="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email" data-lang="label_email">Email</label>
-              <input type="email" name="_replyto" id="email" required>
-            </div>
-            <div class="form-group">
-              <label for="message" data-lang="label_message">Message</label>
-              <textarea name="message" id="message" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="primary" data-lang="submit_button">Send Inquiry</button>
-          </form>
-        </section>
       </main>
 
       <footer data-lang="footer">
         Note: This recommender is a random generator for fun and to help with menu selection.
+        <br>
+        <a href="#" id="btnOpenContact" data-lang="contact_link" style="color: var(--muted); text-decoration: underline; margin-top: 8px; display: inline-block;">Affiliate Inquiry</a>
       </footer>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+      <div class="modal-container" role="dialog" aria-modal="true">
+        <button id="btnCloseModal" class="modal-close" aria-label="Close">&times;</button>
+        <div class="modal-header">
+          <h2 data-lang="contact_title">Affiliate Inquiry</h2>
+        </div>
+        <form action="https://formspree.io/f/xeeeevdz" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name" data-lang="label_name">Name</label>
+            <input type="text" name="name" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email" data-lang="label_email">Email</label>
+            <input type="email" name="_replyto" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message" data-lang="label_message">Message</label>
+            <textarea name="message" id="message" rows="4" required></textarea>
+          </div>
+          <div class="contact-footer">
+            <button type="submit" class="primary" data-lang="submit_button">Send Inquiry</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- JS -->
     <script src="main.js?v=2"></script>
+    <script src="modal.js"></script>
   </body>
 </html>
