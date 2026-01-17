@@ -22,9 +22,27 @@
             <!-- User Side -->
             <div class="player-area">
                 <h2>You</h2>
+                
+                <div class="mode-selector">
+                    <button id="btnModeWebcam" class="mode-btn active">Webcam</button>
+                    <button id="btnModeImage" class="mode-btn">Image</button>
+                </div>
+
                 <div id="webcam-container" class="webcam-container">
                     <div class="placeholder">Loading Camera...</div>
                 </div>
+
+                <div id="upload-container" class="upload-container hidden">
+                    <div class="image-preview-wrapper">
+                        <img id="uploaded-image" src="" alt="Upload Preview" class="hidden">
+                        <div id="upload-placeholder" class="upload-placeholder">
+                            <span>📷</span>
+                            <p>Click to upload</p>
+                        </div>
+                    </div>
+                    <input type="file" id="image-upload" accept="image/*" hidden>
+                </div>
+
                 <div class="prediction-bar">
                     <span id="user-move">-</span>
                 </div>
