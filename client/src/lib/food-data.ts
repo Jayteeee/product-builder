@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { GoogleGenerativeAI } from "@google/generative-ai";
 import type { FoodRecommendation, RecommendationRequest } from "@/lib/types";
 
 export const FOOD_CATEGORIES = [
@@ -148,28 +148,10 @@ const foodRecommendations = baseItems.map(item => {
   };
 });
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
+// Initialize Gemini
+// const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || ""); 
 
-async function fetchPexelsImages(query: string): Promise<string[]> {
-  const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
-  if (!apiKey) return [];
-  try {
-    const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=3`, {
-      headers: { Authorization: apiKey }
-    });
-    if (!response.ok) return [];
-    const data = await response.json();
-    return data.photos.map((p: any) => p.src.large);
-  } catch (e) {
-    console.error("Pexels fetch error:", e);
-    return [];
-  }
-}
-
-function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
-  // Simple random fallback
-  return foodRecommendations[Math.floor(Math.random() * foodRecommendations.length)];
-}
+// ... (keep constants) ...
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -186,9 +168,7 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
   }
 
   try {
-    console.log("Calling Gemini API...");
-    // Use gemini-pro which is stable and widely available on v1beta
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    console.log("Calling Gemini API via REST...");
     const prompt = `Recommend one specific, popular lunch menu dish (Korean preference) based on:
     Category: ${request.category}
     Price Range: ${request.priceRange}
@@ -203,14 +183,41 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
+    // Direct REST API call to bypass SDK issues
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: prompt
+          }]
+        }]
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Gemini API Error:", errorData);
+      throw new Error(`Gemini API Error: ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    if (!text) {
+      throw new Error("No text in Gemini response");
+    }
+
     console.log("Gemini Response:", text);
     const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
-    const imageUrls = await fetchPexelsImages(data.englishQuery);
+    // Combine Korean Name and English Query for better Pexels results
+    const combinedQuery = `${data.name} ${data.englishQuery}`;
+    const imageUrls = await fetchPexelsImages(combinedQuery);
 
     return {
       id: Date.now(),
@@ -226,7 +233,7 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       isAiGenerated: true
     };
   } catch (error) {
-    console.error("Gemini AI Error:", error);
+    console.error("Gemini/Network Error:", error);
     const selected = getLocalFallback(request);
     const liveImages = await fetchPexelsImages(selected.name);
     if (liveImages.length > 0) {
