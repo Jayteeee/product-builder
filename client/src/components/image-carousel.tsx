@@ -14,8 +14,8 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
   // If no images provided, show a placeholder
   if (!images || images.length === 0) {
     return (
-      <div className={cn("w-full h-48 bg-gray-200 flex items-center justify-center", className)}>
-        <span className="text-gray-500">이미지 없음</span>
+      <div className={cn("w-full h-48 bg-muted/30 flex items-center justify-center", className)}>
+        <span className="text-muted-foreground">이미지 없음</span>
       </div>
     );
   }
@@ -48,7 +48,7 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
   
   return (
     <div className={cn(
-      "relative w-full bg-gray-100 rounded-lg overflow-hidden",
+      "relative w-full bg-muted/20 rounded-lg overflow-hidden",
       isModalImage ? "h-full flex items-center justify-center bg-transparent" : "h-48",
       className
     )}>
