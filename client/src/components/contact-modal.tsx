@@ -52,8 +52,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-      <div className="bg-card border border-border/50 rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in duration-200">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+      <div className="bg-background border border-border/50 rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in duration-200">
         <div className="flex justify-between items-center mb-6 border-b border-border/50 pb-4">
           <h2 className="text-xl font-bold text-foreground">제휴 문의</h2>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
