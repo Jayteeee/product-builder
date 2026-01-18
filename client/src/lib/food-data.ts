@@ -187,7 +187,8 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
 
   try {
     console.log("Calling Gemini API...");
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Use gemini-pro which is stable and widely available on v1beta
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Recommend one specific, popular lunch menu dish (Korean preference) based on:
     Category: ${request.category}
     Price Range: ${request.priceRange}
