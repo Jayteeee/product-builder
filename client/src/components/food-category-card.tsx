@@ -18,20 +18,20 @@ export function FoodCategoryCard({ category, isSelected, onSelect }: FoodCategor
   return (
     <div 
       className={cn(
-        "food-card bg-white rounded-xl p-4 shadow-md border-2 border-transparent cursor-pointer",
-        isSelected && "selected border-primary"
+        "food-card bg-card rounded-xl p-4 shadow-md border-2 border-border/50 cursor-pointer hover:bg-accent/50",
+        isSelected && "selected border-primary bg-accent/50"
       )}
       onClick={() => onSelect(category.id)}
     >
       <div className="text-center">
         <div className={cn(
-          "w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-white text-2xl",
+          "w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-white text-2xl shadow-lg",
           category.color
         )}>
           {category.icon}
         </div>
-        <h3 className="font-semibold text-gray-800">{category.name}</h3>
-        <p className="text-sm text-gray-500 mt-1">{category.description}</p>
+        <h3 className="font-semibold text-foreground">{category.name}</h3>
+        <p className="text-sm text-muted-foreground mt-1">{category.description}</p>
       </div>
     </div>
   );

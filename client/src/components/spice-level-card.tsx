@@ -18,15 +18,15 @@ export function SpiceLevelCard({ level, isSelected, onSelect }: SpiceLevelCardPr
   return (
     <div 
       className={cn(
-        "food-card bg-white rounded-xl p-4 shadow-md border-2 border-transparent cursor-pointer",
-        isSelected && "selected border-primary"
+        "food-card bg-card rounded-xl p-4 shadow-md border-2 border-border/50 cursor-pointer hover:bg-accent/50",
+        isSelected && "selected border-primary bg-accent/50"
       )}
       onClick={() => onSelect(level.id)}
     >
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-gray-800">{level.icon} {level.name}</h3>
-          <p className="text-sm text-gray-500">{level.description}</p>
+          <h3 className="font-semibold text-foreground">{level.icon} {level.name}</h3>
+          <p className="text-sm text-muted-foreground">{level.description}</p>
         </div>
         <div className="flex">
           <span className={cn(

@@ -21,55 +21,66 @@
 }
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(20, 14.3%, 4.1%);
-  --muted: hsl(60, 4.8%, 95.9%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(14, 100%, 60%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(176, 68%, 55%);
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(50, 100%, 70%);
-  --accent-foreground: hsl(20, 14.3%, 4.1%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(20, 14.3%, 4.1%);
-  --radius: 0.5rem;
-  --cream: hsl(50, 77%, 87%);
-  --korean-food: hsl(350, 70%, 52%);
-  --chinese-food: hsl(43, 96%, 70%);
-  --japanese-food: hsl(251, 77%, 65%);
-  --western-food: hsl(163, 100%, 36%);
-  --street-food: hsl(337, 87%, 72%);
+  /* Dark Blue Theme by Default */
+  --background: 220 48% 8%; /* #0b1220 */
+  --foreground: 220 60% 95%; /* #e8eefc */
+  
+  --muted: 224 30% 75%; /* #a8b3d6 */
+  --muted-foreground: 224 20% 65%;
+  
+  --popover: 222 47% 11%; /* card bg approx */
+  --popover-foreground: 220 60% 95%;
+  
+  --card: 222 47% 13%; /* rgba(16, 26, 51, 0.55) opaque approx */
+  --card-foreground: 220 60% 95%;
+  
+  --border: 215 25% 27%;
+  --input: 215 25% 27%;
+  
+  --primary: 213 100% 64%; /* #479bff */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --ring: 213 100% 64%;
+  --radius: 0.75rem; /* 12px */
+  
+  /* Food Category Colors (Adjusted for Dark Mode visibility) */
+  --korean-food: 350 70% 60%;
+  --chinese-food: 43 96% 60%;
+  --japanese-food: 251 77% 70%;
+  --western-food: 163 80% 45%;
+  --street-food: 337 87% 75%;
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(14, 100%, 60%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(176, 68%, 55%);
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.5rem;
+  /* Same as root since we want dark by default */
+  --background: 220 48% 8%;
+  --foreground: 220 60% 95%;
+  --muted: 224 30% 75%;
+  --muted-foreground: 224 20% 65%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 220 60% 95%;
+  --card: 222 47% 13%;
+  --card-foreground: 220 60% 95%;
+  --border: 215 25% 27%;
+  --input: 215 25% 27%;
+  --primary: 213 100% 64%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --ring: 213 100% 64%;
 }
 
 @layer base {
@@ -78,7 +89,14 @@
   }
 
   body {
-    @apply font-sans antialiased bg-cream text-foreground;
+    @apply font-sans antialiased text-foreground;
+    background-color: #0b1220;
+    background-image: radial-gradient(
+      1200px 800px at 20% 10%,
+      #1a2b5a 0%,
+      #0b1220 55%
+    );
+    background-attachment: fixed; /* Ensure gradient stays */
     font-family: 'Noto Sans KR', sans-serif;
   }
 }

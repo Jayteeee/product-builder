@@ -204,12 +204,12 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-xl min-h-screen relative">
+    <div className="max-w-md mx-auto bg-card/40 backdrop-blur-md shadow-2xl min-h-[90vh] relative my-4 rounded-2xl border border-white/10 overflow-hidden">
       {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-orange-400 text-white p-4 sticky top-0 z-50">
+      <header className="bg-card/80 backdrop-blur-sm border-b border-white/10 text-foreground p-4 sticky top-0 z-50">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold">🍽️ 오늘뭐먹지?</h1>
-          <div className="text-sm opacity-90 flex items-center">
+          <div className="text-sm opacity-90 flex items-center text-muted-foreground">
             <Clock className="w-4 h-4 mr-1" />
             <span>{currentTime}</span>
           </div>
@@ -227,8 +227,8 @@ export default function Home() {
         {currentStep === 1 && (
           <div className="step fade-in">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">어떤 종류의 음식을 드시고 싶나요?</h2>
-              <p className="text-gray-600">카테고리를 선택해주세요</p>
+              <h2 className="text-2xl font-bold text-foreground mb-2">어떤 종류의 음식을 드시고 싶나요?</h2>
+              <p className="text-muted-foreground">카테고리를 선택해주세요</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -255,8 +255,8 @@ export default function Home() {
         {currentStep === 2 && (
           <div className="step fade-in">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">예산은 얼마나 생각하고 계신가요?</h2>
-              <p className="text-gray-600">가격대를 선택해주세요</p>
+              <h2 className="text-2xl font-bold text-foreground mb-2">예산은 얼마나 생각하고 계신가요?</h2>
+              <p className="text-muted-foreground">가격대를 선택해주세요</p>
             </div>
 
             <div className="space-y-4">
@@ -276,8 +276,8 @@ export default function Home() {
         {currentStep === 3 && (
           <div className="step fade-in">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">매운 정도는 어떻게 하실까요?</h2>
-              <p className="text-gray-600">매운맛 정도를 선택해주세요</p>
+              <h2 className="text-2xl font-bold text-foreground mb-2">매운 정도는 어떻게 하실까요?</h2>
+              <p className="text-muted-foreground">매운맛 정도를 선택해주세요</p>
             </div>
 
             <div className="space-y-4">
@@ -298,8 +298,8 @@ export default function Home() {
           <div className="step fade-in">
             <div className="text-center py-16">
               <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mx-auto mb-4"></div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">맛있는 메뉴를 찾고 있어요...</h2>
-              <p className="text-gray-600">잠시만 기다려주세요!</p>
+              <h2 className="text-xl font-bold text-foreground mb-2">맛있는 메뉴를 찾고 있어요...</h2>
+              <p className="text-muted-foreground">잠시만 기다려주세요!</p>
             </div>
           </div>
         )}
@@ -318,7 +318,7 @@ export default function Home() {
       <AdBanner className="h-20 mx-4 mb-4" />
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-200 p-4">
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-white/10 p-4 rounded-b-2xl">
         <div className="flex space-x-3">
           {currentStep > 1 && currentStep < 5 && (
             <Button
