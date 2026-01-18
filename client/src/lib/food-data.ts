@@ -87,6 +87,37 @@ export const SPICE_LEVELS = [
   }
 ] as const;
 
+// Helper functions for prompt generation
+function getCategoryName(id: string) {
+  const cat = FOOD_CATEGORIES.find(c => c.id === id);
+  return cat ? cat.name : id;
+}
+
+function getPriceDescription(id: string) {
+  const p = PRICE_RANGES.find(r => r.id === id);
+  return p ? p.description : id;
+}
+
+function getSpiceDescription(id: string) {
+  const s = SPICE_LEVELS.find(l => l.id === id);
+  return s ? s.description : id;
+}
+
+const createFoodImages = (dishName: string): string[] => {
+  const foodImageMap: { [key: string]: string[] } = {
+    "김치찌개": [
+      "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+      "https://images.unsplash.com/photo-1612428978309-0b7d97e7e924?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+      "https://images.unsplash.com/photo-1611599238845-7f3c32eadb3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+    ],
+  };
+  return foodImageMap[dishName] || [
+    "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+    "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+    "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
+  ];
+};
+
 // Base items for local fallback
 const baseItems = [
   { id: 1, name: "김치찌개", category: "korean", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "얼큰하고 시원한 김치찌개!", imageUrl: null, tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함"] },
@@ -94,23 +125,24 @@ const baseItems = [
   { id: 3, name: "불고기", category: "korean", priceRange: "moderate", spiceLevel: "mild", price: 12000, description: "달콤한 불고기!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 10, name: "짜장면", category: "chinese", priceRange: "budget", spiceLevel: "mild", price: 6000, description: "달콤한 짜장소스!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 15, name: "라멘", category: "japanese", priceRange: "budget", spiceLevel: "mild", price: 8000, description: "진한 국물 라멘!", imageUrl: null, tags: ["🥛 순한맛"] },
-  { id: 20, name: "스파게티", category: "western", priceRange: "budget", spiceLevel: "mild", price: 8500, description: "토마토 소스 스파게티!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 20, name: "스파게티", category: "western", priceRange: "budget", spiceLevel: "mild", price: 8500, description: "토마토 스파게티!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 25, name: "떡볶이", category: "street", priceRange: "budget", spiceLevel: "medium", price: 4000, description: "매콤달콤 떡볶이!", imageUrl: null, tags: ["🌶️🌶️ 보통맛"] },
 ];
 
 const foodRecommendations = baseItems.map(item => {
-  return { ...item, imageUrls: [], imageUrl: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300" };
+  const imageUrls = createFoodImages(item.name);
+  return { ...item, imageUrls, imageUrl: imageUrls[0] };
 });
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 async function fetchPexelsImages(query: string): Promise<string[]> {
-  const pexelsKey = import.meta.env.VITE_PEXELS_API_KEY;
-  if (!pexelsKey) return [];
+  const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
+  if (!apiKey) return [];
   try {
     const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=3`, {
-      headers: { Authorization: pexelsKey }
+      headers: { Authorization: apiKey }
     });
     if (!response.ok) return [];
     const data = await response.json();
@@ -128,35 +160,45 @@ function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
     food.spiceLevel === request.spiceLevel
   );
   if (exactMatches.length > 0) return exactMatches[Math.floor(Math.random() * exactMatches.length)];
+
+  const categoryMatches = foodRecommendations.filter(food => food.category === request.category);
+  if (categoryMatches.length > 0) return categoryMatches[Math.floor(Math.random() * categoryMatches.length)];
+
   return foodRecommendations[Math.floor(Math.random() * foodRecommendations.length)];
 }
 
 async function withFallbackImage(recommendation: FoodRecommendation): Promise<FoodRecommendation> {
-  const liveImages = await fetchPexelsImages(recommendation.name);
-  if (liveImages.length > 0) {
-    return { ...recommendation, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
+  if (!recommendation.imageUrl || recommendation.imageUrl.length === 0) {
+    const liveImages = await fetchPexelsImages(recommendation.name);
+    if (liveImages.length > 0) {
+      return { ...recommendation, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
+    }
   }
   return { ...recommendation, isAiGenerated: false };
 }
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
   if (!ai) {
-    console.warn("No Gemini API Key found. Using local fallback.");
+    console.warn("No Gemini API Key. Using fallback.");
     return withFallbackImage(getLocalFallback(request));
   }
 
   try {
     console.log("Calling Gemini API with @google/genai...");
-    const prompt = `Recommend one specific, popular lunch menu dish (Korean preference) based on:
-    Category: ${request.category}
-    Price Range: ${request.priceRange}
-    Spice Level: ${request.spiceLevel}
+    const prompt = `Recommend ONE specific lunch menu dish that STRICTLY matches these criteria:
+    
+    1. Category: ${getCategoryName(request.category)} (${request.category}) - MUST be this cuisine type.
+    2. Price Range: ${getPriceDescription(request.priceRange)} - Dish average price MUST be within this range.
+    3. Spice Level: ${getSpiceDescription(request.spiceLevel)} - Spice level MUST match this.
+    
+    * Context: Lunch recommendation for a Korean user.
+    * Constraint: Do NOT recommend a generic list. Recommend ONE specific dish.
     
     Return strictly valid JSON (no markdown):
     {
       "name": "Dish Name (Korean)",
-      "englishQuery": "English Search Term for Pexels (e.g. Delicious Kimchi Stew)",
-      "description": "Appetizing description in Korean (max 1 sentence)",
+      "englishQuery": "English Search Term for Pexels (e.g. Delicious Kimchi Stew food photography)",
+      "description": "Appetizing description in Korean explaining why it fits the criteria (max 1 sentence)",
       "price": estimated_price_number_KRW,
       "tags": ["Tag1", "Tag2"]
     }`;
@@ -208,7 +250,14 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
     // REST Fallback - Use gemini-1.5-flash as it is most stable for REST
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!prompt) throw new Error("Prompt construction failed");
+      
+      const prompt = `Recommend ONE specific lunch menu dish that STRICTLY matches these criteria:
+      1. Category: ${getCategoryName(request.category)} (${request.category})
+      2. Price Range: ${getPriceDescription(request.priceRange)}
+      3. Spice Level: ${getSpiceDescription(request.spiceLevel)}
+      
+      Return strictly valid JSON (no markdown):
+      { "name": "...", "englishQuery": "...", "description": "...", "price": 0, "tags": [...] }`;
 
       const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',

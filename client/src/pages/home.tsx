@@ -199,7 +199,7 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-card/40 backdrop-blur-md shadow-2xl min-h-[90vh] relative my-4 rounded-2xl border border-white/10 overflow-hidden transition-colors duration-300">
+    <div className="max-w-md md:max-w-2xl mx-auto bg-card/40 backdrop-blur-md shadow-2xl min-h-[90vh] relative my-4 rounded-3xl border border-white/10 overflow-hidden transition-all duration-300">
       {/* Header */}
       <header className="bg-card/80 backdrop-blur-sm border-b border-border/50 text-foreground p-4 sticky top-0 z-50 transition-colors duration-300">
         <div className="flex items-center justify-between">
@@ -312,6 +312,31 @@ export default function Home() {
           />
         )}
       </main>
+
+      {/* SEO Content Section for AdSense Quality */}
+      <section className="px-6 py-8 border-t border-border/10 bg-card/20 backdrop-blur-sm mx-4 mb-6 rounded-xl">
+        <article className="mb-8">
+          <h2 className="text-lg font-bold text-foreground mb-3">🤔 점심 메뉴, 왜 고르기 힘들까요?</h2>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            '점심 메뉴 결정 장애'는 현대 직장인들이 겪는 흔한 고민 중 하나입니다. 너무 많은 선택지는 오히려 결정을 어렵게 만들고, 
+            오전 업무로 지친 뇌에게 추가적인 스트레스를 줍니다. 심리학자들은 이를 '결정 피로(Decision Fatigue)'라고 부릅니다. 
+            <strong>오늘뭐먹지?</strong> AI 추천기는 이러한 고민을 대신 해결해드려 여러분의 소중한 점심 시간을 온전히 휴식과 즐거움으로 채워드립니다.
+          </p>
+        </article>
+        
+        <article>
+          <h2 className="text-lg font-bold text-foreground mb-3">🥗 건강한 점심 식사를 위한 팁</h2>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            점심은 오후의 에너지를 결정하는 중요한 식사입니다. 
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li><strong>단백질 섭취:</strong> 제육볶음이나 생선구이 같은 단백질은 포만감을 오래 유지시켜 줍니다.</li>
+              <li><strong>복합 탄수화물:</strong> 흰 쌀밥보다는 잡곡밥이나 비빔밥을 선택하여 급격한 혈당 상승을 막으세요.</li>
+              <li><strong>채소 곁들이기:</strong> 쌈이나 나물 반찬을 적극적으로 활용하면 비타민과 무기질을 보충할 수 있습니다.</li>
+            </ul>
+            저희 AI는 영양 균형과 맛을 모두 고려하여 여러분에게 딱 맞는 메뉴를 제안합니다.
+          </p>
+        </article>
+      </section>
 
       {/* Footer Links */}
       <footer className="py-6 text-center text-xs text-muted-foreground pb-24 border-t border-border/10 mt-8">

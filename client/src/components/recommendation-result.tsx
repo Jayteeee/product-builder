@@ -43,28 +43,30 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
               <ImageCarousel 
                 images={getImageUrls(recommendation)}
                 alt={recommendation.name}
-                className="w-full h-48"
+                className="w-full h-64 md:h-72" 
               />
             </div>
           }
         />
         
         <div className="p-6">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-2xl font-bold text-foreground">{recommendation.name}</h3>
-            <div className="flex gap-2 items-center">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-3">
+            <h3 className="text-2xl font-bold text-foreground order-2 md:order-1">{recommendation.name}</h3>
+            <div className="flex flex-wrap gap-2 order-1 md:order-2">
               {recommendation.isAiGenerated && (
-                <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                  ✨ AI 추천
+                <div className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm flex items-center gap-1 animate-pulse">
+                  <span>✨</span> AI 추천
                 </div>
               )}
-              <div className="bg-primary text-white px-3 py-1 rounded-full text-sm">
+              <div className="bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium shadow-sm">
                 {getCategoryName(recommendation.category)}
               </div>
             </div>
           </div>
           
-          <p className="text-muted-foreground mb-4">{recommendation.description}</p>
+          <p className="text-muted-foreground mb-6 leading-relaxed text-base border-l-4 border-primary/30 pl-4 py-1">
+            {recommendation.description}
+          </p>
           
           <div className="flex items-center justify-end mb-4">
             <div className="text-lg font-bold text-primary">
