@@ -7,7 +7,6 @@ import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
 import { SpiceLevelCard } from "@/components/spice-level-card";
 import { RecommendationResult } from "@/components/recommendation-result";
-import { PopupAd } from "@/components/popup-ad";
 import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
@@ -108,7 +107,6 @@ interface RecommendationResponse {
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [currentTime, setCurrentTime] = useState("");
-  const [showPopupAd, setShowPopupAd] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const { theme, setTheme } = useTheme();
   const [selections, setSelections] = useState<RecommendationRequest>({
@@ -131,13 +129,6 @@ export default function Home() {
     onSuccess: (data) => {
       setRecommendation(data);
       setCurrentStep(5);
-      
-      // Show popup ad occasionally (30% chance)
-      if (Math.random() < 0.3) {
-        setTimeout(() => {
-          setShowPopupAd(true);
-        }, 3000);
-      }
     }
   });
 
@@ -205,10 +196,6 @@ export default function Home() {
       priceRange: "budget",
       spiceLevel: "mild"
     });
-  };
-
-  const closePopupAd = () => {
-    setShowPopupAd(false);
   };
 
   return (
@@ -367,9 +354,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Popup Ad */}
-      <PopupAd isOpen={showPopupAd} onClose={closePopupAd} />
-      
       {/* Contact Modal */}
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
