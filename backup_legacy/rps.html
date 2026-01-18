@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-9065869497785181">
+    <meta name="description" content="Play Rock Paper Scissors against an AI powered by TensorFlow.js. Test your luck or strategy against our machine learning model. Uses webcam or image upload.">
+    <title>AI Rock Paper Scissors</title>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9065869497785181"
+     crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="rps.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="title-area">
+          <h1>AI Rock Paper Scissors</h1>
+          <p>Challenge the AI! Show your hand to the camera.</p>
+        </div>
+        <a href="index.html" class="back-link">Back to Lunch Menu</a>
+      </header>
+
+      <main class="game-container">
+        <div class="game-area">
+            <!-- User Side -->
+            <div class="player-area">
+                <h2>You</h2>
+                
+                <div class="mode-selector">
+                    <button id="btnModeWebcam" class="mode-btn active">Webcam</button>
+                    <button id="btnModeImage" class="mode-btn">Image</button>
+                </div>
+
+                <div id="webcam-container" class="webcam-container">
+                    <div class="placeholder">Loading Camera...</div>
+                </div>
+
+                <div id="upload-container" class="upload-container hidden">
+                    <div class="image-preview-wrapper">
+                        <img id="uploaded-image" src="" alt="Upload Preview" class="hidden">
+                        <div id="upload-placeholder" class="upload-placeholder">
+                            <span>📷</span>
+                            <p>Click to upload</p>
+                        </div>
+                    </div>
+                    <input type="file" id="image-upload" accept="image/*" hidden>
+                </div>
+
+                <div class="prediction-bar">
+                    <span id="user-move">-</span>
+                </div>
+            </div>
+
+            <!-- VS -->
+            <div class="vs-badge">VS</div>
+
+            <!-- Computer Side -->
+            <div class="player-area">
+                <h2>AI</h2>
+                <div class="computer-placeholder">
+                    <span id="computer-emoji">🤖</span>
+                </div>
+                <div class="prediction-bar">
+                    <span id="computer-move">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="btnStartGame" class="primary" disabled>Start Game</button>
+            <div id="message" class="game-message">Wait for camera...</div>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <span class="label">Win</span>
+                <span class="value" id="score-win">0</span>
+            </div>
+            <div class="score-item">
+                <span class="label">Draw</span>
+                <span class="value" id="score-draw">0</span>
+            </div>
+            <div class="score-item">
+                <span class="label">Lose</span>
+                <span class="value" id="score-lose">0</span>
+            </div>
+        </div>
+
+        <!-- Educational Content Section -->
+        <section class="info-content" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); width: 100%;">
+            <article>
+                <h2 style="font-size: 1.2rem; color: var(--text);">How Does This Work?</h2>
+                <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+                    This game utilizes <strong>TensorFlow.js</strong> and a custom model trained with <strong>Teachable Machine</strong>. 
+                    The AI analyzes the pixel data from your webcam or uploaded image in real-time to identify patterns that match the shapes of "Rock", "Paper", or "Scissors". 
+                    Unlike traditional programmed games, this AI "learned" to recognize these hand gestures by seeing thousands of examples during its training phase.
+                </p>
+            </article>
+            <article style="margin-top: 20px;">
+                <h2 style="font-size: 1.2rem; color: var(--text);">The Psychology of Rock Paper Scissors</h2>
+                <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+                    While theoretically a game of chance, human players often follow predictable patterns. 
+                    For example, winners tend to stick with their winning move, while losers often switch to the move that would have beaten their previous opponent. 
+                    However, our AI opponent chooses its moves completely randomly, making it a true test of probability!
+                </p>
+            </article>
+        </section>
+      </main>
+
+      <footer>
+        <div style="margin-bottom: 8px;">Powered by Teachable Machine & TensorFlow.js</div>
+        <div style="display: flex; gap: 15px; justify-content: center; font-size: 0.85rem;">
+            <a href="about.html" style="color: var(--muted); text-decoration: underline;">About Us</a>
+            <a href="privacy.html" style="color: var(--muted); text-decoration: underline;">Privacy Policy</a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
+    <!-- Game Script -->
+    <script src="rps.js"></script>
+  </body>
+</html>

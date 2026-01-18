@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
 import { StepProgress } from "@/components/step-progress";
 import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
@@ -10,7 +10,7 @@ import { AdBanner } from "@/components/ad-banner";
 import { PopupAd } from "@/components/popup-ad";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, RotateCcw, Clock } from "lucide-react";
-import type { RecommendationRequest, FoodRecommendation } from "@shared/schema";
+import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
 const FOOD_CATEGORIES = [
   {
@@ -116,8 +116,9 @@ export default function Home() {
 
   const recommendationMutation = useMutation({
     mutationFn: async (request: RecommendationRequest) => {
-      const response = await apiRequest("POST", "/api/recommendations", request);
-      return response.json() as Promise<RecommendationResponse>;
+      const recommendation = await getFoodRecommendation(request);
+      const alternatives = await getAlternativeRecommendations(request.category, recommendation.id);
+      return { recommendation, alternatives };
     },
     onSuccess: (data) => {
       setRecommendation(data);
