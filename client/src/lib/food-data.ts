@@ -87,45 +87,30 @@ export const SPICE_LEVELS = [
   }
 ] as const;
 
-const createFoodImages = (dishName: string): string[] => {
-  const foodImageMap: { [key: string]: string[] } = {
-    "김치찌개": [
-      "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      "https://images.unsplash.com/photo-1612428978309-0b7d97e7e924?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      "https://images.unsplash.com/photo-1611599238845-7f3c32eadb3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
-    ],
-  };
-  return foodImageMap[dishName] || [
-    "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-    "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-    "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
-  ];
-};
-
+// Base items for local fallback
 const baseItems = [
   { id: 1, name: "김치찌개", category: "korean", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "얼큰하고 시원한 김치찌개!", imageUrl: null, tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함"] },
   { id: 2, name: "된장찌개", category: "korean", priceRange: "budget", spiceLevel: "mild", price: 7000, description: "구수한 된장찌개!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 3, name: "불고기", category: "korean", priceRange: "moderate", spiceLevel: "mild", price: 12000, description: "달콤한 불고기!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 10, name: "짜장면", category: "chinese", priceRange: "budget", spiceLevel: "mild", price: 6000, description: "달콤한 짜장소스!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 15, name: "라멘", category: "japanese", priceRange: "budget", spiceLevel: "mild", price: 8000, description: "진한 국물 라멘!", imageUrl: null, tags: ["🥛 순한맛"] },
-  { id: 20, name: "스파게티", category: "western", priceRange: "budget", spiceLevel: "mild", price: 8500, description: "토마토 스파게티!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 20, name: "스파게티", category: "western", priceRange: "budget", spiceLevel: "mild", price: 8500, description: "토마토 소스 스파게티!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 25, name: "떡볶이", category: "street", priceRange: "budget", spiceLevel: "medium", price: 4000, description: "매콤달콤 떡볶이!", imageUrl: null, tags: ["🌶️🌶️ 보통맛"] },
 ];
 
 const foodRecommendations = baseItems.map(item => {
-  const imageUrls = createFoodImages(item.name);
-  return { ...item, imageUrls, imageUrl: imageUrls[0] };
+  return { ...item, imageUrls: [], imageUrl: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300" };
 });
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 async function fetchPexelsImages(query: string): Promise<string[]> {
-  const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
-  if (!apiKey) return [];
+  const pexelsKey = import.meta.env.VITE_PEXELS_API_KEY;
+  if (!pexelsKey) return [];
   try {
     const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=3`, {
-      headers: { Authorization: apiKey }
+      headers: { Authorization: pexelsKey }
     });
     if (!response.ok) return [];
     const data = await response.json();
@@ -143,26 +128,20 @@ function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
     food.spiceLevel === request.spiceLevel
   );
   if (exactMatches.length > 0) return exactMatches[Math.floor(Math.random() * exactMatches.length)];
-
-  const categoryMatches = foodRecommendations.filter(food => food.category === request.category);
-  if (categoryMatches.length > 0) return categoryMatches[Math.floor(Math.random() * categoryMatches.length)];
-
   return foodRecommendations[Math.floor(Math.random() * foodRecommendations.length)];
 }
 
 async function withFallbackImage(recommendation: FoodRecommendation): Promise<FoodRecommendation> {
-  if (!recommendation.imageUrl || recommendation.imageUrl.length === 0) {
-    const liveImages = await fetchPexelsImages(recommendation.name);
-    if (liveImages.length > 0) {
-      return { ...recommendation, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
-    }
+  const liveImages = await fetchPexelsImages(recommendation.name);
+  if (liveImages.length > 0) {
+    return { ...recommendation, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
   }
   return { ...recommendation, isAiGenerated: false };
 }
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
   if (!ai) {
-    console.warn("No Gemini API Key. Using fallback.");
+    console.warn("No Gemini API Key found. Using local fallback.");
     return withFallbackImage(getLocalFallback(request));
   }
 
@@ -182,21 +161,17 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Use gemini-1.5-flash as standard
-    const response = await ai.models.generateContent({
+    // Using the new SDK syntax with explicit full model path
+    const result = await ai.models.generateContent({
       model: "gemini-1.5-flash",
-      contents: [{
-        role: "user",
-        parts: [{ text: prompt }]
-      }]
+      contents: [{ role: "user", parts: [{ text: prompt }] }]
     });
 
-    console.log("Gemini Response:", response.text());
-    
-    let jsonStr = response.text() || "{}";
-    jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
+    console.log("Gemini Response Received");
+    const jsonStr = result.text().replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
+    // Combine Korean Name + English Query for exact matching
     const combinedQuery = `${data.name} ${data.englishQuery}`;
     const imageUrls = await fetchPexelsImages(combinedQuery);
 
