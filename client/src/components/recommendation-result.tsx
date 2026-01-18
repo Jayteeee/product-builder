@@ -1,7 +1,7 @@
 
 import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
-import type { FoodRecommendation } from "@shared/schema";
+import type { FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResultProps {
   recommendation: FoodRecommendation;
@@ -30,11 +30,11 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
     <div className="step fade-in">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-primary mb-2">🎉 추천 메뉴</h2>
-        <p className="text-gray-600">오늘의 점심은 이거 어때요?</p>
+        <p className="text-muted-foreground">오늘의 점심은 이거 어때요?</p>
       </div>
 
       {/* Recommended Food Card */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6 bounce-in">
+      <div className="bg-card border border-border/50 rounded-2xl shadow-lg overflow-hidden mb-6 bounce-in">
         <ImageModal
           images={getImageUrls(recommendation)}
           alt={recommendation.name}
@@ -51,13 +51,13 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
         
         <div className="p-6">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-2xl font-bold text-gray-800">{recommendation.name}</h3>
+            <h3 className="text-2xl font-bold text-foreground">{recommendation.name}</h3>
             <div className="bg-primary text-white px-3 py-1 rounded-full text-sm">
               {getCategoryName(recommendation.category)}
             </div>
           </div>
           
-          <p className="text-gray-600 mb-4">{recommendation.description}</p>
+          <p className="text-muted-foreground mb-4">{recommendation.description}</p>
           
           <div className="flex items-center justify-end mb-4">
             <div className="text-lg font-bold text-primary">
@@ -70,7 +70,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
               {recommendation.tags.map((tag, index) => (
                 <span 
                   key={index}
-                  className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+                  className="bg-accent text-foreground px-3 py-1 rounded-full text-sm"
                 >
                   {tag}
                 </span>
@@ -83,12 +83,12 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       {/* Alternative Options */}
       {alternatives.length > 0 && (
         <div className="mb-6">
-          <h4 className="font-semibold text-gray-800 mb-3">다른 추천 메뉴도 있어요!</h4>
+          <h4 className="font-semibold text-foreground mb-3">다른 추천 메뉴도 있어요!</h4>
           <div className="flex space-x-3 overflow-x-auto pb-2">
             {alternatives.map((option) => (
               <div 
                 key={option.id}
-                className="flex-shrink-0 bg-white rounded-lg p-3 shadow-md min-w-[120px] hover:shadow-lg hover:scale-105 transition-all duration-200"
+                className="flex-shrink-0 bg-card border border-border/50 rounded-lg p-3 shadow-md min-w-[120px] hover:shadow-lg hover:scale-105 transition-all duration-200"
               >
                 <div className="relative">
                   {option.imageUrl && (
@@ -114,8 +114,8 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
                   className="cursor-pointer"
                   onClick={() => handleAlternativeClick(option)}
                 >
-                  <h5 className="font-medium text-sm">{option.name}</h5>
-                  <p className="text-xs text-gray-500">{option.price.toLocaleString()}원</p>
+                  <h5 className="font-medium text-sm text-foreground">{option.name}</h5>
+                  <p className="text-xs text-muted-foreground">{option.price.toLocaleString()}원</p>
                 </div>
               </div>
             ))}
