@@ -161,11 +161,10 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Using the new SDK syntax from the user's snippet (simple string content)
+    // Use specific model version and remove strict JSON config for better compatibility
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
-      contents: prompt,
-      config: { responseMimeType: "application/json" }
+      model: "gemini-1.5-flash-001",
+      contents: prompt
     });
 
     console.log("Gemini Response:", response.text());
