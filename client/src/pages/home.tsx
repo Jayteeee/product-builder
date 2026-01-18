@@ -314,8 +314,18 @@ export default function Home() {
         )}
       </main>
 
+      {/* Footer Links */}
+      <footer className="py-6 text-center text-xs text-muted-foreground pb-24">
+        <p className="mb-2">Note: This recommender is a random generator for fun.</p>
+        <div className="flex justify-center gap-4">
+          <a href="/about" className="underline hover:text-primary">About Us</a>
+          <a href="#" className="underline hover:text-primary" onClick={() => window.open('https://formspree.io/f/xeeeevdz', '_blank')}>Affiliate Inquiry</a>
+          <a href="/privacy" className="underline hover:text-primary">Privacy Policy</a>
+        </div>
+      </footer>
+
       {/* Middle Banner Ad */}
-      <AdBanner className="h-20 mx-4 mb-4" />
+      <AdBanner className="h-20 mx-4 mb-4 hidden" />
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-white/10 p-4 rounded-b-2xl">
