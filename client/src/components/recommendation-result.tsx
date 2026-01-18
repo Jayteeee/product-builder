@@ -151,7 +151,10 @@ function getCategoryIcon(category: string): string {
     chinese: "🥢",
     japanese: "🍣", 
     western: "🍔",
-    street: "🌭"
+    street: "🌭",
+    vietnamese: "🍜",
+    mexican: "🌮",
+    asian: "🥘"
   };
   return iconMap[category] || "🍽️";
 }
