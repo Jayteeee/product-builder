@@ -161,17 +161,22 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Use specific model version and remove strict JSON config for better compatibility
+    // Try using the SDK with the standard 'gemini-1.5-flash' model
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash-001",
+      model: "gemini-1.5-flash",
       contents: prompt
     });
 
     console.log("Gemini Response:", response.text());
-    const jsonStr = result.text().replace(/```json/g, "").replace(/```/g, "").trim();
+    
+    let jsonStr = response.text(); 
+    if (typeof jsonStr !== 'string') {
+        jsonStr = JSON.stringify(jsonStr);
+    }
+    
+    jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
-    // Combine Korean Name + English Query for exact matching
     const combinedQuery = `${data.name} ${data.englishQuery}`;
     const imageUrls = await fetchPexelsImages(combinedQuery);
 
@@ -189,8 +194,48 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       isAiGenerated: true
     };
   } catch (error) {
-    console.error("Gemini AI Failed:", error);
-    return withFallbackImage(getLocalFallback(request));
+    console.warn("SDK Failed, trying REST fallback...", error);
+    
+    // REST Fallback for 404/Network issues
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+
+      if (!restResponse.ok) throw new Error(`REST Error: ${restResponse.status}`);
+      
+      const restData = await restResponse.json();
+      const text = restData.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error("No text in REST response");
+
+      const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
+      const data = JSON.parse(jsonStr);
+      
+      const combinedQuery = `${data.name} ${data.englishQuery}`;
+      const imageUrls = await fetchPexelsImages(combinedQuery);
+
+      return {
+        id: Date.now(),
+        name: data.name,
+        category: request.category,
+        priceRange: request.priceRange,
+        spiceLevel: request.spiceLevel,
+        price: data.price,
+        description: data.description,
+        imageUrl: imageUrls[0] || null,
+        imageUrls: imageUrls,
+        tags: data.tags,
+        isAiGenerated: true
+      };
+    } catch (restError) {
+      console.error("All AI attempts failed:", restError);
+      return withFallbackImage(getLocalFallback(request));
+    }
   }
 }
 
