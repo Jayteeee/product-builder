@@ -161,9 +161,9 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Try using the SDK with the standard 'gemini-1.5-flash' model
+    // Try using the SDK with 'gemini-2.0-flash' (assuming 2.5 was a typo for 2.0)
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
+      model: "gemini-2.0-flash",
       contents: prompt
     });
 
@@ -196,18 +196,24 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
   } catch (error) {
     console.warn("SDK Failed, trying REST fallback...", error);
     
-    // REST Fallback for 404/Network issues
+    // REST Fallback with corrected body structure and model
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }]
+          contents: [{ 
+            role: "user",
+            parts: [{ text: prompt }] 
+          }]
         })
       });
 
-      if (!restResponse.ok) throw new Error(`REST Error: ${restResponse.status}`);
+      if (!restResponse.ok) {
+        const errText = await restResponse.text();
+        throw new Error(`REST Error: ${restResponse.status} - ${errText}`);
+      }
       
       const restData = await restResponse.json();
       const text = restData.candidates?.[0]?.content?.parts?.[0]?.text;
