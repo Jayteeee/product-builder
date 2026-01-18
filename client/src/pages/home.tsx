@@ -324,9 +324,9 @@ export default function Home() {
           </p>
         </article>
         
-        <article>
+        <article className="mb-8">
           <h2 className="text-lg font-bold text-foreground mb-3">🥗 건강한 점심 식사를 위한 팁</h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <div className="text-muted-foreground text-sm leading-relaxed">
             점심은 오후의 에너지를 결정하는 중요한 식사입니다. 
             <ul className="list-disc pl-5 mt-2 space-y-1">
               <li><strong>단백질 섭취:</strong> 제육볶음이나 생선구이 같은 단백질은 포만감을 오래 유지시켜 줍니다.</li>
@@ -334,6 +334,16 @@ export default function Home() {
               <li><strong>채소 곁들이기:</strong> 쌈이나 나물 반찬을 적극적으로 활용하면 비타민과 무기질을 보충할 수 있습니다.</li>
             </ul>
             저희 AI는 영양 균형과 맛을 모두 고려하여 여러분에게 딱 맞는 메뉴를 제안합니다.
+          </div>
+        </article>
+
+        <article>
+          <h2 className="text-lg font-bold text-foreground mb-3">📱 사용 방법</h2>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            1. <strong>카테고리 선택:</strong> 한식, 중식, 일식 등 원하시는 종류를 선택하세요.<br/>
+            2. <strong>예산 설정:</strong> 5,000원 이하의 저렴한 식사부터 프리미엄 메뉴까지 예산에 맞춰 고를 수 있습니다.<br/>
+            3. <strong>매운맛 조절:</strong> 매운 음식을 잘 못 드시나요? '순한맛'을 선택하면 AI가 자극적이지 않은 메뉴를 찾아줍니다.<br/>
+            4. <strong>AI 추천 확인:</strong> 선택하신 조건에 딱 맞는 메뉴를 AI가 분석하여 추천해 드립니다. 마음에 들지 않으면 '다시 추천받기'를 눌러보세요!
           </p>
         </article>
       </section>
