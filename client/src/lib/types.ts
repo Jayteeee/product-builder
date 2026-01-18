@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const recommendationRequestSchema = z.object({
-  category: z.enum(["korean", "chinese", "japanese", "western", "street"]),
+  category: z.enum(["korean", "chinese", "japanese", "western", "street", "vietnamese", "mexican", "asian"]),
   priceRange: z.enum(["budget", "moderate", "premium"]),
   spiceLevel: z.enum(["mild", "medium", "hot"]),
 });

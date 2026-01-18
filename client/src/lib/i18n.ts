@@ -22,7 +22,11 @@ export const translations = {
     affiliate: "제휴 문의",
     privacy: "개인정보처리방침",
     
-    korean: "한식", chinese: "중식", japanese: "일식", western: "양식", street: "분식",
+    // Categories
+    korean: "한식", chinese: "중식", japanese: "일식", western: "양식", street: "분식/간식",
+    vietnamese: "베트남", mexican: "멕시칸", asian: "아시안",
+    
+    // Prices
     budget: "저렴한 가격", moderate: "적당한 가격", premium: "프리미엄",
     mild: "순한맛", medium: "보통맛", hot: "매운맛",
     
@@ -54,7 +58,11 @@ export const translations = {
     affiliate: "Affiliate Inquiry",
     privacy: "Privacy Policy",
 
+    // Categories
     korean: "Korean", chinese: "Chinese", japanese: "Japanese", western: "Western", street: "Street Food",
+    vietnamese: "Vietnamese", mexican: "Mexican", asian: "Asian",
+    
+    // Prices
     budget: "Budget", moderate: "Moderate", premium: "Premium",
     mild: "Mild", medium: "Medium", hot: "Hot",
 

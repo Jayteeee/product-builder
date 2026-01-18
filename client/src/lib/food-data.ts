@@ -36,6 +36,27 @@ export const FOOD_CATEGORIES = [
     icon: "🌭",
     description: "떡볶이, 김밥, 핫도그...",
     color: "street-food"
+  },
+  {
+    id: "vietnamese",
+    name: "베트남",
+    icon: "🍜",
+    description: "쌀국수, 분짜, 반미...",
+    color: "western-food"
+  },
+  {
+    id: "mexican",
+    name: "멕시칸",
+    icon: "🌮",
+    description: "타코, 부리또, 퀘사디아...",
+    color: "street-food"
+  },
+  {
+    id: "asian",
+    name: "아시안",
+    icon: "🥘",
+    description: "팟타이, 나시고랭, 딤섬...",
+    color: "chinese-food"
   }
 ] as const;
 
