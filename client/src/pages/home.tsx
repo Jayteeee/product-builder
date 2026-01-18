@@ -7,7 +7,6 @@ import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
 import { SpiceLevelCard } from "@/components/spice-level-card";
 import { RecommendationResult } from "@/components/recommendation-result";
-import { AdBanner } from "@/components/ad-banner";
 import { PopupAd } from "@/components/popup-ad";
 import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
@@ -232,9 +231,8 @@ export default function Home() {
         <StepProgress currentStep={currentStep} totalSteps={5} />
       </header>
 
-      {/* Top Banner Ad */}
-      <AdBanner className="h-16 m-4" />
-
+      {/* Top Banner Ad - Removed */}
+      
       {/* Main Content */}
       <main className="p-4 pb-20">
         {/* Step 1: Food Category Selection */}
@@ -342,9 +340,6 @@ export default function Home() {
           <Link href="/privacy" className="underline hover:text-primary cursor-pointer">Privacy Policy</Link>
         </div>
       </footer>
-
-      {/* Middle Banner Ad */}
-      <AdBanner className="h-20 mx-4 mb-4 hidden" />
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-border/50 p-4 rounded-b-2xl transition-colors duration-300">

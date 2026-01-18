@@ -53,9 +53,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-      <div className="bg-background border border-border/50 rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in duration-200">
+      <div className="bg-card border border-border/50 rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in duration-200">
         <div className="flex justify-between items-center mb-6 border-b border-border/50 pb-4">
-          <h2 className="text-xl font-bold text-foreground">제휴 문의</h2>
+          <h2 className="text-xl font-bold text-card-foreground">제휴 문의</h2>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
             <X className="w-5 h-5" />
           </button>
@@ -63,35 +63,35 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="name" className="text-sm font-medium text-foreground">이름</label>
+            <label htmlFor="name" className="text-sm font-medium text-card-foreground">이름</label>
             <input 
               type="text" 
               name="name" 
               id="name" 
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-3 py-2 rounded-lg bg-background border border-input text-foreground focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
             />
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium text-foreground">이메일</label>
+            <label htmlFor="email" className="text-sm font-medium text-card-foreground">이메일</label>
             <input 
               type="email" 
               name="_replyto" 
               id="email" 
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-3 py-2 rounded-lg bg-background border border-input text-foreground focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
             />
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-medium text-foreground">문의 내용</label>
+            <label htmlFor="message" className="text-sm font-medium text-card-foreground">문의 내용</label>
             <textarea 
               name="message" 
               id="message" 
               rows={4} 
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+              className="w-full px-3 py-2 rounded-lg bg-background border border-input text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"
             ></textarea>
           </div>
 
