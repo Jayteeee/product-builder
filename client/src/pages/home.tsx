@@ -14,12 +14,20 @@ import { useLanguage } from "@/components/language-provider";
 import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2 } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
+interface RecommendationResponse {
+  recommendation: FoodRecommendation;
+  alternatives: FoodRecommendation[];
+}
+
 const CATEGORY_IDS = [
   { id: "korean", icon: "🍚", color: "bg-red-500" },
   { id: "chinese", icon: "🥢", color: "bg-yellow-500" },
   { id: "japanese", icon: "🍣", color: "bg-purple-500" },
   { id: "western", icon: "🍔", color: "bg-green-500" },
-  { id: "street", icon: "🌭", color: "bg-pink-500" }
+  { id: "street", icon: "🌭", color: "bg-pink-500" },
+  { id: "vietnamese", icon: "🍜", color: "bg-emerald-500" },
+  { id: "mexican", icon: "🌮", color: "bg-orange-500" },
+  { id: "asian", icon: "🥘", color: "bg-teal-500" }
 ] as const;
 
 const PRICE_IDS = [
@@ -64,7 +72,7 @@ export default function Home() {
 
   const handleSwapRecommendation = (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => {
     if (!recommendation) return;
-    const updatedAlternatives = recommendation.alternatives.filter(alt => alt.id !== newRecommendation.id);
+    const updatedAlternatives = recommendation.alternatives.filter((alt: FoodRecommendation) => alt.id !== newRecommendation.id);
     updatedAlternatives.push(currentRecommendation);
     setRecommendation({ recommendation: newRecommendation, alternatives: updatedAlternatives });
   };
@@ -144,7 +152,7 @@ export default function Home() {
               <p className="text-muted-foreground">{t('category_desc')}</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {CATEGORY_IDS.slice(0, 4).map((cat) => (
+              {CATEGORY_IDS.map((cat) => (
                 <FoodCategoryCard
                   key={cat.id}
                   category={{ ...cat, name: t(cat.id as any), description: "" }} 
@@ -152,13 +160,6 @@ export default function Home() {
                   onSelect={handleCategorySelect}
                 />
               ))}
-              <div className="col-span-2">
-                <FoodCategoryCard
-                  category={{ ...CATEGORY_IDS[4], name: t(CATEGORY_IDS[4].id as any), description: "" }}
-                  isSelected={selections.category === CATEGORY_IDS[4].id}
-                  onSelect={handleCategorySelect}
-                />
-              </div>
             </div>
           </div>
         )}

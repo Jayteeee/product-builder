@@ -148,6 +148,12 @@ const baseItems = [
   { id: 15, name: "라멘", category: "japanese", priceRange: "budget", spiceLevel: "mild", price: 8000, description: "진한 국물 라멘!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 20, name: "스파게티", category: "western", priceRange: "budget", spiceLevel: "mild", price: 8500, description: "토마토 스파게티!", imageUrl: null, tags: ["🥛 순한맛"] },
   { id: 25, name: "떡볶이", category: "street", priceRange: "budget", spiceLevel: "medium", price: 4000, description: "매콤달콤 떡볶이!", imageUrl: null, tags: ["🌶️🌶️ 보통맛"] },
+  { id: 30, name: "쌀국수", category: "vietnamese", priceRange: "budget", spiceLevel: "mild", price: 9000, description: "진한 육수의 베트남 쌀국수!", imageUrl: null, tags: ["🍜 담백한맛"] },
+  { id: 31, name: "분짜", category: "vietnamese", priceRange: "moderate", spiceLevel: "mild", price: 12000, description: "숯불 돼지고기와 새콤달콤한 소스!", imageUrl: null, tags: ["🥗 새콤달콤"] },
+  { id: 40, name: "타코", category: "mexican", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "신선한 재료가 듬뿍 들어간 타코!", imageUrl: null, tags: ["🌮 멕시칸"] },
+  { id: 41, name: "부리또", category: "mexican", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "든든한 한 끼, 멕시칸 부리또!", imageUrl: null, tags: ["🌯 든든한"] },
+  { id: 50, name: "팟타이", category: "asian", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "태국식 볶음 쌀국수!", imageUrl: null, tags: ["🥘 아시안"] },
+  { id: 51, name: "나시고랭", category: "asian", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "인도네시아식 볶음밥!", imageUrl: null, tags: ["🍛 볶음밥"] },
 ];
 
 const foodRecommendations = baseItems.map(item => {
@@ -232,12 +238,13 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
 
     // Safely access text from response
     let responseText = "";
-    if (typeof response.text === 'function') {
-      responseText = response.text();
-    } else if (typeof response.text === 'string') {
-      responseText = response.text;
-    } else if (response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
-      responseText = response.candidates[0].content.parts[0].text;
+    const res = response as any;
+    if (typeof res.text === 'function') {
+      responseText = res.text();
+    } else if (typeof res.text === 'string') {
+      responseText = res.text;
+    } else if (res.candidates && res.candidates[0]?.content?.parts?.[0]?.text) {
+      responseText = res.candidates[0].content.parts[0].text;
     } else {
       console.warn("Unexpected Gemini response structure:", response);
       throw new Error("Invalid Gemini response structure");
