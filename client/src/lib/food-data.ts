@@ -307,6 +307,24 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
 
 export async function getAlternativeRecommendations(category: string, excludeId?: number): Promise<FoodRecommendation[]> {
   const alternatives = foodRecommendations.filter(food => food.id !== excludeId);
-  const shuffled = alternatives.sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 3) as FoodRecommendation[];
+  const shuffled = alternatives.sort(() => Math.random() - 0.5).slice(0, 3);
+
+  // Fetch accurate images for alternatives in parallel
+  const updatedAlternatives = await Promise.all(shuffled.map(async (item) => {
+    // If it's a fallback item with a static image, we might want to refresh it or keep it.
+    // The user wants "accurate images". Pexels search by name is usually better than generic hardcoded.
+    const query = `${item.name} food`; // Simple query: Name + "food"
+    const liveImages = await fetchPexelsImages(query);
+    
+    if (liveImages.length > 0) {
+      return { 
+        ...item, 
+        imageUrl: liveImages[0], 
+        imageUrls: liveImages 
+      };
+    }
+    return item;
+  }));
+
+  return updatedAlternatives;
 }
