@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import type { FoodRecommendation, RecommendationRequest } from "@/lib/types";
 
 export const FOOD_CATEGORIES = [
@@ -94,7 +94,6 @@ const createFoodImages = (dishName: string): string[] => {
       "https://images.unsplash.com/photo-1612428978309-0b7d97e7e924?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
       "https://images.unsplash.com/photo-1611599238845-7f3c32eadb3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
     ],
-    // ... keep existing map for fallback visual consistency
   };
   return foodImageMap[dishName] || [
     "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
@@ -103,7 +102,6 @@ const createFoodImages = (dishName: string): string[] => {
   ];
 };
 
-// Base items for local fallback
 const baseItems = [
   { id: 1, name: "김치찌개", category: "korean", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "얼큰하고 시원한 김치찌개!", imageUrl: null, tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함"] },
   { id: 2, name: "된장찌개", category: "korean", priceRange: "budget", spiceLevel: "mild", price: 7000, description: "구수한 된장찌개!", imageUrl: null, tags: ["🥛 순한맛"] },
@@ -120,7 +118,7 @@ const foodRecommendations = baseItems.map(item => {
 });
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 async function fetchPexelsImages(query: string): Promise<string[]> {
   const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
@@ -163,13 +161,13 @@ async function withFallbackImage(recommendation: FoodRecommendation): Promise<Fo
 }
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
-  if (!genAI) {
+  if (!ai) {
     console.warn("No Gemini API Key. Using fallback.");
     return withFallbackImage(getLocalFallback(request));
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    console.log("Calling Gemini API with @google/genai...");
     const prompt = `Recommend one specific, popular lunch menu dish (Korean preference) based on:
     Category: ${request.category}
     Price Range: ${request.priceRange}
@@ -184,10 +182,24 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
-    const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
+    // Using the new SDK syntax from the user's snippet
+    const response = await ai.models.generateContent({
+      model: "gemini-1.5-flash",
+      contents: prompt,
+      config: { responseMimeType: "application/json" }
+    });
+
+    console.log("Gemini Response:", response.text);
+    
+    let jsonStr = response.text(); // or response.text which might be a getter or property?
+    // User snippet says: console.log(response.text); So it's a property.
+    if (typeof response.text === 'function') {
+        jsonStr = response.text();
+    } else {
+        jsonStr = response.text || "{}";
+    }
+    
+    jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
     const combinedQuery = `${data.name} ${data.englishQuery}`;
