@@ -184,7 +184,8 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
     }`;
 
     // Direct REST API call to bypass SDK issues
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    // Use 'gemini-pro' which is the standard stable model
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
