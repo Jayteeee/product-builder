@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
 import { StepProgress } from "@/components/step-progress";
 import { FoodCategoryCard } from "@/components/food-category-card";
@@ -318,9 +319,9 @@ export default function Home() {
       <footer className="py-6 text-center text-xs text-muted-foreground pb-24">
         <p className="mb-2">Note: This recommender is a random generator for fun.</p>
         <div className="flex justify-center gap-4">
-          <a href="/about" className="underline hover:text-primary">About Us</a>
-          <a href="#" className="underline hover:text-primary" onClick={() => window.open('https://formspree.io/f/xeeeevdz', '_blank')}>Affiliate Inquiry</a>
-          <a href="/privacy" className="underline hover:text-primary">Privacy Policy</a>
+          <Link href="/about" className="underline hover:text-primary cursor-pointer">About Us</Link>
+          <a href="#" className="underline hover:text-primary" onClick={(e) => { e.preventDefault(); window.open('https://formspree.io/f/xeeeevdz', '_blank'); }}>Affiliate Inquiry</a>
+          <Link href="/privacy" className="underline hover:text-primary cursor-pointer">Privacy Policy</Link>
         </div>
       </footer>
 
