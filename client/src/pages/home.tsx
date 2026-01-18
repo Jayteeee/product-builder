@@ -9,8 +9,10 @@ import { SpiceLevelCard } from "@/components/spice-level-card";
 import { RecommendationResult } from "@/components/recommendation-result";
 import { AdBanner } from "@/components/ad-banner";
 import { PopupAd } from "@/components/popup-ad";
+import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, RotateCcw, Clock } from "lucide-react";
+import { useTheme } from "@/components/theme-provider";
+import { ArrowLeft, ArrowRight, RotateCcw, Clock, Sun, Moon } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
 const FOOD_CATEGORIES = [
@@ -108,12 +110,18 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [currentTime, setCurrentTime] = useState("");
   const [showPopupAd, setShowPopupAd] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [selections, setSelections] = useState<RecommendationRequest>({
     category: "korean",
     priceRange: "budget",
     spiceLevel: "mild"
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const recommendationMutation = useMutation({
     mutationFn: async (request: RecommendationRequest) => {
@@ -205,15 +213,20 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-card/40 backdrop-blur-md shadow-2xl min-h-[90vh] relative my-4 rounded-2xl border border-white/10 overflow-hidden">
+    <div className="max-w-md mx-auto bg-card/40 backdrop-blur-md shadow-2xl min-h-[90vh] relative my-4 rounded-2xl border border-white/10 overflow-hidden transition-colors duration-300">
       {/* Header */}
-      <header className="bg-card/80 backdrop-blur-sm border-b border-white/10 text-foreground p-4 sticky top-0 z-50">
+      <header className="bg-card/80 backdrop-blur-sm border-b border-border/50 text-foreground p-4 sticky top-0 z-50 transition-colors duration-300">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">🍽️ 오늘뭐먹지?</h1>
-          <div className="text-sm opacity-90 flex items-center text-muted-foreground">
-            <Clock className="w-4 h-4 mr-1" />
-            <span>{currentTime}</span>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl font-bold">🍽️ 오늘뭐먹지?</h1>
+            <div className="text-sm opacity-90 flex items-center text-muted-foreground">
+              <Clock className="w-3 h-3 mr-1" />
+              <span>{currentTime}</span>
+            </div>
           </div>
+          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full hover:bg-accent">
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
         </div>
         
         <StepProgress currentStep={currentStep} totalSteps={5} />
@@ -316,11 +329,16 @@ export default function Home() {
       </main>
 
       {/* Footer Links */}
-      <footer className="py-6 text-center text-xs text-muted-foreground pb-24">
+      <footer className="py-6 text-center text-xs text-muted-foreground pb-24 border-t border-border/10 mt-8">
         <p className="mb-2">Note: This recommender is a random generator for fun.</p>
         <div className="flex justify-center gap-4">
           <Link href="/about" className="underline hover:text-primary cursor-pointer">About Us</Link>
-          <a href="#" className="underline hover:text-primary" onClick={(e) => { e.preventDefault(); window.open('https://formspree.io/f/xeeeevdz', '_blank'); }}>Affiliate Inquiry</a>
+          <button 
+            className="underline hover:text-primary cursor-pointer bg-transparent border-none p-0 text-xs text-muted-foreground" 
+            onClick={() => setShowContactModal(true)}
+          >
+            Affiliate Inquiry
+          </button>
           <Link href="/privacy" className="underline hover:text-primary cursor-pointer">Privacy Policy</Link>
         </div>
       </footer>
@@ -329,7 +347,7 @@ export default function Home() {
       <AdBanner className="h-20 mx-4 mb-4 hidden" />
 
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-white/10 p-4 rounded-b-2xl">
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-border/50 p-4 rounded-b-2xl transition-colors duration-300">
         <div className="flex space-x-3">
           {currentStep > 1 && currentStep < 5 && (
             <Button
@@ -356,6 +374,9 @@ export default function Home() {
 
       {/* Popup Ad */}
       <PopupAd isOpen={showPopupAd} onClose={closePopupAd} />
+      
+      {/* Contact Modal */}
+      <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
   );
 }

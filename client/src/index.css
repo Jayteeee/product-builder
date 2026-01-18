@@ -21,38 +21,38 @@
 }
 
 :root {
-  /* Dark Blue Theme by Default */
+  /* Default (Dark Blue) Theme */
   --background: 220 48% 8%; /* #0b1220 */
-  --foreground: 220 60% 95%; /* #e8eefc */
+  --foreground: 220 60% 98%; /* High contrast text for dark mode */
   
-  --muted: 224 30% 75%; /* #a8b3d6 */
-  --muted-foreground: 224 20% 65%;
+  --muted: 224 30% 75%; /* Brighter muted text for readability */
+  --muted-foreground: 224 30% 75%; /* Ensure visibility */
   
-  --popover: 222 47% 11%; /* card bg approx */
-  --popover-foreground: 220 60% 95%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 220 60% 98%;
   
-  --card: 222 47% 13%; /* rgba(16, 26, 51, 0.55) opaque approx */
-  --card-foreground: 220 60% 95%;
+  --card: 222 47% 13%;
+  --card-foreground: 220 60% 98%;
   
   --border: 215 25% 27%;
   --input: 215 25% 27%;
   
-  --primary: 213 100% 64%; /* #479bff */
+  --primary: 213 100% 64%; /* Bright Blue */
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 217 33% 17%;
+  --secondary: 217 33% 25%; /* Lighter secondary for visibility */
   --secondary-foreground: 210 40% 98%;
   
-  --accent: 217 33% 17%;
+  --accent: 217 33% 25%;
   --accent-foreground: 210 40% 98%;
   
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 40% 98%;
   
   --ring: 213 100% 64%;
-  --radius: 0.75rem; /* 12px */
+  --radius: 0.75rem;
   
-  /* Food Category Colors (Adjusted for Dark Mode visibility) */
+  /* Food Category Colors */
   --korean-food: 350 70% 60%;
   --chinese-food: 43 96% 60%;
   --japanese-food: 251 77% 70%;
@@ -60,27 +60,33 @@
   --street-food: 337 87% 75%;
 }
 
-.dark {
-  /* Same as root since we want dark by default */
-  --background: 220 48% 8%;
-  --foreground: 220 60% 95%;
-  --muted: 224 30% 75%;
-  --muted-foreground: 224 20% 65%;
-  --popover: 222 47% 11%;
-  --popover-foreground: 220 60% 95%;
-  --card: 222 47% 13%;
-  --card-foreground: 220 60% 95%;
-  --border: 215 25% 27%;
-  --input: 215 25% 27%;
-  --primary: 213 100% 64%;
+.light {
+  /* Light Mode Overrides */
+  --background: 220 30% 96%; /* #f0f4f8 */
+  --foreground: 222 47% 11%; /* Dark text */
+  
+  --muted: 220 14% 96%;
+  --muted-foreground: 215 16% 47%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  
+  --primary: 213 100% 50%; /* Darker Blue for light mode contrast */
   --primary-foreground: 0 0% 100%;
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
-  --accent: 217 33% 17%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --ring: 213 100% 64%;
+  
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222 47% 11%;
+  
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222 47% 11%;
+  
+  --ring: 213 100% 50%;
 }
 
 @layer base {
@@ -89,15 +95,18 @@
   }
 
   body {
-    @apply font-sans antialiased text-foreground;
-    background-color: #0b1220;
+    @apply font-sans antialiased text-foreground bg-background transition-colors duration-300;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  /* Radial gradient only for dark mode default */
+  :root:not(.light) body {
     background-image: radial-gradient(
       1200px 800px at 20% 10%,
       #1a2b5a 0%,
       #0b1220 55%
     );
-    background-attachment: fixed; /* Ensure gradient stays */
-    font-family: 'Noto Sans KR', sans-serif;
+    background-attachment: fixed;
   }
 }
 
