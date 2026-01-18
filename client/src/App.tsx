@@ -11,9 +11,30 @@ import Privacy from "@/pages/privacy";
 import NotFound from "@/pages/not-found";
 import { useState, useEffect } from "react";
 
-// ... (existing hook code) ...
+// Custom hook for hash-based routing
+const useHashLocation = () => {
+  const [loc, setLoc] = useState(window.location.hash.replace(/^#/, "") || "/");
+  useEffect(() => {
+    const handler = () => setLoc(window.location.hash.replace(/^#/, "") || "/");
+    window.addEventListener("hashchange", handler);
+    return () => window.removeEventListener("hashchange", handler);
+  }, []);
+  const navigate = (to: string) => (window.location.hash = to);
+  return [loc, navigate] as const;
+};
 
-// ... (AppRouter code) ...
+function AppRouter() {
+  return (
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/about.html" component={About} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/privacy.html" component={Privacy} />
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
 
 function App() {
   return (
