@@ -161,13 +161,14 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Using the new SDK syntax with explicit full model path
-    const result = await ai.models.generateContent({
+    // Using the new SDK syntax from the user's snippet (simple string content)
+    const response = await ai.models.generateContent({
       model: "gemini-1.5-flash",
-      contents: [{ role: "user", parts: [{ text: prompt }] }]
+      contents: prompt,
+      config: { responseMimeType: "application/json" }
     });
 
-    console.log("Gemini Response Received");
+    console.log("Gemini Response:", response.text());
     const jsonStr = result.text().replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
