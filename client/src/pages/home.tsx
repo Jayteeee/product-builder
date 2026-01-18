@@ -10,105 +10,36 @@ import { RecommendationResult } from "@/components/recommendation-result";
 import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
-import { ArrowLeft, ArrowRight, RotateCcw, Clock, Sun, Moon } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
+import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2 } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
-const FOOD_CATEGORIES = [
-  {
-    id: "korean",
-    name: "한식",
-    icon: "🍚",
-    description: "김치찌개, 비빔밥...",
-    color: "bg-red-500"
-  },
-  {
-    id: "chinese",
-    name: "중식",
-    icon: "🥢",
-    description: "짜장면, 탕수육...",
-    color: "bg-yellow-500"
-  },
-  {
-    id: "japanese",
-    name: "일식",
-    icon: "🍣",
-    description: "초밥, 라멘...",
-    color: "bg-purple-500"
-  },
-  {
-    id: "western",
-    name: "양식",
-    icon: "🍔",
-    description: "파스타, 피자...",
-    color: "bg-green-500"
-  },
-  {
-    id: "street",
-    name: "분식/간식",
-    icon: "🌭",
-    description: "떡볶이, 김밥, 핫도그...",
-    color: "bg-pink-500"
-  }
+const CATEGORY_IDS = [
+  { id: "korean", icon: "🍚", color: "bg-red-500" },
+  { id: "chinese", icon: "🥢", color: "bg-yellow-500" },
+  { id: "japanese", icon: "🍣", color: "bg-purple-500" },
+  { id: "western", icon: "🍔", color: "bg-green-500" },
+  { id: "street", icon: "🌭", color: "bg-pink-500" }
 ] as const;
 
-const PRICE_OPTIONS = [
-  {
-    id: "budget",
-    name: "저렴한 가격",
-    icon: "💰",
-    description: "5,000원 ~ 8,000원",
-    emoji: "😊"
-  },
-  {
-    id: "moderate",
-    name: "적당한 가격",
-    icon: "💳",
-    description: "8,000원 ~ 12,000원",
-    emoji: "😋"
-  },
-  {
-    id: "premium",
-    name: "프리미엄",
-    icon: "💎",
-    description: "12,000원 이상",
-    emoji: "🤤"
-  }
+const PRICE_IDS = [
+  { id: "budget", icon: "💰", emoji: "😊" },
+  { id: "moderate", icon: "💳", emoji: "😋" },
+  { id: "premium", icon: "💎", emoji: "🤤" }
 ] as const;
 
-const SPICE_LEVELS = [
-  {
-    id: "mild",
-    name: "순한맛",
-    icon: "🥛",
-    description: "매운맛 없이 부드럽게",
-    spiceIcon: "🌶️"
-  },
-  {
-    id: "medium",
-    name: "보통맛",
-    icon: "🔥",
-    description: "적당히 매콤하게",
-    spiceIcon: "🌶️🌶️"
-  },
-  {
-    id: "hot",
-    name: "매운맛",
-    icon: "🌋",
-    description: "진짜 매운맛으로!",
-    spiceIcon: "🌶️🌶️🌶️"
-  }
+const SPICE_IDS = [
+  { id: "mild", icon: "🥛", spiceIcon: "🌶️" },
+  { id: "medium", icon: "🔥", spiceIcon: "🌶️🌶️" },
+  { id: "hot", icon: "🌋", spiceIcon: "🌶️🌶️🌶️" }
 ] as const;
-
-interface RecommendationResponse {
-  recommendation: FoodRecommendation;
-  alternatives: FoodRecommendation[];
-}
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [currentTime, setCurrentTime] = useState("");
   const [showContactModal, setShowContactModal] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
   const [selections, setSelections] = useState<RecommendationRequest>({
     category: "korean",
     priceRange: "budget",
@@ -116,9 +47,8 @@ export default function Home() {
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleLang = () => setLanguage(language === "en" ? "ko" : "en");
 
   const recommendationMutation = useMutation({
     mutationFn: async (request: RecommendationRequest) => {
@@ -134,32 +64,22 @@ export default function Home() {
 
   const handleSwapRecommendation = (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => {
     if (!recommendation) return;
-    
-    // Remove the new recommendation from alternatives and add current one
     const updatedAlternatives = recommendation.alternatives.filter(alt => alt.id !== newRecommendation.id);
     updatedAlternatives.push(currentRecommendation);
-    
-    // Update the recommendation state
-    setRecommendation({
-      recommendation: newRecommendation,
-      alternatives: updatedAlternatives
-    });
+    setRecommendation({ recommendation: newRecommendation, alternatives: updatedAlternatives });
   };
 
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setCurrentTime(now.toLocaleTimeString("ko-KR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
+      setCurrentTime(now.toLocaleTimeString(language === "en" ? "en-US" : "ko-KR", {
+        hour: "2-digit", minute: "2-digit", hour12: false
       }));
     };
-    
     updateTime();
     const interval = setInterval(updateTime, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [language]);
 
   const handleCategorySelect = (category: string) => {
     setSelections(prev => ({ ...prev, category: category as any }));
@@ -175,27 +95,15 @@ export default function Home() {
     setSelections(prev => ({ ...prev, spiceLevel: spiceLevel as any }));
     setTimeout(() => {
       setCurrentStep(4);
-      // Simulate loading time
-      setTimeout(() => {
-        recommendationMutation.mutate(selections);
-      }, 2000);
+      setTimeout(() => recommendationMutation.mutate(selections), 2000);
     }, 500);
   };
 
-  const goBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
+  const goBack = () => currentStep > 1 && setCurrentStep(currentStep - 1);
   const startOver = () => {
     setCurrentStep(1);
     setRecommendation(null);
-    setSelections({
-      category: "korean",
-      priceRange: "budget",
-      spiceLevel: "mild"
-    });
+    setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
   };
 
   return (
@@ -204,45 +112,50 @@ export default function Home() {
       <header className="bg-card/80 backdrop-blur-sm border-b border-border/50 text-foreground p-4 sticky top-0 z-50 transition-colors duration-300">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold">🍽️ 오늘뭐먹지?</h1>
-            <div className="text-sm opacity-90 flex items-center text-muted-foreground">
+            <h1 className="text-xl font-bold">{t('title')}</h1>
+            <div className="text-sm opacity-90 flex items-center text-muted-foreground hidden sm:flex">
               <Clock className="w-3 h-3 mr-1" />
               <span>{currentTime}</span>
             </div>
           </div>
-          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full hover:bg-accent">
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
+          <div className="flex gap-2">
+            <a href="/rps.html" className="flex items-center justify-center p-2 rounded-full hover:bg-accent text-foreground border border-border/50 transition-colors" title={t('rps_game')}>
+              <Gamepad2 className="h-5 w-5" />
+            </a>
+            <Button variant="ghost" size="icon" onClick={toggleLang} className="rounded-full hover:bg-accent border border-border/50">
+              <span className="text-xs font-bold">{language === "en" ? "EN" : "KO"}</span>
+            </Button>
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full hover:bg-accent border border-border/50">
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
         
         <StepProgress currentStep={currentStep} totalSteps={5} />
       </header>
-
-      {/* Top Banner Ad - Removed */}
       
       {/* Main Content */}
       <main className="p-4 pb-20">
-        {/* Step 1: Food Category Selection */}
+        {/* Step 1: Category */}
         {currentStep === 1 && (
           <div className="step fade-in">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground mb-2">어떤 종류의 음식을 드시고 싶나요?</h2>
-              <p className="text-muted-foreground">카테고리를 선택해주세요</p>
+              <h2 className="text-2xl font-bold text-foreground mb-2">{t('category_title')}</h2>
+              <p className="text-muted-foreground">{t('category_desc')}</p>
             </div>
-
             <div className="grid grid-cols-2 gap-4">
-              {FOOD_CATEGORIES.slice(0, 4).map((category) => (
+              {CATEGORY_IDS.slice(0, 4).map((cat) => (
                 <FoodCategoryCard
-                  key={category.id}
-                  category={category}
-                  isSelected={selections.category === category.id}
+                  key={cat.id}
+                  category={{ ...cat, name: t(cat.id as any), description: "" }} 
+                  isSelected={selections.category === cat.id}
                   onSelect={handleCategorySelect}
                 />
               ))}
               <div className="col-span-2">
                 <FoodCategoryCard
-                  category={FOOD_CATEGORIES[4]}
-                  isSelected={selections.category === FOOD_CATEGORIES[4].id}
+                  category={{ ...CATEGORY_IDS[4], name: t(CATEGORY_IDS[4].id as any), description: "" }}
+                  isSelected={selections.category === CATEGORY_IDS[4].id}
                   onSelect={handleCategorySelect}
                 />
               </div>
@@ -250,20 +163,19 @@ export default function Home() {
           </div>
         )}
 
-        {/* Step 2: Price Range Selection */}
+        {/* Step 2: Price */}
         {currentStep === 2 && (
           <div className="step fade-in">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground mb-2">예산은 얼마나 생각하고 계신가요?</h2>
-              <p className="text-muted-foreground">가격대를 선택해주세요</p>
+              <h2 className="text-2xl font-bold text-foreground mb-2">{t('price_title')}</h2>
+              <p className="text-muted-foreground">{t('price_desc')}</p>
             </div>
-
             <div className="space-y-4">
-              {PRICE_OPTIONS.map((option) => (
+              {PRICE_IDS.map((opt) => (
                 <PriceOptionCard
-                  key={option.id}
-                  option={option}
-                  isSelected={selections.priceRange === option.id}
+                  key={opt.id}
+                  option={{ ...opt, name: t(opt.id as any), description: "" }}
+                  isSelected={selections.priceRange === opt.id}
                   onSelect={handlePriceSelect}
                 />
               ))}
@@ -271,20 +183,19 @@ export default function Home() {
           </div>
         )}
 
-        {/* Step 3: Spice Level Selection */}
+        {/* Step 3: Spice */}
         {currentStep === 3 && (
           <div className="step fade-in">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground mb-2">매운 정도는 어떻게 하실까요?</h2>
-              <p className="text-muted-foreground">매운맛 정도를 선택해주세요</p>
+              <h2 className="text-2xl font-bold text-foreground mb-2">{t('spice_title')}</h2>
+              <p className="text-muted-foreground">{t('spice_desc')}</p>
             </div>
-
             <div className="space-y-4">
-              {SPICE_LEVELS.map((level) => (
+              {SPICE_IDS.map((lvl) => (
                 <SpiceLevelCard
-                  key={level.id}
-                  level={level}
-                  isSelected={selections.spiceLevel === level.id}
+                  key={lvl.id}
+                  level={{ ...lvl, name: t(lvl.id as any), description: "" }}
+                  isSelected={selections.spiceLevel === lvl.id}
                   onSelect={handleSpiceSelect}
                 />
               ))}
@@ -292,18 +203,18 @@ export default function Home() {
           </div>
         )}
 
-        {/* Step 4: Loading Screen */}
+        {/* Step 4: Loading */}
         {currentStep === 4 && (
           <div className="step fade-in">
             <div className="text-center py-16">
               <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mx-auto mb-4"></div>
-              <h2 className="text-xl font-bold text-foreground mb-2">맛있는 메뉴를 찾고 있어요...</h2>
-              <p className="text-muted-foreground">잠시만 기다려주세요!</p>
+              <h2 className="text-xl font-bold text-foreground mb-2">{t('loading_title')}</h2>
+              <p className="text-muted-foreground">{t('loading_desc')}</p>
             </div>
           </div>
         )}
 
-        {/* Step 5: Recommendation Result */}
+        {/* Step 5: Result */}
         {currentStep === 5 && recommendation && (
           <RecommendationResult 
             recommendation={recommendation.recommendation}
@@ -313,83 +224,48 @@ export default function Home() {
         )}
       </main>
 
-      {/* SEO Content Section for AdSense Quality */}
+      {/* SEO & Footer */}
       <section className="px-6 py-8 border-t border-border/10 bg-card/20 backdrop-blur-sm mx-4 mb-6 rounded-xl">
         <article className="mb-8">
-          <h2 className="text-lg font-bold text-foreground mb-3">🤔 점심 메뉴, 왜 고르기 힘들까요?</h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            '점심 메뉴 결정 장애'는 현대 직장인들이 겪는 흔한 고민 중 하나입니다. 너무 많은 선택지는 오히려 결정을 어렵게 만들고, 
-            오전 업무로 지친 뇌에게 추가적인 스트레스를 줍니다. 심리학자들은 이를 '결정 피로(Decision Fatigue)'라고 부릅니다. 
-            <strong>오늘뭐먹지?</strong> AI 추천기는 이러한 고민을 대신 해결해드려 여러분의 소중한 점심 시간을 온전히 휴식과 즐거움으로 채워드립니다.
-          </p>
+          <h2 className="text-lg font-bold text-foreground mb-3">{t('seo_title_1')}</h2>
+          <p className="text-muted-foreground text-sm leading-relaxed">{t('seo_desc_1')}</p>
         </article>
-        
-        <article className="mb-8">
-          <h2 className="text-lg font-bold text-foreground mb-3">🥗 건강한 점심 식사를 위한 팁</h2>
-          <div className="text-muted-foreground text-sm leading-relaxed">
-            점심은 오후의 에너지를 결정하는 중요한 식사입니다. 
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li><strong>단백질 섭취:</strong> 제육볶음이나 생선구이 같은 단백질은 포만감을 오래 유지시켜 줍니다.</li>
-              <li><strong>복합 탄수화물:</strong> 흰 쌀밥보다는 잡곡밥이나 비빔밥을 선택하여 급격한 혈당 상승을 막으세요.</li>
-              <li><strong>채소 곁들이기:</strong> 쌈이나 나물 반찬을 적극적으로 활용하면 비타민과 무기질을 보충할 수 있습니다.</li>
-            </ul>
-            저희 AI는 영양 균형과 맛을 모두 고려하여 여러분에게 딱 맞는 메뉴를 제안합니다.
-          </div>
-        </article>
-
         <article>
-          <h2 className="text-lg font-bold text-foreground mb-3">📱 사용 방법</h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            1. <strong>카테고리 선택:</strong> 한식, 중식, 일식 등 원하시는 종류를 선택하세요.<br/>
-            2. <strong>예산 설정:</strong> 5,000원 이하의 저렴한 식사부터 프리미엄 메뉴까지 예산에 맞춰 고를 수 있습니다.<br/>
-            3. <strong>매운맛 조절:</strong> 매운 음식을 잘 못 드시나요? '순한맛'을 선택하면 AI가 자극적이지 않은 메뉴를 찾아줍니다.<br/>
-            4. <strong>AI 추천 확인:</strong> 선택하신 조건에 딱 맞는 메뉴를 AI가 분석하여 추천해 드립니다. 마음에 들지 않으면 '다시 추천받기'를 눌러보세요!
-          </p>
+          <h2 className="text-lg font-bold text-foreground mb-3">{t('seo_title_2')}</h2>
+          <div className="text-muted-foreground text-sm leading-relaxed">{t('seo_desc_2')}</div>
         </article>
       </section>
 
-      {/* Footer Links */}
       <footer className="py-6 text-center text-xs text-muted-foreground pb-24 border-t border-border/10 mt-8">
-        <p className="mb-2">Note: This recommender is a random generator for fun.</p>
+        <p className="mb-2">{t('footer_note')}</p>
         <div className="flex justify-center gap-4">
-          <Link href="/about" className="underline hover:text-primary cursor-pointer">About Us</Link>
+          <Link href="/about" className="underline hover:text-primary cursor-pointer">{t('about')}</Link>
           <button 
             className="underline hover:text-primary cursor-pointer bg-transparent border-none p-0 text-xs text-muted-foreground" 
             onClick={() => setShowContactModal(true)}
           >
-            Affiliate Inquiry
+            {t('affiliate')}
           </button>
-          <Link href="/privacy" className="underline hover:text-primary cursor-pointer">Privacy Policy</Link>
+          <Link href="/privacy" className="underline hover:text-primary cursor-pointer">{t('privacy')}</Link>
         </div>
       </footer>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Nav */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-border/50 p-4 rounded-b-2xl transition-colors duration-300">
         <div className="flex space-x-3">
           {currentStep > 1 && currentStep < 5 && (
-            <Button
-              variant="secondary"
-              className="flex-1"
-              onClick={goBack}
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              이전
+            <Button variant="secondary" className="flex-1" onClick={goBack}>
+              <ArrowLeft className="w-4 h-4 mr-2" /> {t('prev')}
             </Button>
           )}
-          
           {currentStep === 5 && (
-            <Button
-              className="flex-1 bg-secondary hover:bg-secondary/90"
-              onClick={startOver}
-            >
-              <RotateCcw className="w-4 h-4 mr-2" />
-              다시 추천받기
+            <Button className="flex-1 bg-secondary hover:bg-secondary/90" onClick={startOver}>
+              <RotateCcw className="w-4 h-4 mr-2" /> {t('restart')}
             </Button>
           )}
         </div>
       </div>
 
-      {/* Contact Modal */}
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
   );

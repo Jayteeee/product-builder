@@ -1,6 +1,7 @@
 
 import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
+import { useLanguage } from "@/components/language-provider";
 import type { FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResultProps {
@@ -10,6 +11,8 @@ interface RecommendationResultProps {
 }
 
 export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
+  const { t } = useLanguage();
+  
   const handleAlternativeClick = (alternative: FoodRecommendation) => {
     if (onSwapRecommendation) {
       onSwapRecommendation(alternative, recommendation);
@@ -29,8 +32,8 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   return (
     <div className="step fade-in">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-primary mb-2">🎉 추천 메뉴</h2>
-        <p className="text-muted-foreground">오늘의 점심은 이거 어때요?</p>
+        <h2 className="text-2xl font-bold text-primary mb-2">🎉 {t('result_title')}</h2>
+        <p className="text-muted-foreground">{t('result_desc')}</p>
       </div>
 
       {/* Recommended Food Card */}
@@ -55,11 +58,11 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             <div className="flex flex-wrap gap-2 order-1 md:order-2">
               {recommendation.isAiGenerated && (
                 <div className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm flex items-center gap-1 animate-pulse">
-                  <span>✨</span> AI 추천
+                  <span>✨</span> {t('ai_badge')}
                 </div>
               )}
               <div className="bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium shadow-sm">
-                {getCategoryName(recommendation.category)}
+                {getCategoryName(recommendation.category, t)}
               </div>
             </div>
           </div>
@@ -92,7 +95,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       {/* Alternative Options */}
       {alternatives.length > 0 && (
         <div className="mb-6">
-          <h4 className="font-semibold text-foreground mb-3">다른 추천 메뉴도 있어요!</h4>
+          <h4 className="font-semibold text-foreground mb-3">{t('alternatives')}</h4>
           <div className="flex space-x-3 overflow-x-auto pb-2">
             {alternatives.map((option) => (
               <div 
@@ -135,15 +138,11 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   );
 }
 
-function getCategoryName(category: string): string {
-  const categoryMap: Record<string, string> = {
-    korean: "한식",
-    chinese: "중식", 
-    japanese: "일식",
-    western: "양식",
-    street: "분식"
-  };
-  return categoryMap[category] || category;
+function getCategoryName(category: string, t: any): string {
+  // Try to use translation key based on category id
+  const key = category as any;
+  // If translation exists, return it, otherwise fallback
+  return t(key) !== key ? t(key) : category;
 }
 
 function getCategoryIcon(category: string): string {
