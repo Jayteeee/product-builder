@@ -161,19 +161,28 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Try using the SDK with 'gemini-2.0-flash' (assuming 2.5 was a typo for 2.0)
+    // Try using the SDK with 'gemini-2.0-flash'
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
       contents: prompt
     });
 
-    console.log("Gemini Response:", response.text());
-    
-    let jsonStr = response.text(); 
-    if (typeof jsonStr !== 'string') {
-        jsonStr = JSON.stringify(jsonStr);
+    // Safely access text from response
+    let responseText = "";
+    if (typeof response.text === 'function') {
+      responseText = response.text();
+    } else if (typeof response.text === 'string') {
+      responseText = response.text;
+    } else if (response.candidates && response.candidates[0]?.content?.parts?.[0]?.text) {
+      responseText = response.candidates[0].content.parts[0].text;
+    } else {
+      console.warn("Unexpected Gemini response structure:", response);
+      throw new Error("Invalid Gemini response structure");
     }
+
+    console.log("Gemini Response:", responseText);
     
+    let jsonStr = responseText || "{}";
     jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
@@ -196,10 +205,12 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
   } catch (error) {
     console.warn("SDK Failed, trying REST fallback...", error);
     
-    // REST Fallback with corrected body structure and model
+    // REST Fallback - Use gemini-1.5-flash as it is most stable for REST
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+      if (!prompt) throw new Error("Prompt construction failed");
+
+      const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
