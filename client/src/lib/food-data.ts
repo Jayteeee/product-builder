@@ -182,23 +182,18 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // Using the new SDK syntax from the user's snippet
+    // Use gemini-1.5-flash as standard
     const response = await ai.models.generateContent({
       model: "gemini-1.5-flash",
-      contents: prompt,
-      config: { responseMimeType: "application/json" }
+      contents: [{
+        role: "user",
+        parts: [{ text: prompt }]
+      }]
     });
 
-    console.log("Gemini Response:", response.text);
+    console.log("Gemini Response:", response.text());
     
-    let jsonStr = response.text(); // or response.text which might be a getter or property?
-    // User snippet says: console.log(response.text); So it's a property.
-    if (typeof response.text === 'function') {
-        jsonStr = response.text();
-    } else {
-        jsonStr = response.text || "{}";
-    }
-    
+    let jsonStr = response.text() || "{}";
     jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
