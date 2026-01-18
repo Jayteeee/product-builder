@@ -19,4 +19,5 @@ export interface FoodRecommendation {
   imageUrl: string | null;
   imageUrls: string[] | null;
   tags: string[] | null;
+  isAiGenerated?: boolean;
 }

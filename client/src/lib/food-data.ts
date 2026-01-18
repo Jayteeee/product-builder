@@ -173,17 +173,20 @@ function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  console.log("Gemini API Key present:", !!apiKey);
   
   if (!apiKey) {
+    console.log("Using Local Fallback (No API Key)");
     const selected = getLocalFallback(request);
-    const liveImages = await fetchPexelsImages(selected.name); // Search by name as fallback
+    const liveImages = await fetchPexelsImages(selected.name); 
     if (liveImages.length > 0) {
-      return { ...selected, imageUrls: liveImages, imageUrl: liveImages[0] };
+      return { ...selected, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
     }
-    return selected;
+    return { ...selected, isAiGenerated: false };
   }
 
   try {
+    console.log("Calling Gemini API...");
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const prompt = `Recommend one specific, popular lunch menu dish (Korean preference) based on:
     Category: ${request.category}
@@ -202,6 +205,7 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
+    console.log("Gemini Response:", text);
     const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
@@ -217,12 +221,17 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       description: data.description,
       imageUrl: imageUrls[0] || null,
       imageUrls: imageUrls,
-      tags: data.tags
+      tags: data.tags,
+      isAiGenerated: true
     };
   } catch (error) {
     console.error("Gemini AI Error:", error);
     const selected = getLocalFallback(request);
-    return selected;
+    const liveImages = await fetchPexelsImages(selected.name);
+    if (liveImages.length > 0) {
+      return { ...selected, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
+    }
+    return { ...selected, isAiGenerated: false };
   }
 }
 

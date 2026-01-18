@@ -52,8 +52,15 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
         <div className="p-6">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-2xl font-bold text-foreground">{recommendation.name}</h3>
-            <div className="bg-primary text-white px-3 py-1 rounded-full text-sm">
-              {getCategoryName(recommendation.category)}
+            <div className="flex gap-2 items-center">
+              {recommendation.isAiGenerated && (
+                <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                  ✨ AI 추천
+                </div>
+              )}
+              <div className="bg-primary text-white px-3 py-1 rounded-full text-sm">
+                {getCategoryName(recommendation.category)}
+              </div>
             </div>
           </div>
           
