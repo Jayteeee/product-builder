@@ -130,10 +130,8 @@ export default function Home() {
     setCurrentStep(1);
     setRecommendation(null);
     setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
