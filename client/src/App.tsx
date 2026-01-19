@@ -14,12 +14,17 @@ import { useState, useEffect } from "react";
 
 // Custom hook for hash-based routing
 const useHashLocation = () => {
-  const [loc, setLoc] = useState(window.location.hash.replace(/^#/, "") || "/");
+  // Strip the query string from the hash for routing purposes
+  const getPath = () => window.location.hash.replace(/^#/, "").split('?')[0] || "/";
+  
+  const [loc, setLoc] = useState(getPath());
+  
   useEffect(() => {
-    const handler = () => setLoc(window.location.hash.replace(/^#/, "") || "/");
+    const handler = () => setLoc(getPath());
     window.addEventListener("hashchange", handler);
     return () => window.removeEventListener("hashchange", handler);
   }, []);
+  
   const navigate = (to: string) => (window.location.hash = to);
   return [loc, navigate] as const;
 };
