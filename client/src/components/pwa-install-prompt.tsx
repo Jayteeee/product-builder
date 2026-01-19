@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Download, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/language-provider";
@@ -78,29 +79,29 @@ export function PWAInstallPrompt() {
 
   if (!isVisible) return null;
 
-  return (
+  return createPortal(
     <div 
       ref={promptRef}
       className={cn(
-        "fixed bottom-6 left-4 right-4 z-[100] transition-all duration-300 ease-out",
+        "fixed bottom-0 left-0 right-0 z-[100] p-4 pb-8 transition-all duration-300 ease-out sm:pb-6",
         isClosing ? "translate-y-[150%] opacity-0" : "animate-in slide-in-from-bottom-full fade-in"
       )}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="bg-white dark:bg-zinc-900 text-foreground p-5 rounded-2xl shadow-2xl border border-border/50 flex items-center justify-between gap-4 max-w-md mx-auto relative overflow-hidden">
+      <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md text-foreground p-5 rounded-2xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] border border-border/50 flex items-center justify-between gap-4 max-w-md mx-auto relative overflow-hidden">
         {/* Drag Handle Indicator */}
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-muted/50 rounded-full" />
 
         <div className="flex-1 pt-2">
           <h3 className="font-bold text-base mb-1">
-            {language === 'ko' ? "앱으로 설치하기" : "Install App"}
+            {language === 'ko' ? "앱으로 더 간편하게" : "Install App"}
           </h3>
           <p className="text-xs text-muted-foreground leading-tight">
             {language === 'ko' 
-              ? "홈 화면에 추가하여 더 빠르게 이용해보세요." 
-              : "Add to home screen for quick access."}
+              ? "홈 화면에 추가하여 빠르게 추천받으세요." 
+              : "Add to home screen for quick recommendations."}
           </p>
         </div>
         <div className="flex items-center gap-2 pt-2">
@@ -120,6 +121,7 @@ export function PWAInstallPrompt() {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
