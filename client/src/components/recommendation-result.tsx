@@ -135,11 +135,11 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
               <DropdownMenuContent align="center" className="bg-popover/95 backdrop-blur-md border-border/50 rounded-xl shadow-xl min-w-[160px]">
                 <DropdownMenuItem onClick={() => handleSearchMap('naver')} className="flex items-center gap-2 cursor-pointer py-3 focus:bg-primary/10">
                   <div className="bg-green-500 w-2 h-2 rounded-full" />
-                  <span className="font-medium">네이버 지도</span>
+                  <span className="font-medium">{t('naver_map')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleSearchMap('kakao')} className="flex items-center gap-2 cursor-pointer py-3 focus:bg-primary/10">
                   <div className="bg-yellow-500 w-2 h-2 rounded-full" />
-                  <span className="font-medium">카카오맵</span>
+                  <span className="font-medium">{t('kakao_map')}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
