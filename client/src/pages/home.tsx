@@ -42,8 +42,39 @@ export default function Home() {
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Load history on mount
+  // Handle Shared Links and History on mount
   useEffect(() => {
+    // 1. Check for Shared Data in URL
+    const hash = window.location.hash;
+    if (hash.includes('?')) {
+      const params = new URLSearchParams(hash.split('?')[1]);
+      const sharedName = params.get('n');
+      const sharedDesc = params.get('d');
+      const sharedPrice = params.get('p');
+      const sharedCat = params.get('c');
+      const sharedImg = params.get('i');
+
+      if (sharedName && sharedDesc) {
+        const sharedRec: FoodRecommendation = {
+          id: Date.now(),
+          name: sharedName,
+          description: sharedDesc,
+          price: parseInt(sharedPrice || '0'),
+          category: sharedCat || 'korean',
+          imageUrl: sharedImg || null,
+          imageUrls: sharedImg ? [sharedImg] : [],
+          spiceLevel: 'mild',
+          priceRange: 'moderate',
+          tags: [],
+          isAiGenerated: true
+        };
+        setRecommendation({ recommendation: sharedRec, alternatives: [] });
+        setCurrentStep(5);
+        return; // Skip history if we came from a share link
+      }
+    }
+
+    // 2. Load history if no shared data
     const saved = localStorage.getItem("recommendation_history");
     if (saved) {
       try {
@@ -130,6 +161,10 @@ export default function Home() {
     setCurrentStep(1);
     setRecommendation(null);
     setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
+    // Clear URL parameters if any
+    if (window.location.hash.includes('?')) {
+      window.location.hash = '#/';
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

@@ -36,12 +36,23 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleShare = async () => {
+    // Generate shareable URL with parameters
+    const params = new URLSearchParams();
+    params.set('n', recommendation.name);
+    params.set('d', recommendation.description);
+    params.set('p', recommendation.price.toString());
+    params.set('c', recommendation.category);
+    if (recommendation.imageUrl) params.set('i', recommendation.imageUrl);
+
+    // Current structure is using Hash Routing (/#/)
+    const shareUrl = `${window.location.origin}${window.location.pathname}#/?${params.toString()}`;
+
     const shareData = {
       title: t('title'),
       text: language === 'ko' 
         ? `오늘 점심은 ${recommendation.name} 어때요? ${recommendation.description}`
         : `How about ${recommendation.name} for lunch? ${recommendation.description}`,
-      url: window.location.href,
+      url: shareUrl,
     };
 
     try {
