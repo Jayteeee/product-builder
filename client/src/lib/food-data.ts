@@ -234,6 +234,9 @@ async function withFallbackImage(recommendation: FoodRecommendation): Promise<Fo
 }
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
+  console.log("getFoodRecommendation called with:", request);
+  console.log("baseItems available:", !!baseItems, baseItems?.length);
+
   if (!ai) {
     console.warn("No Gemini API Key. Using fallback.");
     return withFallbackImage(getLocalFallback(request));
