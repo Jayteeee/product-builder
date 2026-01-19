@@ -130,6 +130,50 @@ function getSpiceDescription(id: string) {
 
 // ... baseItems and foodRecommendations ...
 
+const foodRecommendations = baseItems.map(item => ({ ...item, imageUrls: [], imageUrl: null }));
+
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+
+async function fetchGoogleImages(query: string): Promise<string[]> {
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+  const cx = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
+  
+  if (!apiKey || !cx) return [];
+
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(query)}&searchType=image&num=3&safe=active`
+    );
+    
+    if (!response.ok) return [];
+    
+    const data = await response.json();
+    if (!data.items) return [];
+    
+    return data.items.map((item: any) => item.link);
+  } catch (e) {
+    console.error("Google Search fetch error:", e);
+    return [];
+  }
+}
+
+async function fetchPexelsImages(query: string): Promise<string[]> {
+  const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
+  if (!apiKey) return [];
+  try {
+    const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=3`, {
+      headers: { Authorization: apiKey }
+    });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.photos.map((p: any) => p.src.large);
+  } catch (e) {
+    console.error("Pexels fetch error:", e);
+    return [];
+  }
+}
+
 // Helper to fetch images from available sources
 async function fetchFoodImages(koreanName: string, englishQuery?: string, categoryId?: string): Promise<string[]> {
   // 1. Try Google Images first (Most accurate for specific dish)
