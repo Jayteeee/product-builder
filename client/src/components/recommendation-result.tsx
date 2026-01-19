@@ -2,6 +2,7 @@
 import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
 import { useLanguage } from "@/components/language-provider";
+import { Badge } from "@/components/ui/badge";
 import type { FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResultProps {
@@ -78,14 +79,15 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
           </div>
           
           {recommendation.tags && (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mt-4">
               {recommendation.tags.map((tag, index) => (
-                <span 
-                  key={index}
-                  className="bg-accent text-foreground px-3 py-1 rounded-full text-sm"
+                <Badge 
+                  key={index} 
+                  variant="secondary"
+                  className="px-3 py-1 text-sm font-normal bg-secondary/80 hover:bg-secondary text-secondary-foreground border-none"
                 >
-                  {tag}
-                </span>
+                  #{tag}
+                </Badge>
               ))}
             </div>
           )}
