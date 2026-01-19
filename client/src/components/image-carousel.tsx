@@ -12,16 +12,6 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imgError, setImgError] = useState(false);
 
-  // If no images provided or error occurred, show a placeholder
-  if (!images || images.length === 0 || imgError) {
-    return (
-      <div className={cn("w-full h-48 bg-muted/30 flex flex-col items-center justify-center gap-2", className)}>
-        <ImageOff className="w-8 h-8 text-muted-foreground/50" />
-        <span className="text-sm text-muted-foreground/70">이미지가 없습니다</span>
-      </div>
-    );
-  }
-
   const nextImage = () => {
     setCurrentIndex((prevIndex) => 
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
@@ -40,13 +30,23 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
 
   // Auto-advance to next image every 5 seconds
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (!images || images.length <= 1) return;
     
     const interval = setInterval(nextImage, 5000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [images?.length]); // Added optional chaining for safety
 
   const isModalImage = className?.includes('modal-image');
+
+  // If no images provided or error occurred, show a placeholder
+  if (!images || images.length === 0 || imgError) {
+    return (
+      <div className={cn("w-full h-48 bg-muted/30 flex flex-col items-center justify-center gap-2", className)}>
+        <ImageOff className="w-8 h-8 text-muted-foreground/50" />
+        <span className="text-sm text-muted-foreground/70">이미지가 없습니다</span>
+      </div>
+    );
+  }
   
   return (
     <div className={cn(
