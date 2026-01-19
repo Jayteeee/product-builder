@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
 import { CATEGORY_IDS, PRICE_IDS, SPICE_IDS } from "@/lib/constants";
+import { decompressData } from "@/lib/share-utils";
 import { StepProgress } from "@/components/step-progress";
 import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
@@ -44,54 +45,70 @@ export default function Home() {
 
   // Handle Shared Links and History
   useEffect(() => {
-    const handleHashData = () => {
+    const handleHashData = async () => {
       const hash = window.location.hash;
       if (hash.includes('?')) {
         const params = new URLSearchParams(hash.split('?')[1]);
-        const sharedName = params.get('n');
-        const sharedDesc = params.get('d');
-        const sharedPrice = params.get('p');
-        const sharedCat = params.get('c');
-        const sharedImg = params.get('i');
-        const sharedTags = params.get('t');
+        
+        let sharedData: any = null;
 
-        if (sharedName && sharedDesc) {
+        // 1. Try compressed data 'v'
+        const v = params.get('v');
+        if (v) {
+          sharedData = await decompressData(v);
+        } else {
+          // 2. Fallback to old format
+          const n = params.get('n');
+          const d = params.get('d');
+          if (n && d) {
+            sharedData = {
+              n, d, 
+              p: params.get('p'),
+              c: params.get('c'),
+              i: params.get('i'),
+              t: params.get('t')?.split(',') || []
+            };
+          }
+        }
+
+        if (sharedData && sharedData.n && sharedData.d) {
           const sharedRec: FoodRecommendation = {
             id: Date.now(),
-            name: sharedName,
-            description: sharedDesc,
-            price: parseInt(sharedPrice || '0'),
-            category: sharedCat || 'korean',
-            imageUrl: sharedImg || null,
-            imageUrls: sharedImg ? [sharedImg] : [],
+            name: sharedData.n,
+            description: sharedData.d,
+            price: parseInt(sharedData.p || '0'),
+            category: sharedData.c || 'korean',
+            imageUrl: sharedData.i || null,
+            imageUrls: sharedData.i ? [sharedData.i] : [],
             spiceLevel: 'mild',
             priceRange: 'moderate',
-            tags: sharedTags ? sharedTags.split(',') : [],
+            tags: sharedData.t || [],
             isAiGenerated: true
           };
           setRecommendation({ recommendation: sharedRec, alternatives: [] });
           setCurrentStep(5);
-          return true; // Data found
+          return true;
         }
       }
       return false;
     };
 
-    const hasSharedData = handleHashData();
-
-    // 2. Load history if no shared data
-    if (!hasSharedData) {
-      const saved = localStorage.getItem("recommendation_history");
-      if (saved) {
-        try {
-          setHistory(JSON.parse(saved));
-        } catch (e) {
-          console.error("Failed to parse history", e);
+    const runInit = async () => {
+      const hasSharedData = await handleHashData();
+      if (!hasSharedData) {
+        const saved = localStorage.getItem("recommendation_history");
+        if (saved) {
+          try {
+            setHistory(JSON.parse(saved));
+          } catch (e) {
+            console.error("Failed to parse history", e);
+          }
         }
       }
-    }
+    };
 
-    // Listen for hash changes to support forward/back with shared links
+    runInit();
+
     window.addEventListener('hashchange', handleHashData);
     return () => window.removeEventListener('hashchange', handleHashData);
   }, []);

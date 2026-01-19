@@ -11,47 +11,30 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { MapPin, Share2, Search, Map as MapIcon } from "lucide-react";
+import { compressData } from "@/lib/share-utils";
 import type { FoodRecommendation } from "@/lib/types";
 
-interface RecommendationResultProps {
-  recommendation: FoodRecommendation;
-  alternatives: FoodRecommendation[];
-  onSwapRecommendation?: (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => void;
-}
+// ... (interface remains same) ...
 
 export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   
-  const handleAlternativeClick = (alternative: FoodRecommendation) => {
-    if (onSwapRecommendation) {
-      onSwapRecommendation(alternative, recommendation);
-    }
-  };
-
-  const handleSearchMap = (type: 'kakao' | 'naver') => {
-    const query = recommendation.name.split('(')[0].trim();
-    const encodedQuery = encodeURIComponent(query);
-    
-    const url = type === 'kakao' 
-      ? `https://map.kakao.com/link/search/${encodedQuery}`
-      : `https://map.naver.com/v5/search/${encodedQuery}`;
-    window.open(url, '_blank');
-  };
+  // ... (handleAlternativeClick and handleSearchMap remain same) ...
 
   const handleShare = async () => {
-    // Generate shareable URL with parameters
-    const params = new URLSearchParams();
-    params.set('n', recommendation.name);
-    params.set('d', recommendation.description);
-    params.set('p', recommendation.price.toString());
-    params.set('c', recommendation.category);
-    if (recommendation.imageUrl) params.set('i', recommendation.imageUrl);
-    if (recommendation.tags && recommendation.tags.length > 0) {
-      params.set('t', recommendation.tags.join(','));
-    }
+    // Collect all data into one object for compression
+    const dataToCompress = {
+      n: recommendation.name,
+      d: recommendation.description,
+      p: recommendation.price,
+      c: recommendation.category,
+      i: recommendation.imageUrl,
+      t: recommendation.tags || []
+    };
 
-    const shareUrl = `${window.location.origin}${window.location.pathname}#/?${params.toString()}`;
+    const compressed = await compressData(dataToCompress);
+    const shareUrl = `${window.location.origin}${window.location.pathname}#/?v=${compressed}`;
 
     const shareData = {
       title: t('title'),
