@@ -86,30 +86,6 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       </div>
 
       <div className="bg-card border border-border/50 rounded-2xl shadow-lg overflow-hidden mb-6 bounce-in relative">
-        <div className="absolute top-3 right-3 z-20">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                size="icon" 
-                variant="secondary" 
-                className="rounded-full bg-background/80 backdrop-blur-md border border-white/10 shadow-lg hover:bg-background transition-all"
-              >
-                <MapIcon className="w-5 h-5 text-primary" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-popover/95 backdrop-blur-md border-border/50 rounded-xl shadow-xl">
-              <DropdownMenuItem onClick={() => handleSearchMap('naver')} className="flex items-center gap-2 cursor-pointer focus:bg-primary/10">
-                <div className="bg-green-500 w-2 h-2 rounded-full" />
-                <span>네이버 지도</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleSearchMap('kakao')} className="flex items-center gap-2 cursor-pointer focus:bg-primary/10">
-                <div className="bg-yellow-500 w-2 h-2 rounded-full" />
-                <span>카카오맵</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
         <ImageModal
           images={getImageUrls(recommendation)}
           alt={recommendation.name}
@@ -144,8 +120,35 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             <div className="text-[10px] text-muted-foreground mt-1 text-right max-w-[200px]">{t('price_disclaimer')}</div>
           </div>
 
-          <div className="mb-6">
-            <Button variant="outline" className="w-full gap-2 border-primary/20 hover:bg-primary/5 h-12 rounded-xl transition-all" onClick={handleShare}>
+          {/* Dual Action Buttons */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="w-full gap-2 border-primary/20 hover:bg-primary/5 h-12 rounded-xl transition-all"
+                >
+                  <MapPin className="w-4 h-4 text-primary" />
+                  <span className="font-bold text-sm">{t('search_nearby')}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="bg-popover/95 backdrop-blur-md border-border/50 rounded-xl shadow-xl min-w-[160px]">
+                <DropdownMenuItem onClick={() => handleSearchMap('naver')} className="flex items-center gap-2 cursor-pointer py-3 focus:bg-primary/10">
+                  <div className="bg-green-500 w-2 h-2 rounded-full" />
+                  <span className="font-medium">네이버 지도</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleSearchMap('kakao')} className="flex items-center gap-2 cursor-pointer py-3 focus:bg-primary/10">
+                  <div className="bg-yellow-500 w-2 h-2 rounded-full" />
+                  <span className="font-medium">카카오맵</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Button 
+              variant="outline" 
+              className="w-full gap-2 border-primary/20 hover:bg-primary/5 h-12 rounded-xl transition-all" 
+              onClick={handleShare}
+            >
               <Share2 className="w-4 h-4 text-primary" />
               <span className="font-bold text-sm">{t('share_result')}</span>
             </Button>
