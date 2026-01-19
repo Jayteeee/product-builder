@@ -72,9 +72,12 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             {recommendation.description}
           </p>
           
-          <div className="flex items-center justify-end mb-4">
-            <div className="text-lg font-bold text-primary">
+          <div className="flex flex-col items-end mb-4">
+            <div className="text-xl font-bold text-primary">
               {recommendation.price.toLocaleString()}원
+            </div>
+            <div className="text-[10px] text-muted-foreground mt-1 text-right max-w-[200px]">
+              {t('price_disclaimer')}
             </div>
           </div>
           
