@@ -174,7 +174,7 @@ export default function Home() {
       </header>
       
       {/* Main Content */}
-      <main className="p-4 pb-20">
+      <main className="p-4 pb-10">
         {/* Back Button */}
         {currentStep > 1 && currentStep < 5 && (
           <div className="mb-2">
@@ -330,7 +330,7 @@ export default function Home() {
         </article>
       </section>
 
-      <footer className="py-6 text-center text-xs text-muted-foreground pb-24 border-t border-border/10 mt-8">
+      <footer className="py-6 text-center text-xs text-muted-foreground mt-8">
         <p className="mb-2">{t('footer_note')}</p>
         <div className="flex justify-center gap-4">
           <Link href="/about" className="underline hover:text-primary cursor-pointer">{t('about')}</Link>
@@ -348,7 +348,7 @@ export default function Home() {
       {showScrollTop && (
         <Button
           size="icon"
-          className="fixed bottom-24 right-6 rounded-full w-12 h-12 shadow-2xl bg-white dark:bg-zinc-800 text-slate-900 dark:text-white border border-border/50 hover:scale-110 transition-all z-40"
+          className="fixed bottom-8 right-6 rounded-full w-12 h-12 shadow-2xl bg-white dark:bg-zinc-800 text-slate-900 dark:text-white border border-border/50 hover:scale-110 active:scale-95 transition-all z-[60]"
           onClick={scrollToTop}
         >
           <ArrowUp className="w-6 h-6" />
