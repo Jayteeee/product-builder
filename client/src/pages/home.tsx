@@ -176,38 +176,38 @@ export default function Home() {
       
       {/* Main Content */}
       <main className="p-4 pb-10">
-        {/* Back Button */}
-        {currentStep > 1 && currentStep < 5 && (
-          <div className="mb-2">
-            <Button 
-              variant="ghost" 
-              onClick={goBack} 
-              className="text-muted-foreground hover:text-foreground pl-0 hover:bg-transparent group h-auto py-2"
-            >
-              <ArrowLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" /> 
-              <span className="text-base font-medium">{t('prev')}</span>
-            </Button>
-          </div>
-        )}
+        {/* Back Button & Summary */}
+        <div className="min-h-[48px]">
+          {currentStep > 1 && currentStep < 5 && (
+            <div className="flex flex-col gap-2">
+              <Button 
+                variant="ghost" 
+                onClick={goBack} 
+                className="text-muted-foreground hover:text-foreground pl-0 hover:bg-transparent group h-auto py-2 self-start"
+              >
+                <ArrowLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" /> 
+                <span className="text-base font-medium">{t('prev')}</span>
+              </Button>
 
-        {/* Selection Summary */}
-        {currentStep > 1 && (
-          <div className="flex flex-wrap gap-2 mb-6 animate-in fade-in slide-in-from-top-4">
-            <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
-              {t(selections.category as any)}
-            </Badge>
-            {currentStep > 2 && (
-              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
-                {t(selections.priceRange as any)}
-              </Badge>
-            )}
-            {currentStep > 3 && (
-              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
-                {t(selections.spiceLevel as any)}
-              </Badge>
-            )}
-          </div>
-        )}
+              {/* Selection Summary */}
+              <div className="flex flex-wrap gap-2 mb-4 animate-in fade-in slide-in-from-top-2">
+                <Badge variant="secondary" className="px-2 py-0.5 text-xs font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
+                  {t(selections.category as any)}
+                </Badge>
+                {currentStep > 2 && (
+                  <Badge variant="secondary" className="px-2 py-0.5 text-xs font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
+                    {t(selections.priceRange as any)}
+                  </Badge>
+                )}
+                {currentStep > 3 && (
+                  <Badge variant="secondary" className="px-2 py-0.5 text-xs font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
+                    {t(selections.spiceLevel as any)}
+                  </Badge>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Step 1: Category */}
         {currentStep === 1 && (
