@@ -37,10 +37,10 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
     const shareUrl = `${window.location.origin}${window.location.pathname}#/?v=${compressed}`;
 
     const shareData = {
-      title: t('title'),
+      title: '오늘뭐먹지? 🍱',
       text: language === 'ko' 
-        ? `오늘 점심은 ${recommendation.name} 어때요? ${recommendation.description}`
-        : `How about ${recommendation.name} for lunch? ${recommendation.description}`,
+        ? `오늘 점심은 이걸로 정했어요! ✨\n\n🍴 메뉴: ${recommendation.name}\n💰 예상가격: ${recommendation.price.toLocaleString()}원\n💬 추천이유: ${recommendation.description}\n\n지금 바로 확인해보세요 👇`
+        : `I found the perfect lunch! ✨\n\n🍴 Menu: ${recommendation.name}\n💰 Price: ₩${recommendation.price.toLocaleString()}\n💬 Why: ${recommendation.description}\n\nCheck it out here 👇`,
       url: shareUrl,
     };
 
