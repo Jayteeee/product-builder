@@ -164,6 +164,29 @@ const foodRecommendations = baseItems.map(item => {
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
+async function fetchGoogleImages(query: string): Promise<string[]> {
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+  const cx = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
+  
+  if (!apiKey || !cx) return [];
+
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(query)}&searchType=image&num=3&safe=active`
+    );
+    
+    if (!response.ok) return [];
+    
+    const data = await response.json();
+    if (!data.items) return [];
+    
+    return data.items.map((item: any) => item.link);
+  } catch (e) {
+    console.error("Google Search fetch error:", e);
+    return [];
+  }
+}
+
 async function fetchPexelsImages(query: string): Promise<string[]> {
   const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
   if (!apiKey) return [];
@@ -178,6 +201,22 @@ async function fetchPexelsImages(query: string): Promise<string[]> {
     console.error("Pexels fetch error:", e);
     return [];
   }
+}
+
+// Helper to fetch images from available sources
+async function fetchFoodImages(koreanName: string, englishQuery?: string): Promise<string[]> {
+  // 1. Try Google Images first (Most accurate)
+  // Use Korean name for Google as it's more accurate for local dishes
+  const googleImages = await fetchGoogleImages(koreanName + " 음식"); 
+  if (googleImages.length > 0) return googleImages;
+
+  // 2. Fallback to Pexels (Stock photos)
+  // Use English query + "food" for better stock photo results
+  const pexelsQuery = englishQuery ? `${englishQuery} food` : `${koreanName} food`;
+  const pexelsImages = await fetchPexelsImages(pexelsQuery);
+  if (pexelsImages.length > 0) return pexelsImages;
+
+  return [];
 }
 
 function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
@@ -196,7 +235,9 @@ function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
 
 async function withFallbackImage(recommendation: FoodRecommendation): Promise<FoodRecommendation> {
   if (!recommendation.imageUrl || recommendation.imageUrl.length === 0) {
-    const liveImages = await fetchPexelsImages(recommendation.name);
+    // Try to fetch live images using the new helper
+    const liveImages = await fetchFoodImages(recommendation.name);
+    
     if (liveImages.length > 0) {
       return { ...recommendation, imageUrls: liveImages, imageUrl: liveImages[0], isAiGenerated: false };
     }
@@ -256,8 +297,8 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
     jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
     const data = JSON.parse(jsonStr);
 
-    const combinedQuery = `${data.name} ${data.englishQuery}`;
-    const imageUrls = await fetchPexelsImages(combinedQuery);
+    // Use the unified fetch function
+    const imageUrls = await fetchFoodImages(data.name, data.englishQuery);
 
     return {
       id: Date.now(),
@@ -310,8 +351,8 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
       const data = JSON.parse(jsonStr);
       
-      const combinedQuery = `${data.name} ${data.englishQuery}`;
-      const imageUrls = await fetchPexelsImages(combinedQuery);
+      // Use the unified fetch function
+      const imageUrls = await fetchFoodImages(data.name, data.englishQuery);
 
       return {
         id: Date.now(),
@@ -339,10 +380,9 @@ export async function getAlternativeRecommendations(category: string, excludeId?
 
   // Fetch accurate images for alternatives in parallel
   const updatedAlternatives = await Promise.all(shuffled.map(async (item) => {
-    // If it's a fallback item with a static image, we might want to refresh it or keep it.
-    // The user wants "accurate images". Pexels search by name is usually better than generic hardcoded.
-    const query = `${item.name} food`; // Simple query: Name + "food"
-    const liveImages = await fetchPexelsImages(query);
+    // Use the unified fetch function
+    // For alternatives (static items), we might not have 'englishQuery', so just use name
+    const liveImages = await fetchFoodImages(item.name);
     
     if (liveImages.length > 0) {
       return { 
