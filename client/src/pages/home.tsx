@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
@@ -345,14 +346,15 @@ export default function Home() {
       </footer>
 
       {/* Floating Scroll to Top Button */}
-      {showScrollTop && (
+      {showScrollTop && createPortal(
         <Button
           size="icon"
-          className="fixed bottom-8 right-6 rounded-full w-12 h-12 shadow-2xl bg-white dark:bg-zinc-800 text-slate-900 dark:text-white border border-border/50 hover:scale-110 active:scale-95 transition-all z-[60]"
+          className="fixed bottom-10 right-6 rounded-full w-12 h-12 shadow-[0_8px_30px_rgb(0,0,0,0.3)] bg-white dark:bg-zinc-800 text-slate-900 dark:text-white border border-border/50 hover:scale-110 active:scale-95 transition-all z-[110] animate-in fade-in zoom-in duration-300"
           onClick={scrollToTop}
         >
           <ArrowUp className="w-6 h-6" />
-        </Button>
+        </Button>,
+        document.body
       )}
 
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
