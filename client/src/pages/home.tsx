@@ -252,7 +252,7 @@ export default function Home() {
             <div className="mt-8 px-2 step fade-in" style={{ animationDelay: '0.2s' }}>
               <Button 
                 size="lg" 
-                className="w-full h-14 text-lg font-bold shadow-lg bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white border-none" 
+                className="w-full h-14 text-lg font-bold shadow-lg bg-primary hover:bg-primary/90 text-primary-foreground border-none" 
                 onClick={startOver}
               >
                 <RotateCcw className="w-5 h-5 mr-2" /> {t('restart')}
@@ -302,7 +302,7 @@ export default function Home() {
             </Button>
           )}
           {currentStep === 5 && (
-            <Button className="flex-1 bg-secondary hover:bg-secondary/90" onClick={startOver}>
+            <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold" onClick={startOver}>
               <RotateCcw className="w-4 h-4 mr-2" /> {t('restart')}
             </Button>
           )}
