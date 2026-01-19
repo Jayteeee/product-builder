@@ -24,7 +24,7 @@ const EMOJI_MAP: Record<string, string> = {
 };
 
 export default function RPS() {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
   
@@ -270,6 +270,14 @@ export default function RPS() {
             </button>
           </Link>
           <div className="flex gap-3">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setLanguage(language === 'en' ? 'ko' : 'en')}
+              className="rounded-full hover:bg-accent border border-border/50 font-bold text-xs"
+            >
+              {language === 'en' ? 'EN' : 'KO'}
+            </Button>
             <Button 
               variant="ghost" 
               size="icon" 

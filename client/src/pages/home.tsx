@@ -159,6 +159,20 @@ export default function Home() {
       
       {/* Main Content */}
       <main className="p-4 pb-20">
+        {/* Back Button */}
+        {currentStep > 1 && currentStep < 5 && (
+          <div className="mb-2">
+            <Button 
+              variant="ghost" 
+              onClick={goBack} 
+              className="text-muted-foreground hover:text-foreground pl-0 hover:bg-transparent group h-auto py-2"
+            >
+              <ArrowLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" /> 
+              <span className="text-base font-medium">{t('prev')}</span>
+            </Button>
+          </div>
+        )}
+
         {/* Step 1: Category */}
         {currentStep === 1 && (
           <div className="step fade-in">
