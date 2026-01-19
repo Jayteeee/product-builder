@@ -12,7 +12,8 @@ import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
-import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResponse {
@@ -49,6 +50,7 @@ export default function Home() {
   const [showContactModal, setShowContactModal] = useState(false);
   const { theme, setTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
+  const { toast } = useToast();
   const [selections, setSelections] = useState<RecommendationRequest>({
     category: "korean",
     priceRange: "budget",
@@ -68,6 +70,14 @@ export default function Home() {
     onSuccess: (data) => {
       setRecommendation(data);
       setCurrentStep(5);
+    },
+    onError: (error) => {
+      console.error("Recommendation failed:", error);
+      toast({
+        variant: "destructive",
+        title: "오류가 발생했습니다",
+        description: "메뉴 추천 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
+      });
     }
   });
 
@@ -205,13 +215,26 @@ export default function Home() {
           </div>
         )}
 
-        {/* Step 4: Loading */}
+        {/* Step 4: Loading or Error */}
         {currentStep === 4 && (
           <div className="step fade-in">
             <div className="text-center py-16">
-              <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mx-auto mb-4"></div>
-              <h2 className="text-xl font-bold text-foreground mb-2">{t('loading_title')}</h2>
-              <p className="text-muted-foreground">{t('loading_desc')}</p>
+              {recommendationMutation.isError ? (
+                <>
+                  <AlertCircle className="h-16 w-16 text-destructive mx-auto mb-4" />
+                  <h2 className="text-xl font-bold text-foreground mb-2">오류가 발생했습니다</h2>
+                  <p className="text-muted-foreground mb-6">메뉴를 추천하는 도중 문제가 생겼습니다.</p>
+                  <Button onClick={() => recommendationMutation.mutate(selections)} variant="outline">
+                    <RotateCcw className="w-4 h-4 mr-2" /> 다시 시도하기
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mx-auto mb-4"></div>
+                  <h2 className="text-xl font-bold text-foreground mb-2">{t('loading_title')}</h2>
+                  <p className="text-muted-foreground">{t('loading_desc')}</p>
+                </>
+              )}
             </div>
           </div>
         )}
