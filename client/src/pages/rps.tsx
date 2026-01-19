@@ -262,11 +262,11 @@ export default function RPS() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-2xl mx-auto relative z-10">
-        <header className="flex justify-between items-center mb-10 pt-4">
+        <header className="flex justify-between items-center mb-10 pt-4 px-2">
           <Link href="/">
-            <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group">
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              <span className="text-sm font-medium hover:underline decoration-2 underline-offset-4">{t('rps_back')}</span>
+            <button className="flex items-center gap-2 text-foreground hover:text-primary transition-all group py-2 px-3 -ml-3 rounded-lg hover:bg-primary/5">
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform stroke-[2.5px]" />
+              <span className="text-base font-bold tracking-tight">{t('rps_back')}</span>
             </button>
           </Link>
           <div className="flex gap-3">
