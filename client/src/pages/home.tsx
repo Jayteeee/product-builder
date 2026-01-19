@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle } from "lucide-react";
+import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResponse {
@@ -46,87 +46,18 @@ const SPICE_IDS = [
   { id: "hot", icon: "🌋", spiceIcon: "🌶️🌶️🌶️" }
 ] as const;
 
-export default function Home() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [currentTime, setCurrentTime] = useState("");
-  const [showContactModal, setShowContactModal] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const { language, setLanguage, t } = useLanguage();
-  const { toast } = useToast();
-  const [selections, setSelections] = useState<RecommendationRequest>({
-    category: "korean",
-    priceRange: "budget",
-    spiceLevel: "mild"
-  });
-  const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
-
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
-  const toggleLang = () => setLanguage(language === "en" ? "ko" : "en");
-
-  const recommendationMutation = useMutation({
-    mutationFn: async (request: RecommendationRequest) => {
-      const recommendation = await getFoodRecommendation(request);
-      const alternatives = await getAlternativeRecommendations(request.category, recommendation.id);
-      return { recommendation, alternatives };
-    },
-    onSuccess: (data) => {
-      setRecommendation(data);
-      setCurrentStep(5);
-    },
-    onError: (error) => {
-      console.error("Recommendation failed:", error);
-      toast({
-        variant: "destructive",
-        title: "오류가 발생했습니다",
-        description: "메뉴 추천 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
-      });
-    }
-  });
-
-  const handleSwapRecommendation = (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => {
-    if (!recommendation) return;
-    const updatedAlternatives = recommendation.alternatives.filter((alt: FoodRecommendation) => alt.id !== newRecommendation.id);
-    updatedAlternatives.push(currentRecommendation);
-    setRecommendation({ recommendation: newRecommendation, alternatives: updatedAlternatives });
-  };
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString(language === "en" ? "en-US" : "ko-KR", {
-        hour: "2-digit", minute: "2-digit", hour12: false
-      }));
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
     };
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
-  }, [language]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const handleCategorySelect = (category: string) => {
-    setSelections(prev => ({ ...prev, category: category as any }));
-    setTimeout(() => setCurrentStep(2), 500);
-  };
-
-  const handlePriceSelect = (priceRange: string) => {
-    setSelections(prev => ({ ...prev, priceRange: priceRange as any }));
-    setTimeout(() => setCurrentStep(3), 500);
-  };
-
-  const handleSpiceSelect = (spiceLevel: string) => {
-    const newSelections = { ...selections, spiceLevel: spiceLevel as any };
-    setSelections(newSelections);
-    setTimeout(() => {
-      setCurrentStep(4);
-      setTimeout(() => recommendationMutation.mutate(newSelections), 2000);
-    }, 500);
-  };
-
-  const goBack = () => currentStep > 1 && setCurrentStep(currentStep - 1);
-  const startOver = () => {
-    setCurrentStep(1);
-    setRecommendation(null);
-    setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
-    window.scrollTo(0, 0);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -330,21 +261,16 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Bottom Nav */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-card/80 backdrop-blur-sm border-t border-border/50 p-4 rounded-b-2xl transition-colors duration-300">
-        <div className="flex space-x-3">
-          {currentStep > 1 && currentStep < 5 && (
-            <Button variant="secondary" className="flex-1" onClick={goBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" /> {t('prev')}
-            </Button>
-          )}
-          {currentStep === 5 && (
-            <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold" onClick={startOver}>
-              <RotateCcw className="w-4 h-4 mr-2" /> {t('restart')}
-            </Button>
-          )}
-        </div>
-      </div>
+      {/* Floating Scroll to Top Button */}
+      {showScrollTop && (
+        <Button
+          size="icon"
+          className="fixed bottom-24 right-6 rounded-full w-12 h-12 shadow-2xl bg-white dark:bg-zinc-800 text-slate-900 dark:text-white border border-border/50 hover:scale-110 transition-all z-40"
+          onClick={scrollToTop}
+        >
+          <ArrowUp className="w-6 h-6" />
+        </Button>
+      )}
 
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
       <PWAInstallPrompt />
