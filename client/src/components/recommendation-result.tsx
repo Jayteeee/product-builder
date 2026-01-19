@@ -31,8 +31,8 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleSearchMap = (type: 'kakao' | 'naver') => {
-    // Logic: Use Korean if lang is ko, otherwise extract Korean part or use english
-    const query = language === 'ko' ? recommendation.name : recommendation.name.split('(')[0].trim();
+    // Exclude anything in parentheses for both languages to get clean search results
+    const query = recommendation.name.split('(')[0].trim();
     const encodedQuery = encodeURIComponent(query);
     
     const url = type === 'kakao' 
