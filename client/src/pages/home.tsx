@@ -9,6 +9,7 @@ import { SpiceLevelCard } from "@/components/spice-level-card";
 import { RecommendationResult } from "@/components/recommendation-result";
 import { DisqusComments } from "@/components/disqus-comments";
 import { ContactModal } from "@/components/contact-modal";
+import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/components/theme-provider";
@@ -346,6 +347,7 @@ export default function Home() {
       </div>
 
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
+      <PWAInstallPrompt />
     </div>
   );
 }
