@@ -111,10 +111,11 @@ export default function Home() {
   };
 
   const handleSpiceSelect = (spiceLevel: string) => {
-    setSelections(prev => ({ ...prev, spiceLevel: spiceLevel as any }));
+    const newSelections = { ...selections, spiceLevel: spiceLevel as any };
+    setSelections(newSelections);
     setTimeout(() => {
       setCurrentStep(4);
-      setTimeout(() => recommendationMutation.mutate(selections), 2000);
+      setTimeout(() => recommendationMutation.mutate(newSelections), 2000);
     }, 500);
   };
 

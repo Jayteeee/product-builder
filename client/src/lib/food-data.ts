@@ -191,6 +191,17 @@ async function fetchPexelsImages(query: string): Promise<string[]> {
   }
 }
 
+const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  korean: "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&w=800&q=80",
+  chinese: "https://images.unsplash.com/photo-1525160354320-545b3b9333b6?auto=format&fit=crop&w=800&q=80",
+  japanese: "https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?auto=format&fit=crop&w=800&q=80",
+  western: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80",
+  street: "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&w=800&q=80", // Tteokbokki style
+  vietnamese: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80",
+  mexican: "https://images.unsplash.com/photo-1565299585323-38d68c8e848d?auto=format&fit=crop&w=800&q=80",
+  asian: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80"
+};
+
 // Helper to fetch images from available sources
 async function fetchFoodImages(koreanName: string, englishQuery?: string, categoryId?: string): Promise<string[]> {
   // 1. Try Google Images first (Most accurate for specific dish)
@@ -203,7 +214,6 @@ async function fetchFoodImages(koreanName: string, englishQuery?: string, catego
   if (pexelsImages.length > 0) return pexelsImages;
 
   // 3. Last Resort: Fetch Category Genre Image (e.g., "Korean Food", "Mexican Food")
-  // This ensures we rarely show "No Image" while keeping relevance high enough.
   if (categoryId) {
     const categoryName = FOOD_CATEGORIES.find(c => c.id === categoryId)?.name || categoryId;
     const categoryQuery = categoryId === 'korean' ? 'Korean Food' : 
@@ -214,6 +224,11 @@ async function fetchFoodImages(koreanName: string, englishQuery?: string, catego
     console.log(`Fetching category fallback image for: ${categoryQuery}`);
     const categoryImages = await fetchPexelsImages(categoryQuery);
     if (categoryImages.length > 0) return categoryImages;
+
+    // 4. Absolute Final Resort: Hardcoded Category Image
+    if (CATEGORY_FALLBACK_IMAGES[categoryId]) {
+      return [CATEGORY_FALLBACK_IMAGES[categoryId]];
+    }
   }
 
   return [];
