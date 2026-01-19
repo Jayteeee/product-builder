@@ -243,11 +243,22 @@ export default function Home() {
 
         {/* Step 5: Result */}
         {currentStep === 5 && recommendation && (
-          <RecommendationResult 
-            recommendation={recommendation.recommendation}
-            alternatives={recommendation.alternatives}
-            onSwapRecommendation={handleSwapRecommendation}
-          />
+          <>
+            <RecommendationResult 
+              recommendation={recommendation.recommendation}
+              alternatives={recommendation.alternatives}
+              onSwapRecommendation={handleSwapRecommendation}
+            />
+            <div className="mt-8 px-2 step fade-in" style={{ animationDelay: '0.2s' }}>
+              <Button 
+                size="lg" 
+                className="w-full h-14 text-lg font-bold shadow-lg bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white border-none" 
+                onClick={startOver}
+              >
+                <RotateCcw className="w-5 h-5 mr-2" /> {t('restart')}
+              </Button>
+            </div>
+          </>
         )}
       </main>
 
