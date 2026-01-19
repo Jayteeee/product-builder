@@ -64,6 +64,7 @@
   /* Dark Mode Overrides */
   --background: 220 48% 8%; /* #0b1220 */
   --foreground: 0 0% 100%; /* Pure White */
+  color: white; /* Explicitly set color for inheritance */
   
   --muted: 224 30% 85%;
   --muted-foreground: 224 30% 85%;
@@ -95,7 +96,8 @@
   }
 
   body {
-    @apply font-sans antialiased text-foreground bg-background transition-colors duration-300;
+    @apply font-sans antialiased bg-background transition-colors duration-300;
+    color: hsl(var(--foreground));
     font-family: 'Noto Sans KR', sans-serif;
   }
   
