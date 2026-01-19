@@ -46,6 +46,89 @@ const SPICE_IDS = [
   { id: "hot", icon: "🌋", spiceIcon: "🌶️🌶️🌶️" }
 ] as const;
 
+export default function Home() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [currentTime, setCurrentTime] = useState("");
+  const [showContactModal, setShowContactModal] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
+  const { toast } = useToast();
+  const [selections, setSelections] = useState<RecommendationRequest>({
+    category: "korean",
+    priceRange: "budget",
+    spiceLevel: "mild"
+  });
+  const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
+
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleLang = () => setLanguage(language === "en" ? "ko" : "en");
+
+  const recommendationMutation = useMutation({
+    mutationFn: async (request: RecommendationRequest) => {
+      const recommendation = await getFoodRecommendation(request);
+      const alternatives = await getAlternativeRecommendations(request.category, recommendation.id);
+      return { recommendation, alternatives };
+    },
+    onSuccess: (data) => {
+      setRecommendation(data);
+      setCurrentStep(5);
+    },
+    onError: (error) => {
+      console.error("Recommendation failed:", error);
+      toast({
+        variant: "destructive",
+        title: "오류가 발생했습니다",
+        description: "메뉴 추천 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
+      });
+    }
+  });
+
+  const handleSwapRecommendation = (newRecommendation: FoodRecommendation, currentRecommendation: FoodRecommendation) => {
+    if (!recommendation) return;
+    const updatedAlternatives = recommendation.alternatives.filter((alt: FoodRecommendation) => alt.id !== newRecommendation.id);
+    updatedAlternatives.push(currentRecommendation);
+    setRecommendation({ recommendation: newRecommendation, alternatives: updatedAlternatives });
+  };
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString(language === "en" ? "en-US" : "ko-KR", {
+        hour: "2-digit", minute: "2-digit", hour12: false
+      }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, [language]);
+
+  const handleCategorySelect = (category: string) => {
+    setSelections(prev => ({ ...prev, category: category as any }));
+    setTimeout(() => setCurrentStep(2), 500);
+  };
+
+  const handlePriceSelect = (priceRange: string) => {
+    setSelections(prev => ({ ...prev, priceRange: priceRange as any }));
+    setTimeout(() => setCurrentStep(3), 500);
+  };
+
+  const handleSpiceSelect = (spiceLevel: string) => {
+    const newSelections = { ...selections, spiceLevel: spiceLevel as any };
+    setSelections(newSelections);
+    setTimeout(() => {
+      setCurrentStep(4);
+      setTimeout(() => recommendationMutation.mutate(newSelections), 2000);
+    }, 500);
+  };
+
+  const goBack = () => currentStep > 1 && setCurrentStep(currentStep - 1);
+  const startOver = () => {
+    setCurrentStep(1);
+    setRecommendation(null);
+    setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
+    window.scrollTo(0, 0);
+  };
+
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
