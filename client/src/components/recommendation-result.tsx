@@ -2,6 +2,7 @@
 import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
 import { useLanguage } from "@/components/language-provider";
+import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Share2, Search } from "lucide-react";
@@ -14,7 +15,8 @@ interface RecommendationResultProps {
 }
 
 export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { toast } = useToast();
   
   const handleAlternativeClick = (alternative: FoodRecommendation) => {
     if (onSwapRecommendation) {
@@ -22,18 +24,23 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
     }
   };
 
-  const handleSearchMap = (type: 'kakao' | 'google') => {
-    const query = encodeURIComponent(recommendation.name);
+  const handleSearchMap = (type: 'kakao' | 'naver') => {
+    // Use Korean name if in KO mode, otherwise try to extract Korean name or use english
+    const query = language === 'ko' ? recommendation.name : recommendation.name.split('(')[0].trim();
+    const encodedQuery = encodeURIComponent(query);
+    
     const url = type === 'kakao' 
-      ? `https://map.kakao.com/link/search/${query}`
-      : `https://www.google.com/maps/search/${query}`;
+      ? `https://map.kakao.com/link/search/${encodedQuery}`
+      : `https://map.naver.com/v5/search/${encodedQuery}`;
     window.open(url, '_blank');
   };
 
   const handleShare = async () => {
     const shareData = {
       title: t('title'),
-      text: `오늘 점심은 ${recommendation.name} 어때요? ${recommendation.description}`,
+      text: language === 'ko' 
+        ? `오늘 점심은 ${recommendation.name} 어때요? ${recommendation.description}`
+        : `How about ${recommendation.name} for lunch? ${recommendation.description}`,
       url: window.location.href,
     };
 
@@ -42,14 +49,17 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
         await navigator.share(shareData);
       } else {
         await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
-        alert('링크가 복사되었습니다!');
+        toast({
+          title: language === 'ko' ? "링크 복사 완료" : "Link Copied",
+          description: language === 'ko' ? "클립보드에 링크가 복사되었습니다." : "Link has been copied to clipboard.",
+        });
       }
     } catch (err) {
       console.error('Share failed', err);
     }
   };
 
-  // ... getImageUrls function stays same ...
+  // Create image arrays for carousel - use imageUrls if available, otherwise create array from imageUrl
   const getImageUrls = (food: FoodRecommendation) => {
     if (food.imageUrls && food.imageUrls.length > 0) {
       return food.imageUrls;
@@ -112,26 +122,36 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
           </div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-2 gap-3 mb-8">
+          <div className="grid grid-cols-3 gap-2 mb-8">
             <Button 
               variant="outline" 
-              className="group flex flex-col items-center justify-center gap-1 h-20 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all rounded-2xl"
-              onClick={() => handleSearchMap('kakao')}
+              className="flex flex-col items-center justify-center gap-1 h-16 border-border/50 hover:bg-accent hover:text-accent-foreground transition-all rounded-xl p-1"
+              onClick={() => handleSearchMap('naver')}
             >
-              <div className="bg-primary/10 p-2 rounded-full group-hover:scale-110 transition-transform">
-                <MapPin className="w-5 h-5 text-primary" />
+              <div className="bg-green-500/10 p-1.5 rounded-full">
+                <Search className="w-4 h-4 text-green-600" />
               </div>
-              <span className="text-xs font-bold">{t('search_nearby')}</span>
+              <span className="text-[10px] font-bold">네이버 지도</span>
             </Button>
             <Button 
               variant="outline" 
-              className="group flex flex-col items-center justify-center gap-1 h-20 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all rounded-2xl"
+              className="flex flex-col items-center justify-center gap-1 h-16 border-border/50 hover:bg-accent hover:text-accent-foreground transition-all rounded-xl p-1"
+              onClick={() => handleSearchMap('kakao')}
+            >
+              <div className="bg-yellow-500/10 p-1.5 rounded-full">
+                <MapPin className="w-4 h-4 text-yellow-600" />
+              </div>
+              <span className="text-[10px] font-bold">카카오맵</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              className="flex flex-col items-center justify-center gap-1 h-16 border-border/50 hover:bg-accent hover:text-accent-foreground transition-all rounded-xl p-1"
               onClick={handleShare}
             >
-              <div className="bg-primary/10 p-2 rounded-full group-hover:scale-110 transition-transform">
-                <Share2 className="w-5 h-5 text-primary" />
+              <div className="bg-primary/10 p-1.5 rounded-full">
+                <Share2 className="w-4 h-4 text-primary" />
               </div>
-              <span className="text-xs font-bold">{t('share_result')}</span>
+              <span className="text-[10px] font-bold">{t('share_result')}</span>
             </Button>
           </div>
           
