@@ -10,6 +10,7 @@ import { RecommendationResult } from "@/components/recommendation-result";
 import { DisqusComments } from "@/components/disqus-comments";
 import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
@@ -170,6 +171,25 @@ export default function Home() {
               <ArrowLeft className="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" /> 
               <span className="text-base font-medium">{t('prev')}</span>
             </Button>
+          </div>
+        )}
+
+        {/* Selection Summary */}
+        {currentStep > 1 && (
+          <div className="flex flex-wrap gap-2 mb-6 animate-in fade-in slide-in-from-top-4">
+            <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
+              {t(selections.category as any)}
+            </Badge>
+            {currentStep > 2 && (
+              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
+                {t(selections.priceRange as any)}
+              </Badge>
+            )}
+            {currentStep > 3 && (
+              <Badge variant="secondary" className="px-3 py-1 text-sm font-medium bg-secondary/50 text-secondary-foreground border border-border/50">
+                {t(selections.spiceLevel as any)}
+              </Badge>
+            )}
           </div>
         )}
 

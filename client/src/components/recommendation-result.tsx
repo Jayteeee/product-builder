@@ -98,14 +98,14 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       {alternatives.length > 0 && (
         <div className="mb-6">
           <h4 className="font-semibold text-foreground mb-3">{t('alternatives')}</h4>
-          <div className="flex space-x-3 overflow-x-auto pb-2">
+          <div className="flex space-x-3 overflow-x-auto pb-4 scrollbar-hide">
             {alternatives.map((option) => (
               <div 
                 key={option.id}
-                className="flex-shrink-0 bg-card border border-border/50 rounded-lg p-3 shadow-md min-w-[120px] hover:shadow-lg hover:scale-105 transition-all duration-200"
+                className="flex-shrink-0 bg-card border border-border/50 rounded-lg p-3 shadow-sm w-[140px] hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col"
               >
-                <div className="relative">
-                  {option.imageUrl && (
+                <div className="relative h-20 w-full mb-2 overflow-hidden rounded bg-muted">
+                  {option.imageUrl ? (
                     <ImageModal
                       images={getImageUrls(option)}
                       alt={option.name}
@@ -113,23 +113,29 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
                         <img 
                           src={option.imageUrl} 
                           alt={option.name}
-                          className="w-full h-16 object-cover rounded mb-2 cursor-pointer"
+                          className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.style.display = 'none';
+                            // Show icon fallback logic could be here if needed, 
+                            // but react rendering might be tricky inline. 
+                            // Relying on display:none hiding it and the sibling icon showing below if styled right.
                           }}
                         />
                       }
                     />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-3xl">
+                      {getCategoryIcon(option.category)}
+                    </div>
                   )}
-                  <div className="text-2xl mb-1">{getCategoryIcon(option.category)}</div>
                 </div>
                 <div 
-                  className="cursor-pointer"
+                  className="cursor-pointer flex-1 flex flex-col justify-between"
                   onClick={() => handleAlternativeClick(option)}
                 >
-                  <h5 className="font-medium text-sm text-foreground">{option.name}</h5>
-                  <p className="text-xs text-muted-foreground">{option.price.toLocaleString()}원</p>
+                  <h5 className="font-medium text-sm text-foreground line-clamp-1 mb-1">{option.name}</h5>
+                  <p className="text-xs text-muted-foreground font-medium">{option.price.toLocaleString()}원</p>
                 </div>
               </div>
             ))}
