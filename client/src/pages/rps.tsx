@@ -256,17 +256,27 @@ export default function RPS() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans p-4">
-      <div className="max-w-2xl mx-auto">
-        <header className="flex justify-between items-center mb-6">
+    <div className="min-h-screen bg-background text-foreground font-sans p-4 relative overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-2xl mx-auto relative z-10">
+        <header className="flex justify-between items-center mb-10 pt-4">
           <Link href="/">
-            <Button variant="ghost" className="gap-2">
-              <ArrowLeft className="w-4 h-4" /> {t('rps_back')}
-            </Button>
+            <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group">
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              <span className="text-sm font-medium hover:underline decoration-2 underline-offset-4">{t('rps_back')}</span>
+            </button>
           </Link>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          <div className="flex gap-3">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="rounded-full hover:bg-accent border border-border/50"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-700" />}
             </Button>
           </div>
         </header>
