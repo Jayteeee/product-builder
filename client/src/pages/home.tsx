@@ -7,6 +7,7 @@ import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
 import { SpiceLevelCard } from "@/components/spice-level-card";
 import { RecommendationResult } from "@/components/recommendation-result";
+import { DisqusComments } from "@/components/disqus-comments";
 import { ContactModal } from "@/components/contact-modal";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
@@ -224,6 +225,11 @@ export default function Home() {
           />
         )}
       </main>
+
+      {/* Disqus Comments */}
+      <section className="px-6 mb-8">
+        <DisqusComments />
+      </section>
 
       {/* SEO & Footer */}
       <section className="px-6 py-8 border-t border-border/10 bg-card/20 backdrop-blur-sm mx-4 mb-6 rounded-xl">
