@@ -10,17 +10,20 @@ interface ImageCarouselProps {
 
 export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [imgError, setImgError] = useState(false);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  // Filter out images that have failed to load
+  const validImages = images?.filter(url => !failedImages.has(url)) || [];
 
   const nextImage = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === validImages.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevImage = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? validImages.length - 1 : prevIndex - 1
     );
   };
 
@@ -28,18 +31,27 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
     setCurrentIndex(index);
   };
 
-  // Auto-advance to next image every 5 seconds
+  const handleImageError = (failedUrl: string) => {
+    setFailedImages(prev => {
+      const newSet = new Set(prev);
+      newSet.add(failedUrl);
+      return newSet;
+    });
+    // Reset index if we lose the current image, or if list becomes empty
+    setCurrentIndex(0); 
+  };
+
+  // Auto-advance
   useEffect(() => {
-    if (!images || images.length <= 1) return;
-    
+    if (validImages.length <= 1) return;
     const interval = setInterval(nextImage, 5000);
     return () => clearInterval(interval);
-  }, [images?.length]); // Added optional chaining for safety
+  }, [validImages.length]);
 
   const isModalImage = className?.includes('modal-image');
 
-  // If no images provided or error occurred, show a placeholder
-  if (!images || images.length === 0 || imgError) {
+  // If no valid images remain, show placeholder
+  if (validImages.length === 0) {
     return (
       <div className={cn("w-full h-48 bg-muted/30 flex flex-col items-center justify-center gap-2", className)}>
         <ImageOff className="w-8 h-8 text-muted-foreground/50" />
@@ -48,6 +60,10 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
     );
   }
   
+  // Ensure index is valid
+  const safeIndex = currentIndex >= validImages.length ? 0 : currentIndex;
+  const currentImageUrl = validImages[safeIndex];
+
   return (
     <div className={cn(
       "relative w-full bg-muted/20 rounded-lg overflow-hidden",
@@ -56,17 +72,17 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
     )}>
       {/* Main Image */}
       <img 
-        src={images[currentIndex]} 
-        alt={`${alt} - 이미지 ${currentIndex + 1}`}
+        src={currentImageUrl} 
+        alt={`${alt} - 이미지 ${safeIndex + 1}`}
         className={cn(
           "transition-opacity duration-300",
           isModalImage ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
         )}
-        onError={() => setImgError(true)}
+        onError={() => handleImageError(currentImageUrl)}
       />
       
       {/* Navigation arrows - only show if more than 1 image */}
-      {images.length > 1 && (
+      {validImages.length > 1 && (
         <>
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
@@ -85,15 +101,15 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
       )}
       
       {/* Dots indicator - only show if more than 1 image */}
-      {images.length > 1 && (
+      {validImages.length > 1 && (
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
-          {images.map((_, index) => (
+          {validImages.map((_, index) => (
             <button
               key={index}
               onClick={(e) => { e.stopPropagation(); goToSlide(index); }}
               className={cn(
                 "w-2 h-2 rounded-full transition-all shadow-sm",
-                index === currentIndex ? "bg-white" : "bg-white/50 hover:bg-white/70"
+                index === safeIndex ? "bg-white" : "bg-white/50 hover:bg-white/70"
               )}
             />
           ))}
@@ -101,9 +117,9 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
       )}
       
       {/* Image counter */}
-      {images.length > 1 && (
+      {validImages.length > 1 && (
         <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
-          {currentIndex + 1} / {images.length}
+          {safeIndex + 1} / {validImages.length}
         </div>
       )}
     </div>
