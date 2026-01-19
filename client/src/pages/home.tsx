@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
+import { CATEGORY_IDS, PRICE_IDS, SPICE_IDS } from "@/lib/constants";
 import { StepProgress } from "@/components/step-progress";
 import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
@@ -16,7 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp } from "lucide-react";
+import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp, History } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResponse {
@@ -24,42 +25,43 @@ interface RecommendationResponse {
   alternatives: FoodRecommendation[];
 }
 
-const CATEGORY_IDS = [
-  { id: "korean", icon: "🍚", color: "bg-red-500" },
-  { id: "chinese", icon: "🥢", color: "bg-yellow-500" },
-  { id: "japanese", icon: "🍣", color: "bg-purple-500" },
-  { id: "western", icon: "🍔", color: "bg-green-500" },
-  { id: "street", icon: "🌭", color: "bg-pink-500" },
-  { id: "vietnamese", icon: "🍜", color: "bg-emerald-500" },
-  { id: "mexican", icon: "🌮", color: "bg-orange-500" },
-  { id: "asian", icon: "🥘", color: "bg-teal-500" }
-] as const;
-
-const PRICE_IDS = [
-  { id: "budget", icon: "💰", emoji: "😊" },
-  { id: "moderate", icon: "💳", emoji: "😋" },
-  { id: "premium", icon: "💎", emoji: "🤤" }
-] as const;
-
-const SPICE_IDS = [
-  { id: "mild", icon: "🥛", spiceIcon: "🌶️" },
-  { id: "medium", icon: "🔥", spiceIcon: "🌶️🌶️" },
-  { id: "hot", icon: "🌋", spiceIcon: "🌶️🌶️🌶️" }
-] as const;
-
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [currentTime, setCurrentTime] = useState("");
   const [showContactModal, setShowContactModal] = useState(false);
+  const [history, setHistory] = useState<FoodRecommendation[]>([]);
   const { theme, setTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
   const { toast } = useToast();
+  
   const [selections, setSelections] = useState<RecommendationRequest>({
     category: "korean",
     priceRange: "budget",
     spiceLevel: "mild"
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Load history on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("recommendation_history");
+    if (saved) {
+      try {
+        setHistory(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse history", e);
+      }
+    }
+  }, []);
+
+  const saveToHistory = (item: FoodRecommendation) => {
+    setHistory(prev => {
+      const filtered = prev.filter(h => h.name !== item.name);
+      const newHistory = [item, ...filtered].slice(0, 5);
+      localStorage.setItem("recommendation_history", JSON.stringify(newHistory));
+      return newHistory;
+    });
+  };
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   const toggleLang = () => setLanguage(language === "en" ? "ko" : "en");
@@ -73,6 +75,7 @@ export default function Home() {
     onSuccess: (data) => {
       setRecommendation(data);
       setCurrentStep(5);
+      saveToHistory(data.recommendation);
     },
     onError: (error) => {
       console.error("Recommendation failed:", error);
@@ -216,7 +219,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold text-foreground mb-2">{t('category_title')}</h2>
               <p className="text-muted-foreground">{t('category_desc')}</p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mb-10">
               {CATEGORY_IDS.map((cat) => (
                 <FoodCategoryCard
                   key={cat.id}
@@ -226,6 +229,52 @@ export default function Home() {
                 />
               ))}
             </div>
+
+            {/* History Section */}
+            {history.length > 0 && (
+              <div className="mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="flex items-center justify-between mb-4 px-1">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <History className="w-4 h-4" />
+                    <h3 className="text-sm font-bold uppercase tracking-widest">{t('history_title')}</h3>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-[10px] h-7 text-muted-foreground hover:text-destructive"
+                    onClick={() => {
+                      setHistory([]);
+                      localStorage.removeItem("recommendation_history");
+                    }}
+                  >
+                    삭제
+                  </Button>
+                </div>
+                <div className="space-y-3">
+                  {history.map((item, idx) => (
+                    <div 
+                      key={idx} 
+                      className="flex items-center justify-between p-4 rounded-2xl bg-card/30 border border-border/40 hover:bg-card/50 hover:border-primary/20 transition-all cursor-default group shadow-sm"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-xl shadow-inner">
+                          {CATEGORY_IDS.find(c => c.id === item.category)?.icon || "🍴"}
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-foreground leading-none mb-1">{item.name}</p>
+                          <p className="text-[10px] text-muted-foreground font-medium">
+                            {t(item.category as any)} • {new Date(item.id).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </div>
+                      </div>
+                      <Badge variant="outline" className="text-[10px] py-0 h-5 font-normal border-muted-foreground/20 text-muted-foreground group-hover:border-primary/30 group-hover:text-primary transition-colors">
+                        {item.price.toLocaleString()}원
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

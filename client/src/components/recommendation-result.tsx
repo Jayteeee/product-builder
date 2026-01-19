@@ -3,6 +3,8 @@ import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
 import { useLanguage } from "@/components/language-provider";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MapPin, Share2, Search } from "lucide-react";
 import type { FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResultProps {
@@ -20,7 +22,34 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
     }
   };
 
-  // Create image arrays for carousel - use imageUrls if available, otherwise create array from imageUrl
+  const handleSearchMap = (type: 'kakao' | 'google') => {
+    const query = encodeURIComponent(recommendation.name);
+    const url = type === 'kakao' 
+      ? `https://map.kakao.com/link/search/${query}`
+      : `https://www.google.com/maps/search/${query}`;
+    window.open(url, '_blank');
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: t('title'),
+      text: `오늘 점심은 ${recommendation.name} 어때요? ${recommendation.description}`,
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+        alert('링크가 복사되었습니다!');
+      }
+    } catch (err) {
+      console.error('Share failed', err);
+    }
+  };
+
+  // ... getImageUrls function stays same ...
   const getImageUrls = (food: FoodRecommendation) => {
     if (food.imageUrls && food.imageUrls.length > 0) {
       return food.imageUrls;
@@ -30,6 +59,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
     }
     return [];
   };
+
   return (
     <div className="step fade-in">
       <div className="text-center mb-6">
@@ -72,7 +102,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             {recommendation.description}
           </p>
           
-          <div className="flex flex-col items-end mb-4">
+          <div className="flex flex-col items-end mb-6">
             <div className="text-xl font-bold text-primary">
               {recommendation.price.toLocaleString()}원
             </div>
@@ -80,9 +110,33 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
               {t('price_disclaimer')}
             </div>
           </div>
+
+          {/* Action Buttons */}
+          <div className="grid grid-cols-2 gap-3 mb-8">
+            <Button 
+              variant="outline" 
+              className="group flex flex-col items-center justify-center gap-1 h-20 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all rounded-2xl"
+              onClick={() => handleSearchMap('kakao')}
+            >
+              <div className="bg-primary/10 p-2 rounded-full group-hover:scale-110 transition-transform">
+                <MapPin className="w-5 h-5 text-primary" />
+              </div>
+              <span className="text-xs font-bold">{t('search_nearby')}</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              className="group flex flex-col items-center justify-center gap-1 h-20 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all rounded-2xl"
+              onClick={handleShare}
+            >
+              <div className="bg-primary/10 p-2 rounded-full group-hover:scale-110 transition-transform">
+                <Share2 className="w-5 h-5 text-primary" />
+              </div>
+              <span className="text-xs font-bold">{t('share_result')}</span>
+            </Button>
+          </div>
           
           {recommendation.tags && (
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-2">
               {recommendation.tags.map((tag, index) => (
                 <Badge 
                   key={index} 
