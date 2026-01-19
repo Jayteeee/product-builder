@@ -40,12 +40,16 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleShare = async () => {
+    // Generate shareable URL with parameters
     const params = new URLSearchParams();
     params.set('n', recommendation.name);
     params.set('d', recommendation.description);
     params.set('p', recommendation.price.toString());
     params.set('c', recommendation.category);
     if (recommendation.imageUrl) params.set('i', recommendation.imageUrl);
+    if (recommendation.tags && recommendation.tags.length > 0) {
+      params.set('t', recommendation.tags.join(','));
+    }
 
     const shareUrl = `${window.location.origin}${window.location.pathname}#/?${params.toString()}`;
 

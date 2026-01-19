@@ -53,6 +53,7 @@ export default function Home() {
       const sharedPrice = params.get('p');
       const sharedCat = params.get('c');
       const sharedImg = params.get('i');
+      const sharedTags = params.get('t');
 
       if (sharedName && sharedDesc) {
         const sharedRec: FoodRecommendation = {
@@ -65,7 +66,7 @@ export default function Home() {
           imageUrls: sharedImg ? [sharedImg] : [],
           spiceLevel: 'mild',
           priceRange: 'moderate',
-          tags: [],
+          tags: sharedTags ? sharedTags.split(',') : [],
           isAiGenerated: true
         };
         setRecommendation({ recommendation: sharedRec, alternatives: [] });
