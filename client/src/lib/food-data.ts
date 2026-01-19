@@ -130,6 +130,23 @@ function getSpiceDescription(id: string) {
 
 // ... baseItems and foodRecommendations ...
 
+// Base items for local fallback
+const baseItems = [
+  { id: 1, name: "김치찌개", category: "korean", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "얼큰하고 시원한 김치찌개!", imageUrl: null, tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함"] },
+  { id: 2, name: "된장찌개", category: "korean", priceRange: "budget", spiceLevel: "mild", price: 7000, description: "구수한 된장찌개!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 3, name: "불고기", category: "korean", priceRange: "moderate", spiceLevel: "mild", price: 12000, description: "달콤한 불고기!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 10, name: "짜장면", category: "chinese", priceRange: "budget", spiceLevel: "mild", price: 6000, description: "달콤한 짜장소스!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 15, name: "라멘", category: "japanese", priceRange: "budget", spiceLevel: "mild", price: 8000, description: "진한 국물 라멘!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 20, name: "스파게티", category: "western", priceRange: "budget", spiceLevel: "mild", price: 8500, description: "토마토 스파게티!", imageUrl: null, tags: ["🥛 순한맛"] },
+  { id: 25, name: "떡볶이", category: "street", priceRange: "budget", spiceLevel: "medium", price: 4000, description: "매콤달콤 떡볶이!", imageUrl: null, tags: ["🌶️🌶️ 보통맛"] },
+  { id: 30, name: "쌀국수", category: "vietnamese", priceRange: "budget", spiceLevel: "mild", price: 9000, description: "진한 육수의 베트남 쌀국수!", imageUrl: null, tags: ["🍜 담백한맛"] },
+  { id: 31, name: "분짜", category: "vietnamese", priceRange: "moderate", spiceLevel: "mild", price: 12000, description: "숯불 돼지고기와 새콤달콤한 소스!", imageUrl: null, tags: ["🥗 새콤달콤"] },
+  { id: 40, name: "타코", category: "mexican", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "신선한 재료가 듬뿍 들어간 타코!", imageUrl: null, tags: ["🌮 멕시칸"] },
+  { id: 41, name: "부리또", category: "mexican", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "든든한 한 끼, 멕시칸 부리또!", imageUrl: null, tags: ["🌯 든든한"] },
+  { id: 50, name: "팟타이", category: "asian", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "태국식 볶음 쌀국수!", imageUrl: null, tags: ["🥘 아시안"] },
+  { id: 51, name: "나시고랭", category: "asian", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "인도네시아식 볶음밥!", imageUrl: null, tags: ["🍛 볶음밥"] },
+];
+
 const foodRecommendations = baseItems.map(item => ({ ...item, imageUrls: [], imageUrl: null }));
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
