@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Camera, Upload, RotateCcw, Trophy, X, Minus } from "lucide-react";
+import { ArrowLeft, Camera, Upload, RotateCcw, Trophy, X, Minus, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTheme } from "@/components/theme-provider";
