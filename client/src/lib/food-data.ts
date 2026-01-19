@@ -262,18 +262,54 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       "tags": ["Tag1", "Tag2"]
     }`;
 
-    // ... (Gemini SDK call) ...
+    // Try using the SDK with 'gemini-2.0-flash'
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: prompt
+    });
+
+    // Safely access text from response
+    let responseText = "";
+    const res = response as any;
+    if (typeof res.text === 'function') {
+      responseText = res.text();
+    } else if (typeof res.text === 'string') {
+      responseText = res.text;
+    } else if (res.candidates && res.candidates[0]?.content?.parts?.[0]?.text) {
+      responseText = res.candidates[0].content.parts[0].text;
+    } else {
+      console.warn("Unexpected Gemini response structure:", response);
+      throw new Error("Invalid Gemini response structure");
+    }
+
+    console.log("Gemini Response:", responseText);
+    
+    let jsonStr = responseText || "{}";
+    jsonStr = jsonStr.replace(/```json/g, "").replace(/```/g, "").trim();
+    const parsedData = JSON.parse(jsonStr);
+
+    console.log("Parsed Data:", parsedData);
 
     // Use the unified fetch function
-    const imageUrls = await fetchFoodImages(data.name, data.englishQuery, request.category);
+    const imageUrls = await fetchFoodImages(parsedData.name, parsedData.englishQuery, request.category);
 
     return {
-      // ...
+      id: Date.now(),
+      name: parsedData.name,
+      category: request.category,
+      priceRange: request.priceRange,
+      spiceLevel: request.spiceLevel,
+      price: parsedData.price,
+      description: parsedData.description,
+      imageUrl: imageUrls[0] || null,
+      imageUrls: imageUrls,
+      tags: parsedData.tags,
+      isAiGenerated: true
     };
   } catch (error) {
     console.warn("SDK Failed, trying REST fallback...", error);
     
-    // REST Fallback
+    // REST Fallback - Use gemini-1.5-flash as it is most stable for REST
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       
@@ -285,16 +321,48 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       Return strictly valid JSON (no markdown):
       { "name": "...", "englishQuery": "...", "description": "...", "price": 0, "tags": [...] }`;
 
-      // ... (REST call) ...
+      const restResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            role: "user",
+            parts: [{ text: prompt }]
+          }]
+        })
+      });
+
+      if (!restResponse.ok) {
+        const errText = await restResponse.text();
+        throw new Error(`REST Error: ${restResponse.status} - ${errText}`);
+      }
+      
+      const restData = await restResponse.json();
+      const text = restData.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error("No text in REST response");
+
+      const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
+      const parsedData = JSON.parse(jsonStr);
       
       // Use the unified fetch function
-      const imageUrls = await fetchFoodImages(data.name, data.englishQuery, request.category);
+      const imageUrls = await fetchFoodImages(parsedData.name, parsedData.englishQuery, request.category);
 
       return {
-        // ...
+        id: Date.now(),
+        name: parsedData.name,
+        category: request.category,
+        priceRange: request.priceRange,
+        spiceLevel: request.spiceLevel,
+        price: parsedData.price,
+        description: parsedData.description,
+        imageUrl: imageUrls[0] || null,
+        imageUrls: imageUrls,
+        tags: parsedData.tags,
+        isAiGenerated: true
       };
     } catch (restError) {
-       // ...
+      console.error("All AI attempts failed:", restError);
+      return withFallbackImage(getLocalFallback(request));
     }
   }
 }
