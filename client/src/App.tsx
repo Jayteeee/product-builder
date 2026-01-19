@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/components/language-provider";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Privacy from "@/pages/privacy";
+import RPS from "@/pages/rps";
 import NotFound from "@/pages/not-found";
 import { useState, useEffect } from "react";
 
@@ -27,6 +28,7 @@ function AppRouter() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/rps" component={RPS} />
       <Route path="/about" component={About} />
       <Route path="/about.html" component={About} />
       <Route path="/privacy" component={Privacy} />

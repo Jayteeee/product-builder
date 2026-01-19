@@ -140,9 +140,11 @@ export default function Home() {
             </div>
           </div>
           <div className="flex gap-2">
-            <a href="/rps.html" className="flex items-center justify-center p-2 rounded-full hover:bg-accent text-foreground border border-border/50 transition-colors" title={t('rps_game')}>
-              <Gamepad2 className="h-5 w-5" />
-            </a>
+            <Link href="/rps">
+              <Button variant="ghost" size="icon" className="rounded-full hover:bg-accent border border-border/50" title={t('rps_game')}>
+                <Gamepad2 className="h-5 w-5" />
+              </Button>
+            </Link>
             <Button variant="ghost" size="icon" onClick={toggleLang} className="rounded-full hover:bg-accent border border-border/50">
               <span className="text-xs font-bold">{language === "en" ? "EN" : "KO"}</span>
             </Button>
