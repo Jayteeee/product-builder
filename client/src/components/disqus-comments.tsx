@@ -16,17 +16,25 @@ export function DisqusComments() {
     target.appendChild(script);
 
     return () => {
-      // Cleanup if necessary, though Disqus is tricky to unmount completely
-      // Usually checking if the script exists is enough to prevent duplicates
+      // Cleanup
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
+      // Also try to clean up the iframe if possible
+      const iframe = document.querySelector('iframe[title="Disqus"]');
+      if (iframe && iframe.parentNode) {
+        iframe.parentNode.removeChild(iframe);
+      }
     };
-  }, []);
+  }, [theme]); // Re-run when theme changes
 
   return (
     <div className="mt-8 pt-8 border-t border-border/50">
-      <div id="disqus_thread" className="min-h-[200px]"></div>
+      <div 
+        key={theme} 
+        id="disqus_thread" 
+        className="min-h-[200px] bg-slate-50 dark:bg-zinc-900 p-4 rounded-xl"
+      ></div>
       <noscript>
         Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
       </noscript>
