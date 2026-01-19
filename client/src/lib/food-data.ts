@@ -124,22 +124,7 @@ function getSpiceDescription(id: string) {
   return s ? s.description : id;
 }
 
-const createFoodImages = (dishName: string): string[] => {
-  const foodImageMap: { [key: string]: string[] } = {
-    "김치찌개": [
-      "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      "https://images.unsplash.com/photo-1612428978309-0b7d97e7e924?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      "https://images.unsplash.com/photo-1611599238845-7f3c32eadb3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
-    ],
-  };
-  return foodImageMap[dishName] || [
-    "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-    "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-    "https://images.unsplash.com/photo-1582927349550-778a53160baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300"
-  ];
-};
-
-// Base items for local fallback
+// Base items for local fallback - No hardcoded images
 const baseItems = [
   { id: 1, name: "김치찌개", category: "korean", priceRange: "budget", spiceLevel: "medium", price: 8000, description: "얼큰하고 시원한 김치찌개!", imageUrl: null, tags: ["🌶️🌶️ 보통맛", "🍚 밥 포함"] },
   { id: 2, name: "된장찌개", category: "korean", priceRange: "budget", spiceLevel: "mild", price: 7000, description: "구수한 된장찌개!", imageUrl: null, tags: ["🥛 순한맛"] },
@@ -156,10 +141,7 @@ const baseItems = [
   { id: 51, name: "나시고랭", category: "asian", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "인도네시아식 볶음밥!", imageUrl: null, tags: ["🍛 볶음밥"] },
 ];
 
-const foodRecommendations = baseItems.map(item => {
-  const imageUrls = createFoodImages(item.name);
-  return { ...item, imageUrls, imageUrl: imageUrls[0] };
-});
+const foodRecommendations = baseItems.map(item => ({ ...item, imageUrls: [], imageUrl: null }));
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;

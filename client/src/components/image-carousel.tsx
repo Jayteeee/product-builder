@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ImageCarouselProps {
@@ -10,12 +10,14 @@ interface ImageCarouselProps {
 
 export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imgError, setImgError] = useState(false);
 
-  // If no images provided, show a placeholder
-  if (!images || images.length === 0) {
+  // If no images provided or error occurred, show a placeholder
+  if (!images || images.length === 0 || imgError) {
     return (
-      <div className={cn("w-full h-48 bg-muted/30 flex items-center justify-center", className)}>
-        <span className="text-muted-foreground">이미지 없음</span>
+      <div className={cn("w-full h-48 bg-muted/30 flex flex-col items-center justify-center gap-2", className)}>
+        <ImageOff className="w-8 h-8 text-muted-foreground/50" />
+        <span className="text-sm text-muted-foreground/70">이미지가 없습니다</span>
       </div>
     );
   }
@@ -60,25 +62,22 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
           "transition-opacity duration-300",
           isModalImage ? "max-w-full max-h-full object-contain" : "w-full h-full object-cover"
         )}
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.src = "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300";
-        }}
+        onError={() => setImgError(true)}
       />
       
       {/* Navigation arrows - only show if more than 1 image */}
       {images.length > 1 && (
         <>
           <button
-            onClick={prevImage}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-70 transition-all"
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-1 rounded-full hover:bg-black/70 transition-all backdrop-blur-sm"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           
           <button
-            onClick={nextImage}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-70 transition-all"
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-1 rounded-full hover:bg-black/70 transition-all backdrop-blur-sm"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -91,10 +90,10 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
           {images.map((_, index) => (
             <button
               key={index}
-              onClick={() => goToSlide(index)}
+              onClick={(e) => { e.stopPropagation(); goToSlide(index); }}
               className={cn(
-                "w-2 h-2 rounded-full transition-all",
-                index === currentIndex ? "bg-white" : "bg-white bg-opacity-50"
+                "w-2 h-2 rounded-full transition-all shadow-sm",
+                index === currentIndex ? "bg-white" : "bg-white/50 hover:bg-white/70"
               )}
             />
           ))}
@@ -103,7 +102,7 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
       
       {/* Image counter */}
       {images.length > 1 && (
-        <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+        <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
           {currentIndex + 1} / {images.length}
         </div>
       )}
