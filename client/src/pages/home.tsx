@@ -268,13 +268,13 @@ export default function Home() {
       </section>
 
       {/* SEO & Footer */}
-      <section className="px-6 py-8 border-t border-border/10 bg-card/20 backdrop-blur-sm mx-4 mb-6 rounded-xl">
+      <section className="p-8 mx-6 mb-8 rounded-2xl bg-card/40 backdrop-blur-md border border-border/30 shadow-sm transition-all hover:shadow-md">
         <article className="mb-8">
-          <h2 className="text-lg font-bold text-foreground mb-3">{t('seo_title_1')}</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4 leading-tight">{t('seo_title_1')}</h2>
           <p className="text-muted-foreground text-sm leading-relaxed">{t('seo_desc_1')}</p>
         </article>
         <article>
-          <h2 className="text-lg font-bold text-foreground mb-3">{t('seo_title_2')}</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4 leading-tight">{t('seo_title_2')}</h2>
           <div className="text-muted-foreground text-sm leading-relaxed">{t('seo_desc_2')}</div>
         </article>
       </section>
