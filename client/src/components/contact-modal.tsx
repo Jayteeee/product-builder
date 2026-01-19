@@ -53,7 +53,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-      <div className="bg-background dark:bg-zinc-900 border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in duration-200">
+      <div className="bg-white dark:bg-zinc-900 border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in duration-200">
         <div className="flex justify-between items-center mb-6 border-b border-border pb-4">
           <h2 className="text-xl font-bold text-foreground">제휴 문의</h2>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground">
@@ -69,7 +69,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               name="name" 
               id="name" 
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-zinc-800 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
             />
           </div>
           
@@ -80,7 +80,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               name="_replyto" 
               id="email" 
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-zinc-800 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-muted-foreground"
             />
           </div>
           
@@ -91,7 +91,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               id="message" 
               rows={4} 
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"
+              className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-zinc-800 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none placeholder:text-muted-foreground"
             ></textarea>
           </div>
 
