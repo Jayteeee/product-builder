@@ -5,7 +5,13 @@ import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Share2, Search } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
+import { MapPin, Share2, Search, Map as MapIcon } from "lucide-react";
 import type { FoodRecommendation } from "@/lib/types";
 
 interface RecommendationResultProps {
@@ -25,7 +31,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleSearchMap = (type: 'kakao' | 'naver') => {
-    // Use Korean name if in KO mode, otherwise try to extract Korean name or use english
+    // Logic: Use Korean if lang is ko, otherwise extract Korean part or use english
     const query = language === 'ko' ? recommendation.name : recommendation.name.split('(')[0].trim();
     const encodedQuery = encodeURIComponent(query);
     
@@ -44,7 +50,6 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
     params.set('c', recommendation.category);
     if (recommendation.imageUrl) params.set('i', recommendation.imageUrl);
 
-    // Current structure is using Hash Routing (/#/)
     const shareUrl = `${window.location.origin}${window.location.pathname}#/?${params.toString()}`;
 
     const shareData = {
@@ -89,7 +94,36 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       </div>
 
       {/* Recommended Food Card */}
-      <div className="bg-card border border-border/50 rounded-2xl shadow-lg overflow-hidden mb-6 bounce-in">
+      <div className="absolute top-3 right-3 z-20">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                size="icon" 
+                variant="secondary" 
+                className="rounded-full bg-background/80 backdrop-blur-md border border-white/10 shadow-lg hover:bg-background transition-all"
+              >
+                <MapIcon className="w-5 h-5 text-primary" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-popover/95 backdrop-blur-md border-border/50 rounded-xl shadow-xl">
+              <DropdownMenuItem 
+                onClick={() => handleSearchMap('naver')}
+                className="flex items-center gap-2 cursor-pointer focus:bg-primary/10"
+              >
+                <div className="bg-green-500 w-2 h-2 rounded-full" />
+                <span>네이버 지도</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem 
+                onClick={() => handleSearchMap('kakao')}
+                className="flex items-center gap-2 cursor-pointer focus:bg-primary/10"
+              >
+                <div className="bg-yellow-500 w-2 h-2 rounded-full" />
+                <span>카카오맵</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
         <ImageModal
           images={getImageUrls(recommendation)}
           alt={recommendation.name}
@@ -132,39 +166,33 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="grid grid-cols-3 gap-2 mb-8">
+          {/* Share Button at the bottom */}
+          <div className="mb-6">
             <Button 
               variant="outline" 
-              className="flex flex-col items-center justify-center gap-1 h-16 border-border/50 hover:bg-accent hover:text-accent-foreground transition-all rounded-xl p-1"
-              onClick={() => handleSearchMap('naver')}
-            >
-              <div className="bg-green-500/10 p-1.5 rounded-full">
-                <Search className="w-4 h-4 text-green-600" />
-              </div>
-              <span className="text-[10px] font-bold">네이버 지도</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="flex flex-col items-center justify-center gap-1 h-16 border-border/50 hover:bg-accent hover:text-accent-foreground transition-all rounded-xl p-1"
-              onClick={() => handleSearchMap('kakao')}
-            >
-              <div className="bg-yellow-500/10 p-1.5 rounded-full">
-                <MapPin className="w-4 h-4 text-yellow-600" />
-              </div>
-              <span className="text-[10px] font-bold">카카오맵</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="flex flex-col items-center justify-center gap-1 h-16 border-border/50 hover:bg-accent hover:text-accent-foreground transition-all rounded-xl p-1"
+              className="w-full gap-2 border-primary/20 hover:bg-primary/5 h-12 rounded-xl transition-all"
               onClick={handleShare}
             >
-              <div className="bg-primary/10 p-1.5 rounded-full">
-                <Share2 className="w-4 h-4 text-primary" />
-              </div>
-              <span className="text-[10px] font-bold">{t('share_result')}</span>
+              <Share2 className="w-4 h-4 text-primary" />
+              <span className="font-bold text-sm">{t('share_result')}</span>
             </Button>
           </div>
+          
+          {recommendation.tags && (
+            <div className="flex flex-wrap gap-2">
+              {recommendation.tags.map((tag, index) => (
+                <Badge 
+                  key={index} 
+                  variant="secondary"
+                  className="px-3 py-1 text-sm font-normal bg-secondary/80 hover:bg-secondary text-secondary-foreground border-none"
+                >
+                  #{tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
           
           {recommendation.tags && (
             <div className="flex flex-wrap gap-2">
