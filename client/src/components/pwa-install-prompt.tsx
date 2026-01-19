@@ -1,18 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Download, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/language-provider";
+import { cn } from "@/lib/utils";
 
 export function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const { language } = useLanguage();
+  
+  // Touch handling for swipe dismissal
+  const touchStartY = useRef<number | null>(null);
+  const promptRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setIsVisible(true);
+      // Slight delay to not annoy immediately on load
+      setTimeout(() => setIsVisible(true), 3000);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
@@ -34,36 +41,82 @@ export function PWAInstallPrompt() {
     }
   };
 
+  const closePrompt = () => {
+    setIsClosing(true);
+    setTimeout(() => setIsVisible(false), 300); // Wait for animation
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartY.current || !promptRef.current) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - touchStartY.current;
+    
+    // If swiping down
+    if (diff > 0) {
+      promptRef.current.style.transform = `translateY(${diff}px)`;
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStartY.current || !promptRef.current) return;
+    const currentY = e.changedTouches[0].clientY;
+    const diff = currentY - touchStartY.current;
+
+    // Threshold to dismiss
+    if (diff > 50) {
+      closePrompt();
+    } else {
+      // Reset position
+      promptRef.current.style.transform = '';
+    }
+    touchStartY.current = null;
+  };
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 animate-in slide-in-from-bottom-10 fade-in duration-500">
-      <div className="bg-primary text-primary-foreground p-4 rounded-xl shadow-2xl border border-primary/20 flex items-center justify-between gap-4 max-w-md mx-auto">
-        <div className="flex-1">
-          <h3 className="font-bold text-sm mb-1">
-            {language === 'ko' ? "앱으로 더 빠르게!" : "Install App"}
+    <div 
+      ref={promptRef}
+      className={cn(
+        "fixed bottom-6 left-4 right-4 z-[100] transition-all duration-300 ease-out",
+        isClosing ? "translate-y-[150%] opacity-0" : "animate-in slide-in-from-bottom-full fade-in"
+      )}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="bg-white dark:bg-zinc-900 text-foreground p-5 rounded-2xl shadow-2xl border border-border/50 flex items-center justify-between gap-4 max-w-md mx-auto relative overflow-hidden">
+        {/* Drag Handle Indicator */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-muted/50 rounded-full" />
+
+        <div className="flex-1 pt-2">
+          <h3 className="font-bold text-base mb-1">
+            {language === 'ko' ? "앱으로 설치하기" : "Install App"}
           </h3>
-          <p className="text-xs opacity-90">
+          <p className="text-xs text-muted-foreground leading-tight">
             {language === 'ko' 
-              ? "웹사이트 방문 없이 홈 화면에서 바로 메뉴를 추천받아보세요." 
-              : "Get quick recommendations directly from your home screen."}
+              ? "홈 화면에 추가하여 더 빠르게 이용해보세요." 
+              : "Add to home screen for quick access."}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pt-2">
           <Button 
             size="sm" 
-            variant="secondary" 
-            className="font-bold whitespace-nowrap h-9 px-4 shadow-sm"
+            className="font-bold whitespace-nowrap h-10 px-5 shadow-md bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
             onClick={handleInstallClick}
           >
             <Download className="w-4 h-4 mr-2" />
-            {language === 'ko' ? "앱 설치" : "Install"}
+            {language === 'ko' ? "설치" : "Install"}
           </Button>
           <button 
-            onClick={() => setIsVisible(false)}
-            className="p-1 hover:bg-primary-foreground/10 rounded-full transition-colors"
+            onClick={closePrompt}
+            className="p-2 hover:bg-accent rounded-full transition-colors text-muted-foreground"
           >
-            <X className="w-5 h-5 opacity-80" />
+            <X className="w-5 h-5" />
           </button>
         </div>
       </div>
