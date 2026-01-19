@@ -165,10 +165,10 @@ async function fetchGoogleImages(query: string): Promise<string[]> {
     
     if (!response.ok) return [];
     
-    const data = await response.json();
-    if (!data.items) return [];
+    const responseData = await response.json();
+    if (!responseData.items) return [];
     
-    return data.items.map((item: any) => item.link);
+    return responseData.items.map((item: any) => item.link);
   } catch (e) {
     console.error("Google Search fetch error:", e);
     return [];
@@ -183,8 +183,8 @@ async function fetchPexelsImages(query: string): Promise<string[]> {
       headers: { Authorization: apiKey }
     });
     if (!response.ok) return [];
-    const data = await response.json();
-    return data.photos.map((p: any) => p.src.large);
+    const responseData = await response.json();
+    return responseData.photos.map((p: any) => p.src.large);
   } catch (e) {
     console.error("Pexels fetch error:", e);
     return [];
