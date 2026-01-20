@@ -1,6 +1,6 @@
 import { ImageCarousel } from "./image-carousel";
 import { ImageModal } from "./image-modal";
-import { useLanguage } from "@/components/language-provider";
+import { useLanguage } from "./language-provider";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ interface RecommendationResultProps {
 }
 
 export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
+  console.log("Rendering RecommendationResult for:", recommendation.name);
   const { t, language } = useLanguage();
   const { toast } = useToast();
   
