@@ -1,20 +1,4 @@
-import { ImageCarousel } from "./image-carousel";
-import { ImageModal } from "./image-modal";
-import { useLanguage } from "@/components/language-provider";
-import { useToast } from "@/hooks/use-toast";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
-import { MapPin, Share2, Search, Map as MapIcon } from "lucide-react";
-import { compressData } from "@/lib/share-utils";
-import type { FoodRecommendation } from "@/lib/types";
-
-// ... (interface remains same) ...
+import { ShareButtons } from "./share-buttons";
 
 export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
   const { t, language } = useLanguage();
@@ -141,6 +125,9 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             </Button>
           </div>
           
+          {/* AddToAny Share Buttons */}
+          <ShareButtons />
+
           {recommendation.tags && (
             <div className="flex flex-wrap gap-2">
               {recommendation.tags.map((tag, index) => (
