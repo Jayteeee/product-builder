@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 
 declare global {
   interface Window {
@@ -9,15 +9,16 @@ declare global {
   }
 }
 
-export function ShareButtons() {
+function ShareButtonsComponent() {
   const isLoaded = useRef(false);
 
   useEffect(() => {
     // Configure AddToAny
     window.a2a_config = window.a2a_config || {};
-    window.a2a_config.onclick = 1; // Enable click tracking if needed
-    window.a2a_config.num_services = 8; // Number of services to show
+    window.a2a_config.onclick = 1;
+    window.a2a_config.num_services = 8;
 
+    // Load script if not present
     if (!document.getElementById("a2a-script")) {
       const script = document.createElement("script");
       script.id = "a2a-script";
@@ -26,18 +27,20 @@ export function ShareButtons() {
       script.defer = true;
       script.onload = () => {
         isLoaded.current = true;
+        // Try init after load
+        if (window.a2a) window.a2a.init("page");
       };
       document.body.appendChild(script);
-    } else if (window.a2a) {
-      // If script is already loaded, re-initialize
-      try {
-        window.a2a.init("page");
-      } catch (e) {
-        console.error("AddToAny init error", e);
+    } else {
+      // If script exists, re-init immediately
+      if (window.a2a) {
+        try {
+          window.a2a.init("page");
+        } catch (e) {
+          console.error("AddToAny init error", e);
+        }
       }
     }
-
-    // Cleanup not typically needed for this singleton script
   }, []);
 
   return (
@@ -58,3 +61,6 @@ export function ShareButtons() {
     </div>
   );
 }
+
+// Memoize to prevent React from re-rendering this component and clashing with AddToAny's DOM changes
+export const ShareButtons = memo(ShareButtonsComponent, () => true);
