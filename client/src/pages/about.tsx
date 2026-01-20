@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -21,6 +22,11 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6 font-sans">
+      <Helmet>
+        <title>{lang === "en" ? "About Us - Lunch Picker" : "사이트 소개 - 오늘뭐먹지?"}</title>
+        <meta name="description" content={lang === "en" ? "Learn more about Lunch Picker, the AI-powered lunch menu recommendation app." : "오늘뭐먹지? 앱의 제작 배경과 사용된 기술을 소개합니다."} />
+        <link rel="canonical" href="https://product-builder-10l.pages.dev/about" />
+      </Helmet>
       <div className="max-w-3xl mx-auto bg-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl">
         <div className="flex justify-between items-center mb-8">
           <Link href="/">

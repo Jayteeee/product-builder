@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Camera, Upload, RotateCcw, Trophy, X, Minus, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -257,6 +258,12 @@ export default function RPS() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans p-4 relative overflow-hidden">
+      <Helmet>
+        <title>{language === "en" ? "Rock Paper Scissors - Lunch Picker" : "가위바위보 게임 - 오늘뭐먹지?"}</title>
+        <meta name="description" content={language === "en" ? "Play Rock Paper Scissors with AI using your camera!" : "카메라를 이용해 AI와 가위바위보 대결을 펼쳐보세요! 점심 내기 게임으로 딱입니다."} />
+        <link rel="canonical" href="https://product-builder-10l.pages.dev/rps" />
+      </Helmet>
+
       {/* Decorative Background Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />

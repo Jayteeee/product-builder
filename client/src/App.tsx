@@ -10,24 +10,6 @@ import About from "@/pages/about";
 import Privacy from "@/pages/privacy";
 import RPS from "@/pages/rps";
 import NotFound from "@/pages/not-found";
-import { useState, useEffect } from "react";
-
-// Custom hook for hash-based routing
-const useHashLocation = () => {
-  // Strip the query string from the hash for routing purposes
-  const getPath = () => window.location.hash.replace(/^#/, "").split('?')[0] || "/";
-  
-  const [loc, setLoc] = useState(getPath());
-  
-  useEffect(() => {
-    const handler = () => setLoc(getPath());
-    window.addEventListener("hashchange", handler);
-    return () => window.removeEventListener("hashchange", handler);
-  }, []);
-  
-  const navigate = (to: string) => (window.location.hash = to);
-  return [loc, navigate] as const;
-};
 
 function AppRouter() {
   return (
@@ -35,9 +17,7 @@ function AppRouter() {
       <Route path="/" component={Home} />
       <Route path="/rps" component={RPS} />
       <Route path="/about" component={About} />
-      <Route path="/about.html" component={About} />
       <Route path="/privacy" component={Privacy} />
-      <Route path="/privacy.html" component={Privacy} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -50,9 +30,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             <Toaster />
-            <WouterRouter hook={useHashLocation}>
-              <AppRouter />
-            </WouterRouter>
+            <AppRouter />
           </TooltipProvider>
         </QueryClientProvider>
       </LanguageProvider>

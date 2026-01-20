@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
 import { CATEGORY_IDS, PRICE_IDS, SPICE_IDS } from "@/lib/constants";
 import { decompressData } from "@/lib/share-utils";
@@ -13,6 +14,7 @@ import { RecommendationResult } from "@/components/recommendation-result";
 import { DisqusComments } from "@/components/disqus-comments";
 import { ContactModal } from "@/components/contact-modal";
 import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
+import { StructuredData } from "@/components/structured-data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/components/theme-provider";
@@ -210,6 +212,13 @@ export default function Home() {
 
   return (
     <div className="max-w-md md:max-w-2xl mx-auto bg-card/40 backdrop-blur-md shadow-2xl min-h-[90vh] relative my-4 rounded-3xl border border-white/10 overflow-hidden transition-all duration-300">
+      <Helmet>
+        <title>오늘뭐먹지? - 음식 메뉴 추천 앱</title>
+        <meta name="description" content="결정 장애를 위한 최고의 해결책! AI가 당신의 취향에 딱 맞는 오늘 점심 메뉴를 추천해드립니다. 매일 반복되는 점심 고민, 이제 AI에게 맡기세요!" />
+        <link rel="canonical" href="https://product-builder-10l.pages.dev/" />
+      </Helmet>
+      <StructuredData />
+      
       {/* Header */}
       <header className="bg-card/80 backdrop-blur-sm border-b border-border/50 text-foreground p-4 sticky top-0 z-50 transition-colors duration-300">
         <div className="flex items-center justify-between">

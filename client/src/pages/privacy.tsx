@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -21,6 +22,11 @@ export default function Privacy() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6 font-sans">
+      <Helmet>
+        <title>{lang === "en" ? "Privacy Policy - Lunch Picker" : "개인정보처리방침 - 오늘뭐먹지?"}</title>
+        <meta name="description" content={lang === "en" ? "Privacy Policy for Lunch Picker." : "오늘뭐먹지? 서비스의 개인정보처리방침입니다."} />
+        <link rel="canonical" href="https://product-builder-10l.pages.dev/privacy" />
+      </Helmet>
       <div className="max-w-3xl mx-auto bg-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl">
         <div className="flex justify-between items-center mb-8">
           <Link href="/">
