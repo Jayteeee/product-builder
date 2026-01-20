@@ -205,7 +205,9 @@ const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
 // Helper to fetch images from available sources
 async function fetchFoodImages(koreanName: string, englishQuery?: string, categoryId?: string): Promise<string[]> {
   // 1. Try Google Images first (Most accurate for specific dish)
-  const googleImages = await fetchGoogleImages(koreanName + " 음식"); 
+  // Optimization: Exclude commercial products, recipes, youtube thumbnails, and illustrations
+  const optimizedQuery = `${koreanName} 음식 -밀키트 -레시피 -유튜브 -youtube -thumbnail -일러스트 -벡터 -제품 -쇼핑 -가격`;
+  const googleImages = await fetchGoogleImages(optimizedQuery); 
   if (googleImages.length > 0) return googleImages;
 
   // 2. Fallback to Pexels (Stock photos for specific dish)
