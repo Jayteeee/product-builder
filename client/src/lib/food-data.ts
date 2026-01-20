@@ -236,7 +236,24 @@ async function fetchFoodImages(koreanName: string, englishQuery?: string, catego
   return [];
 }
 
-// ... getLocalFallback ...
+function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
+  const filtered = baseItems.filter(item => 
+    item.category === request.category &&
+    item.priceRange === request.priceRange &&
+    item.spiceLevel === request.spiceLevel
+  );
+
+  const selected = filtered.length > 0 
+    ? filtered[Math.floor(Math.random() * filtered.length)]
+    : baseItems.find(item => item.category === request.category) || baseItems[0];
+
+  return {
+    ...selected,
+    imageUrls: [],
+    imageUrl: null,
+    isAiGenerated: false
+  };
+}
 
 async function withFallbackImage(recommendation: FoodRecommendation): Promise<FoodRecommendation> {
   if (!recommendation.imageUrl || recommendation.imageUrl.length === 0) {

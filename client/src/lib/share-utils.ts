@@ -17,7 +17,12 @@ export async function compressData(data: object): Promise<string> {
     const compressedBuffer = await new Response(cs.readable).arrayBuffer();
     
     // Convert to URL-safe Base64
-    return btoa(String.fromCharCode(...new Uint8Array(compressedBuffer)))
+    const uint8Array = new Uint8Array(compressedBuffer);
+    let binary = '';
+    for (let i = 0; i < uint8Array.byteLength; i++) {
+      binary += String.fromCharCode(uint8Array[i]);
+    }
+    return btoa(binary)
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
       .replace(/=+$/, '');

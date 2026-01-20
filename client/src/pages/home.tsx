@@ -49,6 +49,32 @@ export default function Home() {
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [shareUrl, setShareUrl] = useState(window.location.href);
+  const shareTitle = t('title');
+
+  // Update shareUrl when recommendation changes
+  useEffect(() => {
+    const updateShareUrl = async () => {
+      if (recommendation?.recommendation) {
+        const data = {
+          n: recommendation.recommendation.name,
+          d: recommendation.recommendation.description,
+          p: recommendation.recommendation.price.toString(),
+          c: recommendation.recommendation.category,
+          i: recommendation.recommendation.imageUrl,
+          t: recommendation.recommendation.tags
+        };
+        const v = await compressData(data);
+        const url = new URL(window.location.origin);
+        url.searchParams.set('v', v);
+        setShareUrl(url.toString());
+      } else {
+        const url = new URL(window.location.origin);
+        setShareUrl(url.toString());
+      }
+    };
+    updateShareUrl();
+  }, [recommendation]);
 
   // Automatically request location on mount or when starting
   useEffect(() => {
