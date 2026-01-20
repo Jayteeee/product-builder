@@ -40,10 +40,17 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleSearchMap = (type: 'naver' | 'kakao') => {
+    // For Korean searches, clean up the menu name by removing content in parentheses
+    // e.g., "Kimchi Stew (Pork)" -> "Kimchi Stew"
+    let menuName = recommendation.name;
+    if (language === 'ko') {
+      menuName = menuName.replace(/\s*\(.*?\)\s*/g, ' ').trim();
+    }
+
     // Incorporate current location into search query for better results
     const searchQuery = currentLocation 
-      ? `${currentLocation} ${recommendation.name}`
-      : recommendation.name;
+      ? `${currentLocation} ${menuName}`
+      : menuName;
       
     const query = encodeURIComponent(searchQuery);
     const url = type === 'naver' 
