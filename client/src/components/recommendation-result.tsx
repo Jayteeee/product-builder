@@ -159,7 +159,9 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
           </div>
           
           {/* AddToAny Share Buttons */}
-          <ShareButtons />
+          <div className="flex justify-center my-4">
+            <ShareButtons />
+          </div>
 
           {recommendation.tags && (
             <div className="flex flex-wrap gap-2">
