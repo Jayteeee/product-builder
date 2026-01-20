@@ -261,20 +261,26 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
 
   try {
     console.log("Calling Gemini API with @google/genai...");
+    
+    // Construct location context string
+    const locationContext = request.location 
+      ? `User Location: ${request.location}. Please recommend a menu that is commonly sold in restaurants in this specific area.` 
+      : "Context: Lunch recommendation for a Korean user.";
+
     const prompt = `Recommend ONE specific lunch menu dish that STRICTLY matches these criteria:
     
     1. Category: ${getCategoryName(request.category)} (${request.category}) - MUST be this cuisine type.
     2. Price Range: ${getPriceDescription(request.priceRange)} - Dish average price MUST be within this range.
     3. Spice Level: ${getSpiceDescription(request.spiceLevel)} - Spice level MUST match this.
     
-    * Context: Lunch recommendation for a Korean user.
+    * ${locationContext}
     * Constraint: Do NOT recommend a generic list. Recommend ONE specific dish.
     
     Return strictly valid JSON (no markdown):
     {
       "name": "Dish Name (Korean)",
       "englishQuery": "English Search Term for Pexels (e.g. Delicious Kimchi Stew food photography)",
-      "description": "Appetizing description in Korean explaining why it fits the criteria (max 1 sentence)",
+      "description": "Appetizing description in Korean. If location provided, mention why it's good in that area (max 1 sentence)",
       "price": estimated_price_number_KRW,
       "tags": ["Tag1", "Tag2"]
     }`;
@@ -342,10 +348,16 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       
+      const locationContext = request.location 
+        ? `User Location: ${request.location}. Recommend a menu popular in this area.` 
+        : "Context: Lunch recommendation for a Korean user.";
+
       const prompt = `Recommend ONE specific lunch menu dish that STRICTLY matches these criteria:
       1. Category: ${getCategoryName(request.category)} (${request.category})
       2. Price Range: ${getPriceDescription(request.priceRange)}
       3. Spice Level: ${getSpiceDescription(request.spiceLevel)}
+      
+      * ${locationContext}
       
       Return strictly valid JSON (no markdown):
       { "name": "...", "englishQuery": "...", "description": "...", "price": 0, "tags": [...] }`;
