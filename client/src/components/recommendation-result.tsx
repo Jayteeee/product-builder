@@ -10,6 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { MapPin, Share2, Search, Map as MapIcon } from "lucide-react";
 import { compressData } from "@/lib/share-utils";
 import type { FoodRecommendation } from "@/lib/types";
@@ -37,43 +42,6 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       ? `https://map.naver.com/v5/search/${query}`
       : `https://map.kakao.com/link/search/${query}`;
     window.open(url, '_blank');
-  };
-
-  const handleShare = async () => {
-    // Collect all data into one object for compression
-    const dataToCompress = {
-      n: recommendation.name,
-      d: recommendation.description,
-      p: recommendation.price,
-      c: recommendation.category,
-      i: recommendation.imageUrl,
-      t: recommendation.tags || []
-    };
-
-    const compressed = await compressData(dataToCompress);
-    const shareUrl = `${window.location.origin}${window.location.pathname}#/?v=${compressed}`;
-
-    const shareData = {
-      title: '오늘뭐먹지? 🍱',
-      text: language === 'ko' 
-        ? `오늘 점심은 이걸로 정했어요! ✨\n\n🍴 메뉴: ${recommendation.name}\n💰 예상가격: ${recommendation.price.toLocaleString()}원\n💬 추천이유: ${recommendation.description}\n\n지금 바로 확인해보세요 👇`
-        : `I found the perfect lunch! ✨\n\n🍴 Menu: ${recommendation.name}\n💰 Price: ₩${recommendation.price.toLocaleString()}\n💬 Why: ${recommendation.description}\n\nCheck it out here 👇`,
-      url: shareUrl,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
-        toast({
-          title: language === 'ko' ? "링크 복사 완료" : "Link Copied",
-          description: language === 'ko' ? "클립보드에 링크가 복사되었습니다." : "Link has been copied to clipboard.",
-        });
-      }
-    } catch (err) {
-      console.error('Share failed', err);
-    }
   };
 
   const getImageUrls = (food: FoodRecommendation) => {
@@ -148,19 +116,20 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button 
-              variant="outline" 
-              className="w-full gap-2 border-primary/20 hover:bg-primary/5 h-12 rounded-xl transition-all" 
-              onClick={handleShare}
-            >
-              <Share2 className="w-4 h-4 text-primary" />
-              <span className="font-bold text-sm">{t('share_result')}</span>
-            </Button>
-          </div>
-          
-          {/* AddToAny Share Buttons */}
-          <div className="flex justify-center my-4">
-            <ShareButtons />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="w-full gap-2 border-primary/20 hover:bg-primary/5 h-12 rounded-xl transition-all"
+                >
+                  <Share2 className="w-4 h-4 text-primary" />
+                  <span className="font-bold text-sm">{t('share_result')}</span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-3" align="end">
+                <ShareButtons />
+              </PopoverContent>
+            </Popover>
           </div>
 
           {recommendation.tags && (

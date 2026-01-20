@@ -244,6 +244,16 @@ export default function Home() {
                 <Gamepad2 className="h-5 w-5" />
               </Button>
             </Link>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full hover:bg-accent border border-border/50">
+                  <Share2 className="h-5 w-5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-3" align="end">
+                <ShareButtons />
+              </PopoverContent>
+            </Popover>
             <Button variant="ghost" size="icon" onClick={toggleLang} className="rounded-full hover:bg-accent border border-border/50">
               <span className="text-xs font-bold">{language === "en" ? "EN" : "KO"}</span>
             </Button>
