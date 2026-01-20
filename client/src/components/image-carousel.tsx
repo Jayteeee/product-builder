@@ -6,9 +6,10 @@ interface ImageCarouselProps {
   images: string[];
   alt: string;
   className?: string;
+  showControls?: boolean;
 }
 
-export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
+export function ImageCarousel({ images, alt, className, showControls = true }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
@@ -41,12 +42,12 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
     setCurrentIndex(0); 
   };
 
-  // Auto-advance
+  // Auto-advance only if controls are enabled (implies full view)
   useEffect(() => {
-    if (validImages.length <= 1) return;
+    if (validImages.length <= 1 || !showControls) return;
     const interval = setInterval(nextImage, 5000);
     return () => clearInterval(interval);
-  }, [validImages.length]);
+  }, [validImages.length, showControls]);
 
   const isModalImage = className?.includes('modal-image');
 
@@ -55,7 +56,7 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
     return (
       <div className={cn("w-full h-48 bg-muted/30 flex flex-col items-center justify-center gap-2", className)}>
         <ImageOff className="w-8 h-8 text-muted-foreground/50" />
-        <span className="text-sm text-muted-foreground/70">이미지가 없습니다</span>
+        {showControls && <span className="text-sm text-muted-foreground/70">이미지가 없습니다</span>}
       </div>
     );
   }
@@ -81,8 +82,8 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
         onError={() => handleImageError(currentImageUrl)}
       />
       
-      {/* Navigation arrows - only show if more than 1 image */}
-      {validImages.length > 1 && (
+      {/* Navigation arrows - only show if more than 1 image AND controls enabled */}
+      {validImages.length > 1 && showControls && (
         <>
           <button
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
@@ -100,8 +101,8 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
         </>
       )}
       
-      {/* Dots indicator - only show if more than 1 image */}
-      {validImages.length > 1 && (
+      {/* Dots indicator - only show if more than 1 image AND controls enabled */}
+      {validImages.length > 1 && showControls && (
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
           {validImages.map((_, index) => (
             <button
@@ -116,8 +117,8 @@ export function ImageCarousel({ images, alt, className }: ImageCarouselProps) {
         </div>
       )}
       
-      {/* Image counter */}
-      {validImages.length > 1 && (
+      {/* Image counter - only show if controls enabled */}
+      {validImages.length > 1 && showControls && (
         <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
           {safeIndex + 1} / {validImages.length}
         </div>

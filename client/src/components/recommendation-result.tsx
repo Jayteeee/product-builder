@@ -182,12 +182,19 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             {alternatives.map((option) => (
               <div key={option.id} className="flex-shrink-0 bg-card border border-border/50 rounded-lg p-3 shadow-sm w-[140px] hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col">
                 <div className="relative h-20 w-full mb-2 overflow-hidden rounded bg-muted">
-                  {option.imageUrl ? (
+                  {getImageUrls(option).length > 0 ? (
                     <ImageModal
                       images={getImageUrls(option)}
                       alt={option.name}
                       trigger={
-                        <img src={option.imageUrl} alt={option.name} className="w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-500" />
+                        <div className="w-full h-full cursor-pointer hover:scale-110 transition-transform duration-500">
+                          <ImageCarousel 
+                            images={getImageUrls(option)} 
+                            alt={option.name} 
+                            className="w-full h-full" 
+                            showControls={false}
+                          />
+                        </div>
                       }
                     />
                   ) : (
