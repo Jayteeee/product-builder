@@ -196,6 +196,12 @@ export default function Home() {
     }, 500);
   };
 
+  const handleHistoryClick = (item: FoodRecommendation) => {
+    setRecommendation({ recommendation: item, alternatives: [] });
+    setCurrentStep(5);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const goBack = () => currentStep > 1 && setCurrentStep(currentStep - 1);
   const startOver = () => {
     setCurrentStep(1);
@@ -345,7 +351,8 @@ export default function Home() {
                   {history.map((item, idx) => (
                     <div 
                       key={idx} 
-                      className="flex items-center justify-between p-4 rounded-2xl bg-card/30 border border-border/40 hover:bg-card/50 hover:border-primary/20 transition-all cursor-default group shadow-sm"
+                      className="flex items-center justify-between p-4 rounded-2xl bg-card/30 border border-border/40 hover:bg-card/50 hover:border-primary/20 transition-all cursor-pointer group shadow-sm active:scale-95"
+                      onClick={() => handleHistoryClick(item)}
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-full bg-secondary/50 flex items-center justify-center text-xl shadow-inner">
