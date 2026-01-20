@@ -17,11 +17,13 @@ import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
 import { StructuredData } from "@/components/structured-data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp, History } from "lucide-react";
+import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp, History, Share2 } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
+import { ShareButtons } from "@/components/share-buttons";
 
 interface RecommendationResponse {
   recommendation: FoodRecommendation;
