@@ -1,10 +1,42 @@
+import { ImageCarousel } from "./image-carousel";
+import { ImageModal } from "./image-modal";
+import { useLanguage } from "@/components/language-provider";
+import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
+import { MapPin, Share2, Search, Map as MapIcon } from "lucide-react";
+import { compressData } from "@/lib/share-utils";
+import type { FoodRecommendation } from "@/lib/types";
 import { ShareButtons } from "./share-buttons";
+
+interface RecommendationResultProps {
+  recommendation: FoodRecommendation;
+  alternatives: FoodRecommendation[];
+  onSwapRecommendation: (newRec: FoodRecommendation, currentRec: FoodRecommendation) => void;
+}
 
 export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
   const { t, language } = useLanguage();
   const { toast } = useToast();
   
-  // ... (handleAlternativeClick and handleSearchMap remain same) ...
+  const handleAlternativeClick = (alternative: FoodRecommendation) => {
+    onSwapRecommendation(alternative, recommendation);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSearchMap = (type: 'naver' | 'kakao') => {
+    const query = encodeURIComponent(recommendation.name);
+    const url = type === 'naver' 
+      ? `https://map.naver.com/v5/search/${query}`
+      : `https://map.kakao.com/link/search/${query}`;
+    window.open(url, '_blank');
+  };
 
   const handleShare = async () => {
     // Collect all data into one object for compression
