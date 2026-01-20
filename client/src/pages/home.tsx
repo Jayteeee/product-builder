@@ -21,7 +21,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp, History, Share2 } from "lucide-react";
+import { useGeolocation } from "@/hooks/use-geolocation";
+import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp, History, Share2, MapPin } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 import { ShareButtons } from "@/components/share-buttons";
 
@@ -38,44 +39,28 @@ export default function Home() {
   const { theme, setTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
   const { toast } = useToast();
+  const { location, requestLocation } = useGeolocation();
   
   const [selections, setSelections] = useState<RecommendationRequest>({
     category: "korean",
     priceRange: "budget",
-    spiceLevel: "mild"
+    spiceLevel: "mild",
+    location: undefined
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  
-  const [shareUrl, setShareUrl] = useState<string>("");
-  const [shareTitle, setShareTitle] = useState<string>("");
 
-  // Update share URL when recommendation changes
+  // Automatically request location on mount or when starting
   useEffect(() => {
-    const updateShareUrl = async () => {
-      if (recommendation) {
-        const r = recommendation.recommendation;
-        const dataToCompress = {
-          n: r.name,
-          d: r.description,
-          p: r.price,
-          c: r.category,
-          i: r.imageUrl,
-          t: r.tags || []
-        };
-        const compressed = await compressData(dataToCompress);
-        const url = `${window.location.origin}${window.location.pathname}?v=${compressed}`;
-        setShareUrl(url);
-        setShareTitle(language === 'ko' 
-          ? `오늘뭐먹지? 추천 메뉴: ${r.name}` 
-          : `Lunch Picker Recommendation: ${r.name}`);
-      } else {
-        setShareUrl(window.location.href);
-        setShareTitle(language === 'ko' ? "오늘뭐먹지? - 점심 메뉴 추천" : "Lunch Picker - AI Menu Recommender");
-      }
-    };
-    updateShareUrl();
-  }, [recommendation, language]);
+    requestLocation();
+  }, []);
+
+  // Update selections when location address is resolved
+  useEffect(() => {
+    if (location.address) {
+      setSelections(prev => ({ ...prev, location: location.address }));
+    }
+  }, [location.address]);
 
   // Handle Shared Links and History
   useEffect(() => {
@@ -351,6 +336,21 @@ export default function Home() {
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-foreground mb-2">{t('category_title')}</h2>
               <p className="text-muted-foreground">{t('category_desc')}</p>
+              
+              {/* Location Status Indicator */}
+              {location.loaded && (
+                <div className="mt-4 flex items-center justify-center gap-1.5 animate-in fade-in slide-in-from-top-1">
+                  <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">
+                    <MapPin className="w-3 h-3" />
+                    <span>{location.address ? `${location.address} 주변 추천` : "위치 파악 불가"}</span>
+                  </div>
+                  {!location.address && (
+                    <Button variant="ghost" size="sm" className="h-6 px-2 text-[10px]" onClick={requestLocation}>
+                      재시도
+                    </Button>
+                  )}
+                </div>
+              )}
             </div>
             <div className="grid grid-cols-2 gap-4 mb-10">
               {CATEGORY_IDS.map((cat) => (
@@ -485,6 +485,7 @@ export default function Home() {
               onSwapRecommendation={handleSwapRecommendation}
               shareUrl={shareUrl}
               shareTitle={shareTitle}
+              currentLocation={location.address}
             />
             <div className="mt-8 px-2 step fade-in" style={{ animationDelay: '0.2s' }}>
               <Button 

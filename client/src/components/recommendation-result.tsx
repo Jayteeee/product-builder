@@ -26,9 +26,10 @@ interface RecommendationResultProps {
   onSwapRecommendation: (newRec: FoodRecommendation, currentRec: FoodRecommendation) => void;
   shareUrl?: string;
   shareTitle?: string;
+  currentLocation?: string;
 }
 
-export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation, shareUrl, shareTitle }: RecommendationResultProps) {
+export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation, shareUrl, shareTitle, currentLocation }: RecommendationResultProps) {
   console.log("Rendering RecommendationResult for:", recommendation.name);
   const { t, language } = useLanguage();
   const { toast } = useToast();
@@ -39,7 +40,12 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleSearchMap = (type: 'naver' | 'kakao') => {
-    const query = encodeURIComponent(recommendation.name);
+    // Incorporate current location into search query for better results
+    const searchQuery = currentLocation 
+      ? `${currentLocation} ${recommendation.name}`
+      : recommendation.name;
+      
+    const query = encodeURIComponent(searchQuery);
     const url = type === 'naver' 
       ? `https://map.naver.com/v5/search/${query}`
       : `https://map.kakao.com/link/search/${query}`;
