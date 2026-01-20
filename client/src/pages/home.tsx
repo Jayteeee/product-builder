@@ -270,7 +270,13 @@ export default function Home() {
       <header className="bg-card/80 backdrop-blur-sm border-b border-border/50 text-foreground p-4 sticky top-0 z-50 transition-colors duration-300">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold">{t('title')}</h1>
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity" 
+              onClick={startOver}
+            >
+              <img src="/favicon.svg" alt="Favicon" className="w-6 h-6" />
+              <h1 className="text-xl font-bold">{t('title')}</h1>
+            </div>
             <div className="text-sm opacity-90 flex items-center text-muted-foreground hidden sm:flex">
               <Clock className="w-3 h-3 mr-1" />
               <span>{currentTime}</span>
