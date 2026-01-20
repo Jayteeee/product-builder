@@ -305,6 +305,18 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
 
     console.log("Parsed Data:", parsedData);
 
+    // Validation
+    if (!parsedData.name) throw new Error("Missing name in response");
+    if (typeof parsedData.price !== 'number') {
+        if (typeof parsedData.price === 'string') {
+            parsedData.price = parseInt(parsedData.price.replace(/[^0-9]/g, ''), 10);
+        }
+        if (isNaN(parsedData.price)) parsedData.price = 0; // Fallback
+    }
+    if (!Array.isArray(parsedData.tags)) {
+        parsedData.tags = [];
+    }
+
     // Use the unified fetch function
     const imageUrls = await fetchFoodImages(parsedData.name, parsedData.englishQuery, request.category);
 
@@ -315,7 +327,7 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       priceRange: request.priceRange,
       spiceLevel: request.spiceLevel,
       price: parsedData.price,
-      description: parsedData.description,
+      description: parsedData.description || "맛있는 점심 메뉴입니다!",
       imageUrl: imageUrls[0] || null,
       imageUrls: imageUrls,
       tags: parsedData.tags,
@@ -359,6 +371,16 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
       const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsedData = JSON.parse(jsonStr);
       
+      // Validation for REST response
+      if (!parsedData.name) throw new Error("Missing name in response");
+      if (typeof parsedData.price !== 'number') {
+          if (typeof parsedData.price === 'string') {
+              parsedData.price = parseInt(parsedData.price.replace(/[^0-9]/g, ''), 10);
+          }
+          if (isNaN(parsedData.price)) parsedData.price = 0;
+      }
+      if (!Array.isArray(parsedData.tags)) parsedData.tags = [];
+
       // Use the unified fetch function
       const imageUrls = await fetchFoodImages(parsedData.name, parsedData.englishQuery, request.category);
 
@@ -369,7 +391,7 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
         priceRange: request.priceRange,
         spiceLevel: request.spiceLevel,
         price: parsedData.price,
-        description: parsedData.description,
+        description: parsedData.description || "맛있는 점심 메뉴입니다!",
         imageUrl: imageUrls[0] || null,
         imageUrls: imageUrls,
         tags: parsedData.tags,
