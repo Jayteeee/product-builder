@@ -4,8 +4,10 @@ import { Download, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/language-provider";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function PWAInstallPrompt() {
+  const isMobile = useIsMobile();
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -19,8 +21,6 @@ export function PWAInstallPrompt() {
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      // Slight delay to not annoy immediately on load
-      setTimeout(() => setIsVisible(true), 3000);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
@@ -29,6 +29,14 @@ export function PWAInstallPrompt() {
       window.removeEventListener("beforeinstallprompt", handler);
     };
   }, []);
+
+  useEffect(() => {
+    // Only show prompt if on mobile and we have a deferred prompt
+    if (isMobile && deferredPrompt && !isVisible && !isClosing) {
+      const timer = setTimeout(() => setIsVisible(true), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile, deferredPrompt, isVisible, isClosing]);
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
@@ -77,7 +85,7 @@ export function PWAInstallPrompt() {
     touchStartY.current = null;
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || !isMobile) return null;
 
   return createPortal(
     <div 
