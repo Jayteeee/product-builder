@@ -24,9 +24,11 @@ interface RecommendationResultProps {
   recommendation: FoodRecommendation;
   alternatives: FoodRecommendation[];
   onSwapRecommendation: (newRec: FoodRecommendation, currentRec: FoodRecommendation) => void;
+  shareUrl?: string;
+  shareTitle?: string;
 }
 
-export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation }: RecommendationResultProps) {
+export function RecommendationResult({ recommendation, alternatives, onSwapRecommendation, shareUrl, shareTitle }: RecommendationResultProps) {
   console.log("Rendering RecommendationResult for:", recommendation.name);
   const { t, language } = useLanguage();
   const { toast } = useToast();
@@ -42,6 +44,35 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
       ? `https://map.naver.com/v5/search/${query}`
       : `https://map.kakao.com/link/search/${query}`;
     window.open(url, '_blank');
+  };
+
+  const handleShare = async () => {
+    const url = shareUrl || window.location.href;
+    const title = shareTitle || (language === 'ko' ? '오늘뭐먹지? 🍱' : 'Lunch Picker 🍱');
+    
+    const text = language === 'ko' 
+        ? `오늘 점심은 이걸로 정했어요! ✨\n\n🍴 메뉴: ${recommendation.name}\n💰 예상가격: ${recommendation.price.toLocaleString()}원\n💬 추천이유: ${recommendation.description}\n\n지금 바로 확인해보세요 👇`
+        : `I found the perfect lunch! ✨\n\n🍴 Menu: ${recommendation.name}\n💰 Price: ₩${recommendation.price.toLocaleString()}\n💬 Why: ${recommendation.description}\n\nCheck it out here 👇`;
+
+    const shareData = {
+      title: title,
+      text: text,
+      url: url,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+        toast({
+          title: language === 'ko' ? "링크 복사 완료" : "Link Copied",
+          description: language === 'ko' ? "클립보드에 링크가 복사되었습니다." : "Link has been copied to clipboard.",
+        });
+      }
+    } catch (err) {
+      console.error('Share failed', err);
+    }
   };
 
   const getImageUrls = (food: FoodRecommendation) => {
@@ -127,7 +158,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-3" align="end">
-                <ShareButtons />
+                <ShareButtons url={shareUrl} title={shareTitle} />
               </PopoverContent>
             </Popover>
           </div>

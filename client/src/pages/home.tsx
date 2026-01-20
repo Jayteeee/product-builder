@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import { Helmet } from "react-helmet-async";
 import { getFoodRecommendation, getAlternativeRecommendations } from "@/lib/food-data";
 import { CATEGORY_IDS, PRICE_IDS, SPICE_IDS } from "@/lib/constants";
-import { decompressData } from "@/lib/share-utils";
+import { decompressData, compressData } from "@/lib/share-utils";
 import { StepProgress } from "@/components/step-progress";
 import { FoodCategoryCard } from "@/components/food-category-card";
 import { PriceOptionCard } from "@/components/price-option-card";
@@ -46,6 +46,36 @@ export default function Home() {
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  
+  const [shareUrl, setShareUrl] = useState<string>("");
+  const [shareTitle, setShareTitle] = useState<string>("");
+
+  // Update share URL when recommendation changes
+  useEffect(() => {
+    const updateShareUrl = async () => {
+      if (recommendation) {
+        const r = recommendation.recommendation;
+        const dataToCompress = {
+          n: r.name,
+          d: r.description,
+          p: r.price,
+          c: r.category,
+          i: r.imageUrl,
+          t: r.tags || []
+        };
+        const compressed = await compressData(dataToCompress);
+        const url = `${window.location.origin}${window.location.pathname}?v=${compressed}`;
+        setShareUrl(url);
+        setShareTitle(language === 'ko' 
+          ? `오늘뭐먹지? 추천 메뉴: ${r.name}` 
+          : `Lunch Picker Recommendation: ${r.name}`);
+      } else {
+        setShareUrl(window.location.href);
+        setShareTitle(language === 'ko' ? "오늘뭐먹지? - 점심 메뉴 추천" : "Lunch Picker - AI Menu Recommender");
+      }
+    };
+    updateShareUrl();
+  }, [recommendation, language]);
 
   // Handle Shared Links and History
   useEffect(() => {
@@ -259,7 +289,7 @@ export default function Home() {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-3" align="end">
-                <ShareButtons />
+                <ShareButtons url={shareUrl} title={shareTitle} />
               </PopoverContent>
             </Popover>
             <Button variant="ghost" size="icon" onClick={toggleLang} className="rounded-full hover:bg-accent border border-border/50">
@@ -447,6 +477,8 @@ export default function Home() {
               recommendation={recommendation.recommendation}
               alternatives={recommendation.alternatives}
               onSwapRecommendation={handleSwapRecommendation}
+              shareUrl={shareUrl}
+              shareTitle={shareTitle}
             />
             <div className="mt-8 px-2 step fade-in" style={{ animationDelay: '0.2s' }}>
               <Button 

@@ -9,7 +9,12 @@ declare global {
   }
 }
 
-function ShareButtonsComponent() {
+interface ShareButtonsProps {
+  url?: string;
+  title?: string;
+}
+
+function ShareButtonsComponent({ url, title }: ShareButtonsProps) {
   const isLoaded = useRef(false);
 
   useEffect(() => {
@@ -43,8 +48,23 @@ function ShareButtonsComponent() {
     }
   }, []);
 
+  // Re-initialize AddToAny when URL or title changes
+  useEffect(() => {
+    if (window.a2a && isLoaded.current) {
+      try {
+        window.a2a.init("page");
+      } catch (e) {
+        console.error("AddToAny re-init error", e);
+      }
+    }
+  }, [url, title]);
+
   return (
-    <div className="a2a_kit a2a_kit_size_32 a2a_default_style">
+    <div 
+      className="a2a_kit a2a_kit_size_32 a2a_default_style"
+      data-a2a-url={url}
+      data-a2a-title={title}
+    >
       <a className="a2a_dd" href="https://www.addtoany.com/share"></a>
       <a className="a2a_button_copy_link"></a>
       <a className="a2a_button_email"></a>
@@ -58,5 +78,5 @@ function ShareButtonsComponent() {
   );
 }
 
-// Memoize to prevent React from re-rendering this component and clashing with AddToAny's DOM changes
-export const ShareButtons = memo(ShareButtonsComponent, () => true);
+// Export memoized component
+export const ShareButtons = memo(ShareButtonsComponent);
