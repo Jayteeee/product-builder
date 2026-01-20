@@ -205,23 +205,25 @@ const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
 // Helper to fetch images from available sources
 async function fetchFoodImages(koreanName: string, englishQuery?: string, categoryId?: string): Promise<string[]> {
   // 1. Try Google Images first (Most accurate for specific dish)
-  // Optimization: Exclude commercial products, recipes, youtube thumbnails, and illustrations
-  const optimizedQuery = `${koreanName} 음식 -밀키트 -레시피 -유튜브 -youtube -thumbnail -일러스트 -벡터 -제품 -쇼핑 -가격`;
+  // Optimization: Exclude commercial products, recipes, people, and illustrations
+  const optimizedQuery = `${koreanName} 음식 -밀키트 -레시피 -유튜브 -youtube -thumbnail -일러스트 -벡터 -제품 -쇼핑 -가격 -사람 -얼굴 -인물 -먹는모습 -face -person -human`;
   const googleImages = await fetchGoogleImages(optimizedQuery); 
   if (googleImages.length > 0) return googleImages;
 
   // 2. Fallback to Pexels (Stock photos for specific dish)
-  const pexelsQuery = englishQuery ? `${englishQuery} food` : `${koreanName} food`;
+  const pexelsQuery = englishQuery 
+    ? `${englishQuery} food photography -person -face -man -woman` 
+    : `${koreanName} food photography -person -face -man -woman`;
   const pexelsImages = await fetchPexelsImages(pexelsQuery);
   if (pexelsImages.length > 0) return pexelsImages;
 
   // 3. Last Resort: Fetch Category Genre Image (e.g., "Korean Food", "Mexican Food")
   if (categoryId) {
     const categoryName = FOOD_CATEGORIES.find(c => c.id === categoryId)?.name || categoryId;
-    const categoryQuery = categoryId === 'korean' ? 'Korean Food' : 
-                          categoryId === 'mexican' ? 'Mexican Food' :
-                          categoryId === 'vietnamese' ? 'Vietnamese Food' :
-                          `${categoryName} food`;
+    const categoryQuery = categoryId === 'korean' ? 'Korean Food photography -person' : 
+                          categoryId === 'mexican' ? 'Mexican Food photography -person' :
+                          categoryId === 'vietnamese' ? 'Vietnamese Food photography -person' :
+                          `${categoryName} food photography -person`;
                           
     console.log(`Fetching category fallback image for: ${categoryQuery}`);
     const categoryImages = await fetchPexelsImages(categoryQuery);
