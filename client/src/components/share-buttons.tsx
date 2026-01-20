@@ -1,19 +1,43 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+
+declare global {
+  interface Window {
+    a2a?: {
+      init: (type: string) => void;
+    };
+    a2a_config?: any;
+  }
+}
 
 export function ShareButtons() {
-  useEffect(() => {
-    // Load AddToAny script
-    const script = document.createElement("script");
-    script.src = "https://static.addtoany.com/menu/page.js";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
+  const isLoaded = useRef(false);
 
-    return () => {
-      // Cleanup might be tricky as the script adds global variable a2a
-      // but usually fine to leave it or remove script tag
-      document.body.removeChild(script);
-    };
+  useEffect(() => {
+    // Configure AddToAny
+    window.a2a_config = window.a2a_config || {};
+    window.a2a_config.onclick = 1; // Enable click tracking if needed
+    window.a2a_config.num_services = 8; // Number of services to show
+
+    if (!document.getElementById("a2a-script")) {
+      const script = document.createElement("script");
+      script.id = "a2a-script";
+      script.src = "https://static.addtoany.com/menu/page.js";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        isLoaded.current = true;
+      };
+      document.body.appendChild(script);
+    } else if (window.a2a) {
+      // If script is already loaded, re-initialize
+      try {
+        window.a2a.init("page");
+      } catch (e) {
+        console.error("AddToAny init error", e);
+      }
+    }
+
+    // Cleanup not typically needed for this singleton script
   }, []);
 
   return (

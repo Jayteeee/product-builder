@@ -47,56 +47,59 @@ export default function Home() {
 
   // Handle Shared Links and History
   useEffect(() => {
-    const handleHashData = async () => {
+    const handleSharedData = async () => {
+      let params = new URLSearchParams(window.location.search);
       const hash = window.location.hash;
-      if (hash.includes('?')) {
-        const params = new URLSearchParams(hash.split('?')[1]);
-        
-        let sharedData: any = null;
+      
+      // Fallback to hash params if search params are empty but hash exists (old links)
+      if (Array.from(params).length === 0 && hash.includes('?')) {
+        params = new URLSearchParams(hash.split('?')[1]);
+      }
 
-        // 1. Try compressed data 'v'
-        const v = params.get('v');
-        if (v) {
-          sharedData = await decompressData(v);
-        } else {
-          // 2. Fallback to old format
-          const n = params.get('n');
-          const d = params.get('d');
-          if (n && d) {
-            sharedData = {
-              n, d, 
-              p: params.get('p'),
-              c: params.get('c'),
-              i: params.get('i'),
-              t: params.get('t')?.split(',') || []
-            };
-          }
-        }
+      let sharedData: any = null;
 
-        if (sharedData && sharedData.n && sharedData.d) {
-          const sharedRec: FoodRecommendation = {
-            id: Date.now(),
-            name: sharedData.n,
-            description: sharedData.d,
-            price: parseInt(sharedData.p || '0'),
-            category: sharedData.c || 'korean',
-            imageUrl: sharedData.i || null,
-            imageUrls: sharedData.i ? [sharedData.i] : [],
-            spiceLevel: 'mild',
-            priceRange: 'moderate',
-            tags: sharedData.t || [],
-            isAiGenerated: true
+      // 1. Try compressed data 'v'
+      const v = params.get('v');
+      if (v) {
+        sharedData = await decompressData(v);
+      } else {
+        // 2. Fallback to old format
+        const n = params.get('n');
+        const d = params.get('d');
+        if (n && d) {
+          sharedData = {
+            n, d, 
+            p: params.get('p'),
+            c: params.get('c'),
+            i: params.get('i'),
+            t: params.get('t')?.split(',') || []
           };
-          setRecommendation({ recommendation: sharedRec, alternatives: [] });
-          setCurrentStep(5);
-          return true;
         }
+      }
+
+      if (sharedData && sharedData.n && sharedData.d) {
+        const sharedRec: FoodRecommendation = {
+          id: Date.now(),
+          name: sharedData.n,
+          description: sharedData.d,
+          price: parseInt(sharedData.p || '0'),
+          category: sharedData.c || 'korean',
+          imageUrl: sharedData.i || null,
+          imageUrls: sharedData.i ? [sharedData.i] : [],
+          spiceLevel: 'mild',
+          priceRange: 'moderate',
+          tags: sharedData.t || [],
+          isAiGenerated: true
+        };
+        setRecommendation({ recommendation: sharedRec, alternatives: [] });
+        setCurrentStep(5);
+        return true;
       }
       return false;
     };
 
     const runInit = async () => {
-      const hasSharedData = await handleHashData();
+      const hasSharedData = await handleSharedData();
       if (!hasSharedData) {
         const saved = localStorage.getItem("recommendation_history");
         if (saved) {
@@ -111,8 +114,13 @@ export default function Home() {
 
     runInit();
 
-    window.addEventListener('hashchange', handleHashData);
-    return () => window.removeEventListener('hashchange', handleHashData);
+    // Listen to both hashchange (for old links) and popstate (for clean URLs)
+    window.addEventListener('hashchange', handleSharedData);
+    window.addEventListener('popstate', handleSharedData);
+    return () => {
+      window.removeEventListener('hashchange', handleSharedData);
+      window.removeEventListener('popstate', handleSharedData);
+    };
   }, []);
 
   const saveToHistory = (item: FoodRecommendation) => {
@@ -191,9 +199,10 @@ export default function Home() {
     setCurrentStep(1);
     setRecommendation(null);
     setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
-    // Clear URL parameters if any
-    if (window.location.hash.includes('?')) {
-      window.location.hash = '#/';
+    
+    // Clear URL parameters properly using history API
+    if (window.location.search || window.location.hash) {
+      window.history.pushState({}, '', '/');
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

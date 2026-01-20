@@ -10,6 +10,40 @@ import About from "@/pages/about";
 import Privacy from "@/pages/privacy";
 import RPS from "@/pages/rps";
 import NotFound from "@/pages/not-found";
+import React, { Component, ErrorInfo, ReactNode } from "react";
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Uncaught error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
+          <h1 className="text-2xl font-bold mb-4">Something went wrong.</h1>
+          <button 
+            className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90"
+            onClick={() => window.location.reload()}
+          >
+            Reload Page
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 function AppRouter() {
   return (
@@ -25,16 +59,18 @@ function AppRouter() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <LanguageProvider defaultLanguage="ko" storageKey="lunch_lang">
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <AppRouter />
-          </TooltipProvider>
-        </QueryClientProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <LanguageProvider defaultLanguage="ko" storageKey="lunch_lang">
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <Toaster />
+              <AppRouter />
+            </TooltipProvider>
+          </QueryClientProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
