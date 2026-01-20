@@ -59,10 +59,10 @@ export const translations = {
     budget: "저렴한 가격", moderate: "적당한 가격", premium: "프리미엄",
     mild: "순한맛", medium: "보통맛", hot: "매운맛",
     
-    seo_title_1: "🤔 점심 메뉴, 왜 고르기 힘들까요?",
-    seo_desc_1: "'점심 메뉴 결정 장애'는 현대 직장인들이 겪는 흔한 고민 중 하나입니다. 너무 많은 선택지는 오히려 결정을 어렵게 만들고, 오전 업무로 지친 뇌에게 추가적인 스트레스를 줍니다. 저희 AI 추천기가 여러분의 고민을 덜어드립니다.",
-    seo_title_2: "🥗 건강한 점심 식사를 위한 팁",
-    seo_desc_2: "점심은 오후의 에너지를 결정하는 중요한 식사입니다. 단백질과 복합 탄수화물, 그리고 채소를 곁들인 균형 잡힌 식사를 추천합니다."
+    seo_title_1: "Q. 점심 메뉴를 고르는 것이 왜 이렇게 힘들까요?",
+    seo_desc_1: "현대인의 '결정 피로(Decision Fatigue)' 때문입니다. 오전 업무로 지친 뇌가 수많은 식당과 메뉴 사이에서 최적의 선택을 하려고 할 때 스트레스를 받습니다. '오늘뭐먹지?'는 이 과정을 단순화하여, AI가 사용자 취향에 맞는 최적의 한 끼를 즉시 제안함으로써 뇌의 부담을 줄여줍니다.",
+    seo_title_2: "Q. AI 추천 메뉴는 믿을 수 있나요?",
+    seo_desc_2: "네, 물론입니다. 저희 알고리즘은 사용자가 선택한 카테고리(한식, 중식, 일식 등), 가격대, 매운맛 정도를 종합적으로 분석하여 데이터베이스 내 수백 가지 메뉴 중 가장 적합한 음식을 선별합니다. 단순히 무작위로 뽑는 것이 아니라, 여러분의 현재 기분과 상황에 딱 맞는 '맞춤형 점심'을 추천해 드립니다."
   },
   en: {
     title: "Lunch Picker",
@@ -124,10 +124,10 @@ export const translations = {
     budget: "Budget", moderate: "Moderate", premium: "Premium",
     mild: "Mild", medium: "Medium", hot: "Hot",
 
-    seo_title_1: "🤔 Why is choosing lunch so hard?",
-    seo_desc_1: "'Lunch Menu Decision Fatigue' is common. Too many choices cause stress. Our AI recommender helps you make quick and satisfying decisions.",
-    seo_title_2: "🥗 Tips for a Healthy Lunch",
-    seo_desc_2: "Lunch determines your afternoon energy. We recommend a balanced meal with protein, complex carbs, and vegetables."
+    seo_title_1: "Q. Why is choosing lunch so difficult?",
+    seo_desc_1: "It's due to 'Decision Fatigue'. Your brain gets tired from morning work and stressed by too many choices. 'Lunch Picker' simplifies this by using AI to suggest the perfect meal based on your preferences, relieving your brain's burden instantly.",
+    seo_title_2: "Q. Can I trust the AI recommendations?",
+    seo_desc_2: "Absolutely. Our algorithm analyzes your selected category, budget, and spice preference to pick the best match from hundreds of options. It's not just random; it's a 'tailored lunch' for your current mood."
   }
 };
 
