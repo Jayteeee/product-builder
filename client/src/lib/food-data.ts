@@ -601,10 +601,8 @@ const baseItems = [
     description: "취향대로 골라 담는 얼큰하고 얼얼한 맛", 
     tags: ["🌋 매운맛", "🔥 중독성", "🍜 마라"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/5/5c/Malatang_ingredient_selection_counter_at_Xiaogu_Spicy_Hot_Pot_%2820220216140925%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/42/Malatang_with_Tianshui_flavor_in_Suzhou-20240411.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/8f/Malatang_from_Hope_Tree_%2820220226172344%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/78/Malatang_ingredient_selection_counter_at_Xiaogu_Spicy_Hot_Pot_%2820220216141919%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/1d/Spicy_Hot_Pot.jpg"
     ]
   },
@@ -614,10 +612,7 @@ const baseItems = [
     tags: ["🌶️🌶️ 보통맛", "🍞 꽃빵", "🥩 고기요리"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pepper_steak.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/fd/Green_pepper_steak_%28%E9%9D%92%E6%A4%92%E8%82%89%E7%B5%B2%29_%2826880875325%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/e/ee/Pepper_steak_set_meal_of_Matsuya.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/a/a1/Pepper_Steak_%282225347845%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ch%C4%81han_with_chinese_pepper_steak_topping_%3F%2C_Gansen%2C_Sotokanda_3_%28%E9%9D%92%E6%A4%92%E8%82%89%E7%B5%B2%E3%81%AE%E3%81%9B%E7%82%92%E9%A3%AF%3F%2C_%E9%9B%81%E5%B7%9D%2C_%E5%A4%96%E7%A5%9E%E7%94%B03%29_%282011-06-22_21.28.29_by_yuiseki_aoba%29.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/f/fd/Green_pepper_steak_%28%E9%9D%92%E6%A4%92%E8%82%89%E7%B5%B2%29_%2826880875325%29.jpg"
     ]
   },
 
@@ -627,9 +622,7 @@ const baseItems = [
     description: "바삭한 튀김옷 속 두툼한 돼지고기", 
     tags: ["🍖 고기", "🥛 순한맛", "🍱 일식"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Kimjoon2020.png",
       "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tonkatsu_of_Kimukatsu.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/3/38/Tonkatsu_mashita_spb.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/ba/Tonkatsu_mit_asiatischem_Krautsalat%2C_Reis_und_Tonkatsusauce.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/6/62/Tonkatsu_by_ayustety_in_Tokyo.jpg"
     ]
@@ -675,11 +668,7 @@ const baseItems = [
     description: "입안에서 살살 녹는 연어 덮밥", 
     tags: ["🍣 연어", "🍚 덮밥", "🥛 부드러운"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/6/63/Chum_salmon%2Csake-ikura-don%2Csyari-town%2Cjapan.JPG",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c2/Don_Ventura_Stream_Mural_%28Nesui_and_Sake_Ink%2C_2024%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/a/af/Sake_Yaki_Don_-_Ishikai_AUD9.50_%282369841315%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Nikola_Tesla%2C_with_his_equipment_EDIT.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/92/Local_nail_cuter_equipment.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/6/63/Chum_salmon%2Csake-ikura-don%2Csyari-town%2Cjapan.JPG"
     ]
   },
   { 
@@ -688,10 +677,7 @@ const baseItems = [
     tags: ["🍜 면요리", "🥛 순한맛", "💰 가성비"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/b/ba/Udon_by_udono.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/03/Udon_dishes_01.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Shabu_shabu_udon_in_Tokyo.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/0d/Udon_Tofu.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/8/87/Various_types_of_noodles-_Spaghetti%2C_somen%2C_udon%2C_fedelini%2C_soba.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Shabu_shabu_udon_in_Tokyo.jpg"
     ]
   },
   { 
@@ -723,11 +709,7 @@ const baseItems = [
     description: "바삭한 모듬 튀김이 올라간 덮밥", 
     tags: ["🥟 바삭함", "🍚 덮밥", "🥛 순한맛"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gray_%E2%80%94_musculus_rectus_capitis_posterior_major.png",
-      "https://upload.wikimedia.org/wikipedia/commons/2/25/Tendon_one_meal.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/da/Rectus_capitis_posterior_major_muscle_lateral.png",
-      "https://upload.wikimedia.org/wikipedia/commons/9/98/Rectus_capitis_posterior_major_muscle_back2.png",
-      "https://upload.wikimedia.org/wikipedia/commons/9/9a/Rectus_capitis_posterior_major_muscle_back.png"
+      "https://upload.wikimedia.org/wikipedia/commons/2/25/Tendon_one_meal.jpg"
     ]
   },
   { 
