@@ -1290,7 +1290,192 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/e/e5/Thai_green_chicken_curry_and_roti.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/da/Yellow_curry_and_green_curry_-_Nok_Nok_Kitchen_at_The_Cow_2025-09-30.jpg"
     ]
-  }
+  },
+  // --- ADDED MISSING COMBOS ---
+  // Asian
+  { id: 141, name: "계란 볶음밥", category: "asian", priceRange: "budget", spiceLevel: "mild", price: 8000, description: "고소하고 담백한 동남아식 계란 볶음밥", tags: ["🥛 순한맛", "🍚 볶음밥"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/f0/Fried_rice_with_egg.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d5/Kimchi_Fried_Rice%2C_Farm_Egg.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/b/b2/Fried_Rice_with_Egg_and_Dalmote.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/7/73/Special_fried_rice_with_sunny-side_egg_and_satay%3B_January_2011.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2c/Fried_rice_with_sunny-side_egg%2C_chicken%2C_and_satay%3B_December_2018.jpg"
+  ] },
+  { id: 142, name: "팟카파우무쌉", category: "asian", priceRange: "budget", spiceLevel: "medium", price: 9000, description: "태국 국민 메뉴, 돼지고기 바질 볶음밥", tags: ["🌶️🌶️ 보통맛", "🍚 덮밥"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/a/a4/Kraphao_mu_khai_dao.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ae/Basil_fried_crispy_pork_with_rice_-_Chiang_Mai_-_2017-07-11_%28002%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/6/69/2017_0426_Mu_krop_phat_kaphrao_khai_dao_rat_khao_in_Ayutthaya.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/32/2019_02_Mu_krop_phat_kraphao.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/48/Kao_Rad_Pad_Kra-pao_-_Unithai_2023-07-08.jpg"
+  ] },
+  { id: 143, name: "매운 태국식 볶음면", category: "asian", priceRange: "budget", spiceLevel: "hot", price: 9500, description: "화끈한 불맛의 태국식 볶음 국수", tags: ["🌋 매운맛", "🍜 면요리"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/5/5b/Sen_yai_phat_khi_mao.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Drunken_Noodles.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/eb/Drunken_noodles%2C_Aiyara%2C_Montparnasse%2C_Paris_001.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Drunken_noodles%2C_Aiyara%2C_Montparnasse%2C_Paris_002.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/05/Thai_Drunken_Spaghetti_Pad_Kee_Mao.jpg"
+  ] },
+  { id: 144, name: "상하이 스파이시 누들", category: "asian", priceRange: "moderate", spiceLevel: "hot", price: 13000, description: "매콤한 소스가 일품인 아시안 볶음면", tags: ["🌋 매운맛", "🍜 면요리"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/d/d0/Shanghaifriednoodles.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/0f/ShanghaiFriedNoodlesAsianLegend.JPG",
+    "https://upload.wikimedia.org/wikipedia/commons/4/46/Making_of_chinese_noodles_5166105.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/43/Pan-Fried_Shanghai_Noodles.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/45/Easy_Soy_Sauce_Noodles_%E9%99%BD%E6%98%A5%E9%BA%B5_%282%29.jpg"
+  ] },
+  { id: 145, name: "나시고랭 프리미엄", category: "asian", priceRange: "premium", spiceLevel: "medium", price: 16000, description: "고급 해산물이 듬뿍 들어간 인도네시아 볶음밥", tags: ["🌶️🌶️ 보통맛", "💎 프리미엄"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/fb/Nasi_goreng.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/b/b3/Nasi_Goreng_Ikan_Asin.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nasi_goreng_indonesia.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/46/Nasi_Goreng_Kampung.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/08/Nasi_goreng_2.jpg"
+  ] },
+  // Japanese
+  { id: 146, name: "매운 규동", category: "japanese", priceRange: "budget", spiceLevel: "medium", price: 9500, description: "매콤한 양념으로 입맛 돋우는 소고기 덮밥", tags: ["🌶️🌶️ 보통맛", "🍚 덮밥"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/f1/%E3%82%AD%E3%83%A0%E3%83%81%E7%89%9B%E4%B8%BC%2C_%E3%81%99%E3%81%8D%E5%AE%B6%2C_%E6%9D%B1%E6%B1%A0%E8%A2%8B%E5%BA%97%2C_%E6%9D%B1%E4%BA%AC%2C_%E6%97%A5%E6%9C%AC%2C_Dinner%2C_Tokyo%2C_Japan_%2813748900233%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/fd/Sukiya_Spicy_Tomato_%26_Lettuce_beef_bowl.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/1d/Sukiya_white_hair_green_onion_beef_bowl_%28good_spicy_sauce%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/8b/Matsuya_Foods_Extra_Meat_Of_BBQ_Beef_Rice_Bowl_Regular_Spicy_sauce.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/06/Matsuya_Foods_Beef_Steak_Bowl_%28Spicy_Japone_Sauce%29.jpg"
+  ] },
+  { id: 147, name: "카라쿠치 라멘", category: "japanese", priceRange: "budget", spiceLevel: "hot", price: 9500, description: "얼큰하고 진한 매운맛의 일본식 라멘", tags: ["🌋 매운맛", "🍜 라멘"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/fd/Hot_Chicken_Flavor_Ramen_after_boiling.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ab/Buldak_Ramen_20210114_002.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/04/Buldak_Ramen_20210114_001.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/1c/Buldak_Ramen_20210114_003.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/85/Buldak_Ramen_20210114_004.jpg"
+  ] },
+  { id: 148, name: "특상 매콤 돈카츠", category: "japanese", priceRange: "premium", spiceLevel: "medium", price: 18000, description: "최고급 등심과 매콤한 특제 소스의 만남", tags: ["🌶️🌶️ 보통맛", "🍖 돈카츠"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/6/62/Tonkatsu_by_ayustety_in_Tokyo.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tonkatsu_of_Kimukatsu.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Japanese_set_meal_with_tonkatsu.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/9/98/Tonkatsu_003.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/9/99/Tonkatsu_004.jpg"
+  ] },
+  { id: 149, name: "스파이시 참치 롤 세트", category: "japanese", priceRange: "premium", spiceLevel: "hot", price: 25000, description: "매콤한 참치와 신선한 재료가 어우러진 롤", tags: ["🌋 매운맛", "🍣 초밥"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/f1/Spicytunahandroll.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/3e/Spicy_Tuna_Hand_Roll.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/7/79/Crunchy_Spicy_Tuna%2C_big_eye_tuna%2C_shiso_panko%2C_togarashi_%28%2421%29_%2832807112472%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d8/Tuna_roll_with_glazed_shrimp%2C_ginger_and_wasabi.jpg"
+  ] },
+  // Mexican
+  { id: 150, name: "스파이시 치킨 타코", category: "mexican", priceRange: "budget", spiceLevel: "hot", price: 9500, description: "화끈한 멕시칸 소스로 맛을 낸 치킨 타코", tags: ["🌋 매운맛", "🌮 타코"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/6/64/Koreantacos1.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/Chino%27s_Taqueria_Spicy_Chicken_Soft_Taco_%2830015368921%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c4/Taco_Bell_Spicy_Chicken_Crunchwrap_Slider_%2815967202938%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/6/68/Taco_Bell_Spicy_Chicken_Cool_Ranch_Doritos_Locos_Taco_Goo_%2814144208896%29.jpg"
+  ] },
+  { id: 151, name: "핫 비프 부리또", category: "mexican", priceRange: "moderate", spiceLevel: "hot", price: 13000, description: "매콤한 소고기와 할라피뇨가 듬뿍", tags: ["🌋 매운맛", "🌯 부리또"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/2/21/Taco_Bell_Triple_Melt_Burrito_opened_%2839453237380%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/a2/Taco_Bell_Beefy_Fritos_Burrito_%2815401861800%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/1f/Insides_-_Original_Burrito_-_Salsas_Mexican_Grill_%284982696384%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/34/Taco_i_Burrito_a_Val%C3%A8ncia.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/40/Cascabel_-_October_2022_-_Sarah_Stierch_05.jpg"
+  ] },
+  { id: 152, name: "스테이크 파히타", category: "mexican", priceRange: "premium", spiceLevel: "mild", price: 28000, description: "고소한 스테이크와 구운 야채를 즐기는 요리", tags: ["🥛 순한맛", "🥩 스테이크"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/4/4c/USMC-051215-M-6508B-028.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/a1/Taqueria_La_Hacienda_-_Stierch_-_May_2019_05.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ac/La_Hacienda_Mexican_Grill_-_Stierch_-_Sept_2019_01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/f6/Lunch_steak_fajita%2C_El_Cazador.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Steak_Fajita_Quesadilla%2C_San_Judas_Tadeo_Restaurant%2C_Lowndes_County.jpg"
+  ] },
+  { id: 153, name: "새우 퀘사디아 플래터", category: "mexican", priceRange: "premium", spiceLevel: "medium", price: 24000, description: "탱글한 새우와 치즈가 가득한 퀘사디아", tags: ["🌶️🌶️ 보통맛", "🍤 새우"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/d/dd/06_Shrimp_Quesadilla_-_Fresco_Tortilla.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e3/Gulf_Shrimp_and_mushroom_quesadilla_with_burnt_tomato_chile%2C_Oaxacan_cheese%2C_market_greens%2C_pistachio.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/7/7b/Gulf_Shrimp_and_mushroom_quesadilla_with_burnt_tomato_chile%2C_Oaxacan_cheese%2C_market_greens%2C_pistachio_-_16514863227.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e6/Los_Gallitos_-_October_2022_-_Sarah_Stierch_11.jpg"
+  ] },
+  // Street
+  { id: 154, name: "김떡순 세트", category: "street", priceRange: "moderate", spiceLevel: "mild", price: 12000, description: "김밥, 떡볶이, 순대를 한 번에 즐기는 실속 세트", tags: ["🥛 순한맛", "🍢 분식"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Homemade_hot_and_spicy_rice_cake.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Korean.snacks-Tteokbokki-08.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/0e/Gimbap_%28pixabay%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/88/Gimbap_8.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e4/Korean_blood_sausage-Sundae-01.jpg"
+  ] },
+  { id: 155, name: "스페셜 떡볶이 세트", category: "street", priceRange: "moderate", spiceLevel: "medium", price: 14000, description: "다양한 토핑이 올라간 푸짐한 떡볶이 세트", tags: ["🌶️🌶️ 보통맛", "🍢 분식"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Homemade_hot_and_spicy_rice_cake.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Korean.snacks-Tteokbokki-08.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Korean.snacks-Tteokbokki-01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/b/ba/Tteokbokki_in_korea.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/01/Tteokbokki_Dukki_Berlin.jpg"
+  ] },
+  { id: 157, name: "명품 수제 튀김 플래터", category: "street", priceRange: "premium", spiceLevel: "mild", price: 18000, description: "장인이 직접 만든 고품격 수제 튀김", tags: ["🥛 순한맛", "🥟 바삭함"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/fd/Korean.cuisine-Goguma_twigim-01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/50/Korea-Sokcho-Daepo_Port-Twigim_and_Ojingeo_sundae-01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ojingeo-twigim_and_gochu-twigim.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/f9/Gim-mari-twigim_2.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/7/76/Saeu-twigim.jpg"
+  ] },
+  { id: 158, name: "프리미엄 분식 코스", category: "street", priceRange: "premium", spiceLevel: "medium", price: 25000, description: "최고급 재료로 재탄생한 분식 요리", tags: ["🌶️🌶️ 보통맛", "💎 고급"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Korean.snacks-Tteokbokki-08.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/0e/Gimbap_%28pixabay%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/42/Korean.food-Sundae-01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/f9/Gim-mari-twigim_2.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c5/Korean.snacks-Tteokbokki-01.jpg"
+  ] },
+  // Vietnamese
+  { id: 160, name: "매운 반미 샌드위치", category: "vietnamese", priceRange: "budget", spiceLevel: "medium", price: 8500, description: "매콤한 소스가 더해진 베트남식 샌드위치", tags: ["🌶️🌶️ 보통맛", "🥖 반미"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/1/19/B%C3%A1nh_m%C3%AC.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/b/b8/Vietnamese_B%C3%A1nh_m%C3%AC_%28Banh_Mi%29_Sandwich.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/6/6c/B%C3%A1nh_m%C3%AC_th%E1%BB%8Bt_ngu%E1%BB%99i.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e5/B%C3%A1nh_m%C3%AC_k%E1%BA%B9p_b%C3%A1nh_l%E1%BB%8Dc_%E1%BB%9F_%C4%90%C3%B4ng_H%C3%A0_n%C4%83m_2018.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/a8/B%C3%A1nh_m%C3%AC_than_tre_Vi%E1%BB%87t_Nam_20201205.jpg"
+  ] },
+  { id: 161, name: "핫 스파이시 쌀국수", category: "vietnamese", priceRange: "budget", spiceLevel: "hot", price: 9500, description: "얼큰한 국물로 해장까지 가능한 쌀국수", tags: ["🌋 매운맛", "🍜 쌀국수"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/fa/Bun_Bo_Hue_1.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/00/Bun-Bo-Hue-from-Huong-Giang-2011.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/ee/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_minh28397.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/fc/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_%E1%BB%9F_%C4%90%C3%A0_N%E1%BA%B5ng.jpg"
+  ] },
+  { id: 162, name: "매콤 비빔 쌀국수", category: "vietnamese", priceRange: "moderate", spiceLevel: "medium", price: 11000, description: "입맛 돋우는 매콤달콤한 비빔 쌀국수", tags: ["🌶️🌶️ 보통맛", "🍜 면요리"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/3/3b/Vietnamese_grilled_pork_with_rice_noodles_and_fish_sauce.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/81/B%C3%BAn_tr%E1%BB%99n%2C_James_Bun%2C_Paris_27_August_2016_001.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d3/Bun_tron%2C_Pho_Won%2C_Paris_002.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/59/Bun_Bo_Nam_Bo.jpg"
+  ] },
+  { id: 163, name: "왕갈비 프리미엄 쌀국수", category: "vietnamese", priceRange: "premium", spiceLevel: "mild", price: 18000, description: "커다란 왕갈비가 통째로 들어간 보양 쌀국수", tags: ["🥛 순한맛", "🥩 보양식"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/2/2c/Galbi-tang_2.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/88/Korean_soup-Galbitang-01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/b/bb/Galbi-tang_1.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/3b/Neungi-jeonbok-galbi-tang_2.jpg"
+  ] },
+  { id: 164, name: "특선 해물 매운 쌀국수", category: "vietnamese", priceRange: "premium", spiceLevel: "medium", price: 17000, description: "신선한 해산물과 매콤한 국물의 조화", tags: ["🌶️🌶️ 보통맛", "🦐 해산물"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/6/66/Seafood_noodle_soup_Opelika_Alabama.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/7/74/Seafood_and_pork_soup_pasta.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c2/Pasta_soup_with_seafood_and_pork_in_close_up.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Yummy_Taiwanese_Seafood_Soup.jpg"
+  ] },
+  { id: 165, name: "황제 분보후에", category: "vietnamese", priceRange: "premium", spiceLevel: "hot", price: 20000, description: "베트남 황실의 맛, 진하고 매콤한 소고기 국수", tags: ["🌋 매운맛", "🍜 면요리"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/f/fa/Bun_Bo_Hue_1.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/00/Bun-Bo-Hue-from-Huong-Giang-2011.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/ee/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_minh28397.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/fc/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_%E1%BB%9F_%C4%90%C3%A0_N%E1%BA%B5ng.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/01/B%C3%BAn_b%C3%B2_Hu%E1%BA%BF_%2820201109%29.jpg"
+  ] },
+  // Western
+  { id: 166, name: "핫 치킨 버거", category: "western", priceRange: "budget", spiceLevel: "medium", price: 8500, description: "매콤한 치킨 패티와 부드러운 번", tags: ["🌶️🌶️ 보통맛", "🍔 버거"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/d/d4/BK_Spicy_Chick%27n_Crisp.JPG",
+    "https://upload.wikimedia.org/wikipedia/commons/5/54/2020-03-25_20_29_59_A_Spicy_Chicken_Sandwich_from_Wendy%27s_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/f/ff/Chicken_Burger_With_French_Fries.jpg"
+  ] },
+  { id: 167, name: "스파이시 토마토 파스타", category: "western", priceRange: "budget", spiceLevel: "hot", price: 9500, description: "저렴한 가격에 즐기는 화끈한 토마토 파스타", tags: ["🌋 매운맛", "🍝 파스타"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/a/aa/Pasta_Indiano.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d2/Pasta_bake.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e7/Pasta_with_Calamari%2C_Mussels_%26_Prawns_in_a_spicy_tomato_sauce._%2843496515810%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/5a/Pasta_with_Calamari%2C_Mussels_%26_Prawns_in_a_spicy_tomato_sauce._%2843496515800%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/6/66/P_20210220_135808_1.jpg"
+  ] },
+  { id: 168, name: "매콤한 안심 스테이크", category: "western", priceRange: "premium", spiceLevel: "medium", price: 42000, description: "부드러운 안심과 매콤한 페퍼 소스", tags: ["🌶️🌶️ 보통맛", "🥩 스테이크"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/9/96/Chateaubriand_%281%29.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/4c/Image_of_freshly_prepared_chateaubriand_steak_in_the_traditional_style.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ad/Overcooked_medium_rare_-_Beef_Tenderloin_-_Guillaume_at_Bennelong_-_By_Julia.jpg"
+  ] },
+  { id: 169, name: "버팔로 윙 & 립 플래터", category: "western", priceRange: "premium", spiceLevel: "hot", price: 35000, description: "화끈한 양념의 윙과 립 세트", tags: ["🌋 매운맛", "🍖 고기요리"], imageUrls: [
+    "https://upload.wikimedia.org/wikipedia/commons/8/81/Homemade_buffalo_wings.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/11/Coast_Guard_buffalo_chicken_wings.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/51/Buffalo_wings-01.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/3/3b/BBQ_RIBS_pork_side_ribs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/b/bb/Dallas_BBQ_-_BBQ_Ribs_%26_Chicken_Combo_%2843645663714%29.jpg"
+  ] }
 ];
 
 type BaseItem = (typeof baseItems)[number];
@@ -1434,7 +1619,34 @@ const ENGLISH_FOOD_QUERIES: Record<string, string[]> = {
   "부리또": ["Burrito"],
   "퀘사디아": ["Quesadilla"],
   "나초 플래터": ["Nachos platter", "Nachos"],
-  "엔칠라다": ["Enchilada"]
+  "엔칠라다": ["Enchilada"],
+  "계란 볶음밥": ["Egg Fried Rice"],
+  "팟카파우무쌉": ["Pad Krapow Moo Saap", "Thai Basil Pork"],
+  "매운 태국식 볶음면": ["Spicy Thai Stir-fried Noodles", "Pad Kee Mao"],
+  "상하이 스파이시 누들": ["Shanghai Spicy Noodles"],
+  "나시고랭 프리미엄": ["Premium Nasi Goreng"],
+  "매운 규동": ["Spicy Gyudon", "Spicy Beef Bowl"],
+  "카라쿠치 라멘": ["Karakuchi Ramen", "Spicy Ramen"],
+  "특상 매콤 돈카츠": ["Premium Spicy Tonkatsu"],
+  "스파이시 참치 롤 세트": ["Spicy Tuna Roll Set"],
+  "스파이시 치킨 타코": ["Spicy Chicken Tacos"],
+  "핫 비프 부리또": ["Hot Beef Burrito"],
+  "스테이크 파히타": ["Steak Fajitas"],
+  "새우 퀘사디아 플래터": ["Shrimp Quesadilla Platter"],
+  "김떡순 세트": ["Gimbap Tteokbokki Sundae Set"],
+  "스페셜 떡볶이 세트": ["Special Tteokbokki Set"],
+  "명품 수제 튀김 플래터": ["Premium Handmade Fritters Platter"],
+  "프리미엄 분식 코스": ["Premium Street Food Course"],
+  "매운 반미 샌드위치": ["Spicy Banh Mi Sandwich"],
+  "핫 스파이시 쌀국수": ["Hot Spicy Pho"],
+  "매콤 비빔 쌀국수": ["Spicy Mixed Rice Noodles"],
+  "왕갈비 프리미엄 쌀국수": ["Premium King Rib Pho"],
+  "특선 해물 매운 쌀국수": ["Special Spicy Seafood Pho"],
+  "황제 분보후에": ["Imperial Bun Bo Hue"],
+  "핫 치킨 버거": ["Hot Chicken Burger"],
+  "스파이시 토마토 파스타": ["Spicy Tomato Pasta"],
+  "매콤한 안심 스테이크": ["Spicy Tenderloin Steak"],
+  "버팔로 윙 & 립 플래터": ["Buffalo Wings and Ribs Platter"]
 };
 
 function getEnglishQueries(koreanName: string): string[] {
