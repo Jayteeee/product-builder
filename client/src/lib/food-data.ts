@@ -1567,7 +1567,6 @@ async function withFallbackImage(recommendation: FoodRecommendation): Promise<Fo
 }
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
-  console.log("getFoodRecommendation called with:", request);
   let nearbyCounts: Record<string, number> | undefined;
   if (request.coordinates) {
     const pool = baseItems.filter(item => item.category === request.category);
@@ -1576,12 +1575,10 @@ export async function getFoodRecommendation(request: RecommendationRequest): Pro
         pool.map(item => item.name),
         request.coordinates
       );
-      console.debug("[nearby] counts sample", Object.entries(nearbyCounts).slice(0, 5));
     } catch (e) {
       console.error("Failed to fetch nearby menu counts:", e);
     }
   } else {
-    console.debug("[nearby] skipped: no coordinates");
   }
 
   const recommendation = getLocalFallback(request, nearbyCounts);
