@@ -1512,37 +1512,14 @@ function getLocalFallback(
   request: RecommendationRequest,
   nearbyCounts?: Record<string, number>
 ): FoodRecommendation {
-  const spiceOrder = ["mild", "medium", "hot"];
-  const spiceIndex = (level: string) => spiceOrder.indexOf(level);
-  const requestedSpice = spiceOrder.includes(request.spiceLevel)
-    ? request.spiceLevel
-    : "mild";
-  const categoryItems = baseItems.filter(item => item.category === request.category);
-
-  let filtered = categoryItems.filter(item =>
+  const filtered = baseItems.filter(item =>
+    item.category === request.category &&
     item.priceRange === request.priceRange &&
-    item.spiceLevel === requestedSpice
+    item.spiceLevel === request.spiceLevel
   );
 
-  // Keep spice preference, relax price first
   if (filtered.length === 0) {
-    filtered = categoryItems.filter(item => item.spiceLevel === requestedSpice);
-  }
-
-  // If no items match the spice at all, choose the closest spice level in-category.
-  if (filtered.length === 0) {
-    const priceItems = categoryItems.filter(item => item.priceRange === request.priceRange);
-    const candidatePool = priceItems.length > 0 ? priceItems : categoryItems;
-    let bestDistance = Number.POSITIVE_INFINITY;
-    for (const item of candidatePool) {
-      const distance = Math.abs(spiceIndex(item.spiceLevel) - spiceIndex(requestedSpice));
-      if (distance < bestDistance) {
-        bestDistance = distance;
-        filtered = [item];
-      } else if (distance === bestDistance) {
-        filtered.push(item);
-      }
-    }
+    throw new Error("No menu matches selected options.");
   }
 
   const selected = filtered.length > 0 
