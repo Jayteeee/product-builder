@@ -50,7 +50,7 @@ function keywordSearchCount(
 export async function getNearbyMenuCounts(
   menuNames: string[],
   coords: Coordinates,
-  radius = 1500
+  radius = 1600
 ): Promise<Record<string, number>> {
   try {
     await loadKakaoSdk();
