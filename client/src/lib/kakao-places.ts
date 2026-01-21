@@ -30,6 +30,7 @@ function keywordSearchCount(
   radius: number
 ): Promise<number> {
   return new Promise((resolve) => {
+    console.debug("[kakao] keywordSearch", { keyword, radius, coords });
     const options = {
       location: new kakaoRef.maps.LatLng(coords.lat, coords.lng),
       radius,
@@ -38,6 +39,7 @@ function keywordSearchCount(
     };
 
     places.keywordSearch(keyword, (data: any, status: string) => {
+      console.debug("[kakao] keywordSearch result", { keyword, status, count: Array.isArray(data) ? data.length : 0 });
       if (status === kakaoRef.maps.services.Status.OK) {
         resolve(Array.isArray(data) ? data.length : 0);
         return;
@@ -61,6 +63,7 @@ export async function getNearbyMenuCounts(
 
   const kakaoRef = window.kakao;
   if (!kakaoRef?.maps?.services) return {};
+  console.debug("[kakao] SDK ready", { coords, radius, menuCount: menuNames.length });
   const places = new kakaoRef.maps.services.Places();
   const counts: Record<string, number> = {};
 
