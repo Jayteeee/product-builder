@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import type { FoodRecommendation, RecommendationRequest } from "@/lib/types";
+import { getNearbyMenuCounts } from "@/lib/kakao-places";
 
 export const FOOD_CATEGORIES = [
   {
@@ -1292,6 +1293,8 @@ const baseItems = [
   }
 ];
 
+type BaseItem = (typeof baseItems)[number];
+
 const foodRecommendations = baseItems.map(item => ({
   ...item,
   imageUrls: item.imageUrls ?? [],
@@ -1480,7 +1483,35 @@ async function fetchFoodImages(
   return [];
 }
 
-function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
+function pickByNearbyCounts(
+  items: BaseItem[],
+  nearbyCounts?: Record<string, number>
+) {
+  if (!nearbyCounts) {
+    return items[Math.floor(Math.random() * items.length)];
+  }
+
+  let bestScore = -1;
+  let bestItems: BaseItem[] = [];
+
+  for (const item of items) {
+    const score = nearbyCounts[item.name] ?? 0;
+    if (score > bestScore) {
+      bestScore = score;
+      bestItems = [item];
+    } else if (score === bestScore) {
+      bestItems.push(item);
+    }
+  }
+
+  const pool = bestScore > 0 ? bestItems : items;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function getLocalFallback(
+  request: RecommendationRequest,
+  nearbyCounts?: Record<string, number>
+): FoodRecommendation {
   let filtered = baseItems.filter(item => 
     item.category === request.category &&
     item.priceRange === request.priceRange &&
@@ -1501,7 +1532,7 @@ function getLocalFallback(request: RecommendationRequest): FoodRecommendation {
   }
 
   const selected = filtered.length > 0 
-    ? filtered[Math.floor(Math.random() * filtered.length)]
+    ? pickByNearbyCounts(filtered, nearbyCounts)
     : baseItems[0];
 
   return {
@@ -1517,7 +1548,7 @@ async function withFallbackImage(recommendation: FoodRecommendation): Promise<Fo
   if (hasLocalImages) {
     return { 
       ...recommendation,
-      imageUrl: recommendation.imageUrl ?? recommendation.imageUrls[0],
+      imageUrl: recommendation.imageUrl ?? recommendation.imageUrls?.[0] ?? null,
       isAiGenerated: false
     };
   }
@@ -1537,7 +1568,20 @@ async function withFallbackImage(recommendation: FoodRecommendation): Promise<Fo
 
 export async function getFoodRecommendation(request: RecommendationRequest): Promise<FoodRecommendation> {
   console.log("getFoodRecommendation called with:", request);
-  const recommendation = getLocalFallback(request);
+  let nearbyCounts: Record<string, number> | undefined;
+  if (request.coordinates) {
+    const pool = baseItems.filter(item => item.category === request.category);
+    try {
+      nearbyCounts = await getNearbyMenuCounts(
+        pool.map(item => item.name),
+        request.coordinates
+      );
+    } catch (e) {
+      console.error("Failed to fetch nearby menu counts:", e);
+    }
+  }
+
+  const recommendation = getLocalFallback(request, nearbyCounts);
   return withFallbackImage(recommendation);
 }
 

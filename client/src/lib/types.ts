@@ -5,6 +5,9 @@ export const recommendationRequestSchema = z.object({
   priceRange: z.enum(["budget", "moderate", "premium"]),
   spiceLevel: z.enum(["mild", "medium", "hot"]),
   location: z.string().optional(),
+  coordinates: z
+    .object({ lat: z.number(), lng: z.number() })
+    .optional(),
 });
 
 export type RecommendationRequest = z.infer<typeof recommendationRequestSchema>;

@@ -45,7 +45,8 @@ export default function Home() {
     category: "korean",
     priceRange: "budget",
     spiceLevel: "mild",
-    location: undefined
+    location: undefined,
+    coordinates: undefined
   });
   const [recommendation, setRecommendation] = useState<RecommendationResponse | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -87,6 +88,12 @@ export default function Home() {
       setSelections(prev => ({ ...prev, location: location.address }));
     }
   }, [location.address]);
+
+  useEffect(() => {
+    if (location.coordinates) {
+      setSelections(prev => ({ ...prev, coordinates: location.coordinates }));
+    }
+  }, [location.coordinates]);
 
   // Handle Shared Links and History
   useEffect(() => {
