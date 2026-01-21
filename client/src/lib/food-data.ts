@@ -1512,23 +1512,37 @@ function getLocalFallback(
   request: RecommendationRequest,
   nearbyCounts?: Record<string, number>
 ): FoodRecommendation {
-  let filtered = baseItems.filter(item => 
-    item.category === request.category &&
+  const spiceOrder = ["mild", "medium", "hot"];
+  const spiceIndex = (level: string) => spiceOrder.indexOf(level);
+  const requestedSpice = spiceOrder.includes(request.spiceLevel)
+    ? request.spiceLevel
+    : "mild";
+  const categoryItems = baseItems.filter(item => item.category === request.category);
+
+  let filtered = categoryItems.filter(item =>
     item.priceRange === request.priceRange &&
-    item.spiceLevel === request.spiceLevel
+    item.spiceLevel === requestedSpice
   );
 
-  // If no exact match, relax spice level constraint
+  // Keep spice preference, relax price first
   if (filtered.length === 0) {
-    filtered = baseItems.filter(item => 
-      item.category === request.category &&
-      item.priceRange === request.priceRange
-    );
+    filtered = categoryItems.filter(item => item.spiceLevel === requestedSpice);
   }
 
-  // If still no match, relax price range constraint
+  // If no items match the spice at all, choose the closest spice level in-category.
   if (filtered.length === 0) {
-    filtered = baseItems.filter(item => item.category === request.category);
+    const priceItems = categoryItems.filter(item => item.priceRange === request.priceRange);
+    const candidatePool = priceItems.length > 0 ? priceItems : categoryItems;
+    let bestDistance = Number.POSITIVE_INFINITY;
+    for (const item of candidatePool) {
+      const distance = Math.abs(spiceIndex(item.spiceLevel) - spiceIndex(requestedSpice));
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        filtered = [item];
+      } else if (distance === bestDistance) {
+        filtered.push(item);
+      }
+    }
   }
 
   const selected = filtered.length > 0 
