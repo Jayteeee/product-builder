@@ -42,12 +42,7 @@ export function ImageCarousel({ images, alt, className, showControls = true }: I
     setCurrentIndex(0); 
   };
 
-  // Auto-advance only if controls are enabled (implies full view)
-  useEffect(() => {
-    if (validImages.length <= 1 || !showControls) return;
-    const interval = setInterval(nextImage, 5000);
-    return () => clearInterval(interval);
-  }, [validImages.length, showControls]);
+  // Auto-advance disabled to prevent images from rotating
 
   const isModalImage = className?.includes('modal-image');
 

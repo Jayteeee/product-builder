@@ -143,8 +143,6 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/6/67/Kongnamul-gukbap_1.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/2/27/Kongnamul_gukbap_20230408_003.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/2d/Kongnamul_gukbap_20230408_001.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/02/Kongnamul_gukbap_20230408_002.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/7/7b/Kongnamulgukbap_%28haejangguk%29_%28soybean_sprout_hangover_soup%29.jpg"
     ]
   },
@@ -204,7 +202,6 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/c/c4/Grilled_mackerel_on_a_BBQ.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/80/Salty_grilled_mackerel_lunch_of_Yoshinoya.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/18/Grilled_mackerel_sushi_%284691657059%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/5c/Japanese-style_grilled_mackerel_rice_on_HU440_%2820230807153229%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/df/Grilled_horse-mackerel_%285171123164%29.jpg"
     ]
   },
@@ -213,11 +210,11 @@ const baseItems = [
     description: "폭신폭신한 계란찜과 정갈한 반찬", 
     tags: ["🥚 계란", "🥛 순한맛", "🍚 집밥"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/2/2c/Steamed_Egg_White_in_Coconut.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/5a/Square_cut%2C_steamed_egg_curry.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/d9/HK_food_Hennessy_Road_shop_steamed_egg_salted_duck_egg_pork_meat_March_2021_SS2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/8/8b/ChineseSteamedEgg.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/10/Unagi_Chawanmushi_%28steamed_egg_custard_with_Unagi%2C_dashi_and_shark_fin_at_the_bottom%29.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Korean.Banchan-Gyeran.jjim-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/bc/Korean_cuisine-Gyeranjjim-02.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c1/Korean.cuisine-Gyeran.jjim-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/0e/1005_eggjjim.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/20/Gyeranjjim.jpg"
     ]
   },
   { 
@@ -250,9 +247,7 @@ const baseItems = [
     description: "다양한 나물과 고추장의 완벽한 조화", 
     tags: ["🥗 건강식", "🌈 다채로운", "🥛 순한맛"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/a/a4/Bibimbap_7.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/a/a1/Bibimbap_6.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/20/Bokkeum_Bibimbap_and_Little_Piggy_Bao_Bun_by_Bao_Bun_Brighton.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/6/63/Korean_cuisine-Bibimbap-08.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/8f/Bibimbap_at_Micun_Bibimbap%2C_CapitaMall_Crystal_%2820211212122041%29.jpg"
     ]
@@ -263,9 +258,6 @@ const baseItems = [
     tags: ["🥩 소고기", "🥛 순한맛", "🍲 단짠"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/8/87/Ttukbaegi_bulgogi_-_Bulgogi%28beef%29_hot_pot_-_Kogi_Korean_cuisine_2024-09-03.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/6/60/Hot_stone_pot_bibimbap_with_beef_%28Bulgogi_dolsot_bibimbap%29_-_Kogi_2023-10-16.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/10/Bulgogi-jeongol.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/2d/Bulgogi-nakji-jeongol.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/0/0d/Ttukbaegi-bulgogi_2.jpg"
     ]
   },
@@ -276,7 +268,6 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/8/8f/Korean_cuisine-Bossam-04.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/48/Korean.food-Bossam-02.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/92/Bossam_and_jokbal.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/6/69/Bossam_1.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/7/76/Korean_cuisine-Bossam-02.jpg"
     ]
@@ -286,11 +277,9 @@ const baseItems = [
     description: "통통한 낙지와 화끈한 양념의 만남", 
     tags: ["🌋 매운맛", "🐙 해산물", "🍚 덮밥"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/2/2f/Fish_Dumplings_and_Beef_brisket_and_Octopus_Ball_Rice_Noodle_Soup_from_Fu_Hing_Noodle_Shop_in_Yuen_Long.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/4f/Dolsot_Bibimbap_-_Stone_Bowl_Bibimbap_-_Kimchi_and_Bab_%28543866063%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/4b/Nakji-jeongol-bokkeum-bap_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/19/Nakji-jeongol-bokkeum-bap_1.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/72/Nakji-jeongol-bokkeum-bap_3.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/3/34/Korean.cuisine-Nakji_bokkeum-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/2a/Nakji-bokkeum%2C_Stir-Fried_Octopus.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f0/Nakji-bokkeum.jpg"
     ]
   },
   { 
@@ -313,8 +302,7 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/9/9d/%EA%B9%80%EC%B9%98%EC%B0%9C.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/c/cf/Mugeun-ji-jjim_1.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/3c/Mugeun-ji-jjim_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/d1/Gimchi-jjim.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/23/Korean_pancake-Pajeon-02.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/d/d1/Gimchi-jjim.jpg"
     ]
   },
   { 
@@ -325,8 +313,7 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/7/7e/Korean.food-Gamjatang-01.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/4b/Gamjatang_%28pork_neck_stew%29_%2825676572251%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/45/Ppyeohaejangguk_20240929_001.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1d/Ppyeo-haejang-guk.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/cf/Watercress_and_pork_bone_soup.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/1/1d/Ppyeo-haejang-guk.jpg"
     ]
   },
   { 
@@ -334,9 +321,6 @@ const baseItems = [
     description: "살얼음 동동 시원한 육수", 
     tags: ["🍜 시원한", "🥛 순한맛", "❄️ 여름"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/a/ad/Cold_noodles_at_Xinchuan_%2820170622163023%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f9/Grilled_cold_noodles_with_fried_egg_coating_%2820200922115307%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/79/%EC%9C%A1%EC%A0%84_%EB%AC%BC%EB%83%89%EB%A9%B4.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/18/Mulnaengmyeon_20221210_001.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/45/Doongji_Cold_Noodles_20210817_002.jpg"
     ]
@@ -374,8 +358,7 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/9/9e/Yukhoe-bibimbap_%2831896884871%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/16/Yukhoe-bibimbap_%2832013698315%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/cd/Korean.cuisine-Yukhoe_bibimbap-01.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1c/Yukhoe_Bibimbap.JPG"
+      "https://upload.wikimedia.org/wikipedia/commons/c/cd/Korean.cuisine-Yukhoe_bibimbap-01.jpg"
     ]
   },
   { 
@@ -386,8 +369,7 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/8/88/Korean_soup-Galbitang-01.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/3b/Neungi-jeonbok-galbi-tang_2.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/2/2c/Galbi-tang_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/b/bb/Galbi-tang_1.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/28/Galbi-tang_ingredients.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/b/bb/Galbi-tang_1.jpg"
     ]
   },
   { 
@@ -409,8 +391,6 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/0/02/Bulgogi-jeongol_1.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/5/54/Bulgogi-jeongol_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/10/Bulgogi-jeongol.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/2d/Bulgogi-nakji-jeongol.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/87/Ttukbaegi_bulgogi_-_Bulgogi%28beef%29_hot_pot_-_Kogi_Korean_cuisine_2024-09-03.jpg"
     ]
   },
@@ -419,11 +399,11 @@ const baseItems = [
     description: "진정한 밥도둑, 짭조름한 매력", 
     tags: ["🦀 해산물", "💎 프리미엄", "🍚 밥도둑"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/b/b8/A_bowl_of_soy_sauce_and_crab_surimi_around.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/59/Rotary_Korean_Traditional_Set_Menu.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/53/Korean_seafood-Ganjang_gejang-01.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ganjang-gejang.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/9e/Korean.cuisine-Ganjang_gejang-01.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/b/b7/Korean.cuisine-Ganjang_gejang_and_banchan-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/64/Korean.cuisine-Ganjang_gejang_and_banchan-02.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/58/Korean.cuisine-Ganjang_gejang_and_banchan-03.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c4/Korean_seafood-ganjang_gejang_Yeosu_2015-08-15.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/29/Ganjang-gejang_%2832014766195%29.jpg"
     ]
   },
   { 
@@ -446,8 +426,7 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/1/1b/%EB%82%98%EC%9D%98%EA%B0%80%EC%95%BC_%EC%95%95%EA%B5%AC%EC%A0%95_%ED%98%84%EB%8C%80%EB%B0%B1%ED%99%94%EC%A0%90_%EA%B3%B1%EC%B0%BD%EC%A0%84%EA%B3%A8_2.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/b4/Gopchang-jeongol_2.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/b8/%EB%82%98%EC%9D%98%EA%B0%80%EC%95%BC_%EC%95%95%EA%B5%AC%EC%A0%95_%ED%98%84%EB%8C%80%EB%B0%B1%ED%99%94%EC%A0%90_%EA%B3%B1%EC%B0%BD%EC%A0%84%EA%B3%A8_3.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/2c/Gopchang-jeongol_1.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/a/ae/%EB%82%98%EC%9D%98%EA%B0%80%EC%95%BC_%EC%95%95%EA%B5%AC%EC%A0%95_%ED%98%84%EB%8C%80%EB%B0%B1%ED%99%94%EC%A0%90_%EA%B3%B1%EC%B0%BD%EC%A0%84%EA%B3%A8_1.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/2/2c/Gopchang-jeongol_1.jpg"
     ]
   },
   { 
@@ -456,8 +435,6 @@ const baseItems = [
     tags: ["🌋 매운맛", "🐔 닭요리", "🌶️🌶️🌶️"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/1/1b/Korean.food-Dakbokemtang-01.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/8/81/Tostada_-_El_Dorado_Kitchen_-_Nov_2018_-_Stierch_02.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/24/DAKDORITANG_-_Shirkhentseg_Restaurant_Asiatique_2025-03-26.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/de/Dakbokkeumtang_and_samgyetang.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/f/f5/Daktoritang.jpg"
     ]
@@ -468,7 +445,6 @@ const baseItems = [
     tags: ["🦐 해산물", "🥟 바삭함", "🥢 안주"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/7/74/Korean_seafood_pancake_%ED%95%B4%EB%AC%BC%ED%8C%8C%EC%A0%84_%285534738474%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/b/be/Haemul-pajeon_making.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/f/f9/Korean.pancake-Pajeon-05.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/d5/Korean.cuisine-Pajeon_and_gyeran_jjim.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/e/ee/Korean_pancake-Haemul_pajeon-01.jpg"
@@ -506,7 +482,6 @@ const baseItems = [
     tags: ["🍚 볶음밥", "🥛 순한맛", "🍳 인기"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/9/9b/Fried_rice_in_home.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/8/8d/Malapascua%2C_Vegetable_fried_rice%2C_Philippines.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/30/Fried_rice_with_chicken_and_egg.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/d9/Fried_rice_by_olive.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/8e/Fried_rice_in_Uganda.jpg"
@@ -517,7 +492,6 @@ const baseItems = [
     description: "겉은 바삭, 속은 촉촉한 튀김만두", 
     tags: ["🥟 바삭함", "🥛 순한맛", "🥢 사이드"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Korean_Chinese_gun-mandu_2.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/5/55/Korean_Chinese_gun-mandu.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/2/21/Gunmandu.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/1c/Korean.cuisine-Gunmandu-01.jpg",
@@ -531,7 +505,6 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/1/16/Jjamppong_3.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/c/cf/Jjamppong_4.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/3/39/Jjamppong-deopbap.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/12/Jjamppong_2.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/f/f5/Jeonbok-haemul-jjamppong_1.jpg"
     ]
@@ -542,9 +515,7 @@ const baseItems = [
     tags: ["🌶️🌶️ 보통맛", "🍚 덮밥", "🍲 두부"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/a/a5/Billyfoodmabodofu3.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/5e/Mapo_Tofu_%28%E9%BA%BB%E5%A9%86%E8%B1%86%E8%85%90%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/7/73/Authentic_Mapo_Tofu.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/2d/Mapo_Tofu_with_rice.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/88/Chen_Mapo_Tofu.jpg"
     ]
   },
@@ -554,10 +525,8 @@ const baseItems = [
     tags: ["🍚 덮밥", "🥛 순한맛", "🌈 다채로운"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/f/f1/Homemade_Japchae%2C_Dhaka_02.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/09/Japchae_ingredients.png",
       "https://upload.wikimedia.org/wikipedia/commons/c/c1/Japchae-bap_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f1/Japchae-bap.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/70/Korean_Chinese_japchae-bap.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/f/f1/Japchae-bap.jpg"
     ]
   },
   { 
@@ -611,8 +580,11 @@ const baseItems = [
     description: "아삭한 피망과 꽃빵의 환상 조합", 
     tags: ["🌶️🌶️ 보통맛", "🍞 꽃빵", "🥩 고기요리"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pepper_steak.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/fd/Green_pepper_steak_%28%E9%9D%92%E6%A4%92%E8%82%89%E7%B5%B2%29_%2826880875325%29.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/5/58/Pepper_japchae01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/cb/Hu%C4%81ju%C7%8En.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b0/Scallion_flower_rolls.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b1/A_frozen_spring_onion_steamed_flower_bun.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/4/42/Mandarinrolls.jpg"
     ]
   },
 
@@ -633,8 +605,6 @@ const baseItems = [
     tags: ["🍜 면요리", "🌶️🌶️ 보통맛", "🇯🇵 전통"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/2/28/Ramen_Jump_002.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/19/Knorr_Korean_Ramen_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/2/24/Ramen_caseiro.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/d6/Ramen_dan_Teh_Manis_Dingin.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/5/56/Soy_Milk_Ramen_and_Tonkotsu_Miso_Ramen_by_Goemon_Ramen_Bar.jpg"
     ]
@@ -645,7 +615,6 @@ const baseItems = [
     tags: ["🍣 신선함", "💎 프리미엄", "🍱 깔끔한"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/d/db/Chef_Special_Sushi_Set_-_Memo_Wall_Japanese_Cuisine.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/43/Sushi_mini_set_04.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/6/60/Sushi_platter.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/0/03/Assorted_Western_sushi_%28%E7%9B%9B%E3%82%8A%E5%90%88%E3%82%8F%E3%81%9B%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/9/9e/Sushi_Platter_in_Portugal.png"
@@ -657,7 +626,6 @@ const baseItems = [
     tags: ["🍚 덮밥", "🥛 순한맛", "🥩 소고기"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/4/45/Gyuu-don_001.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rice_bowl%2C_Jia_Yan%2C_5_rue_Humblot%2C_Paris_001.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/47/Extra_large_gy%C5%ABdon_at_Yoshinoya_Beijing_West_Railway_Station_%28S%29_Restaurant_%2820210716191713%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/e/e6/Noto_beef_bowl.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/17/Sesame_Beef_Don_-_Pompoko_2024-07-03.jpg"
@@ -668,7 +636,10 @@ const baseItems = [
     description: "입안에서 살살 녹는 연어 덮밥", 
     tags: ["🍣 연어", "🍚 덮밥", "🥛 부드러운"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/6/63/Chum_salmon%2Csake-ikura-don%2Csyari-town%2Cjapan.JPG"
+      "https://upload.wikimedia.org/wikipedia/commons/5/51/Salmon_don_of_Nakau_01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/d9/Salmon_don_of_Nakau_02.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/61/Salmon_caviar_donburi%3B_2011.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/15/Rice_bowl_topped_with_salmon_and_salmon_egg_%2814904439935%29.jpg"
     ]
   },
   { 
@@ -676,8 +647,11 @@ const baseItems = [
     description: "탱글한 면발과 따뜻한 국물", 
     tags: ["🍜 면요리", "🥛 순한맛", "💰 가성비"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/b/ba/Udon_by_udono.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Shabu_shabu_udon_in_Tokyo.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/d/d5/Kake_udon_by_Joe_Jones_in_Tokyo.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/fc/Kake_udon_by_udono.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/8/81/Tempura_udon_by_6strings.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/1e/Chicken_and_burdock_tempura_udon_and_Oden_in_Sukesan_Udon_Maebashi-Nishi.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/e/ea/Kake_Udon_and_Spam_omusubi_from_Marugame_Udon_%282024-06-11%29.jpg"
     ]
   },
   { 
@@ -709,7 +683,11 @@ const baseItems = [
     description: "바삭한 모듬 튀김이 올라간 덮밥", 
     tags: ["🥟 바삭함", "🍚 덮밥", "🥛 순한맛"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/2/25/Tendon_one_meal.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/8/8b/Tendon.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/e/e0/Tendon_set_by_avlxyz.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/28/Tendon_001.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5b/Tendon_of_Ten%27ya.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/21/All_star_tendon_of_Ten%27ya.jpg"
     ]
   },
   { 
@@ -733,9 +711,7 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/3/33/Espaguetis_carbonara.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/7/74/Spaghetti_Carbonara_with_Japanese_Raw_Egg.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/70/Carbonara_con_asparagi.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/e/ed/Spaghetti_Carbonara_von_Unico_Tauberbischofsheim_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f8/Carbonara_di_fettuccine_con_asparagi.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/e/ed/Spaghetti_Carbonara_von_Unico_Tauberbischofsheim_2.jpg"
     ]
   },
   { 
@@ -746,8 +722,7 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/0/09/%EC%84%B1%EB%B6%81%EB%8F%99_%EB%94%94%EB%84%88%EC%87%BC_%EC%95%84%EB%9D%BC%EB%B9%84%EC%95%84%EB%94%B0.png",
       "https://upload.wikimedia.org/wikipedia/commons/c/cd/Penne_Arrabbiata.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/f/f3/Pasta_all%C2%B4arrabbiata_%285864409158%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/77/Pasta_all%C2%B4arrabbiata_%285863855957%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/d3/Pasta_arrabbiata_with_cheese_and_toasted_bread_at_the_Ritz%2C_Mahanagar%2C_Lucknow_%282025-08-01%29.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/7/77/Pasta_all%C2%B4arrabbiata_%285863855957%29.jpg"
     ]
   },
   { 
@@ -755,7 +730,6 @@ const baseItems = [
     description: "짭짤한 페퍼로니와 치즈의 환상 조화", 
     tags: ["🍕 피자", "🥛 순한맛", "🧀 짭짤한"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/7/7e/Vegetarian_Pizza.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/b0/All_Good_pizza_%2838501728345%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/d9/Pepperoni_Pizza_-_Greggs_2024-03-16.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/30/Pepperoni_Pizza_from_Fellini%E2%80%99s_Pizza.jpg",
@@ -767,11 +741,11 @@ const baseItems = [
     description: "육즙 가득 패티와 신선한 야채", 
     tags: ["🍔 햄버거", "🥛 순한맛", "🥩 든든한"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/a/a6/Gourmet_Burger_Kitchen%2C_Brighton_2023-10-03.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f9/Grilled_Hey_Pesto_Chicken_Burger_-_Gourmet_Burger_Kitchen_2023-10-03.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/99/Paul%26Mary_Burger.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/b/bf/Gourmet_Burger_Kitchen_-_geograph.org.uk_-_1336201.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/49/Gourmet_Burger_Kitchen%2C_Lendal%2C_York_-_geograph.org.uk_-_5031348.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Gourmet_Burger_Kitchen_hamburger.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5b/Cheddar_Cheese_Beef_Burger_-_Gourmet_Burger_Kitchen_2023-10-03.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/e/e8/Hamburger_sandwich.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/d0/Hamburger_on_Brioche.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/4/4d/Cheeseburger.jpg"
     ]
   },
   { 
@@ -779,11 +753,11 @@ const baseItems = [
     description: "고급스러운 육질과 풍부한 육즙", 
     tags: ["🥩 소고기", "💎 프리미엄", "🍽️ 분위기"],
     imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/8/8b/300_grams_Sirloin_Steak_%283690335768%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Sirloin_Steak_%282056614458%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/dc/Sirloin_steak_at_home.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/d9/Classic_8oz_sirloin_steak_-_The_Bright_Helm_2023-10-17.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/e/ef/Sirloin_Steak_with_Rice.JPG",
-      "https://upload.wikimedia.org/wikipedia/commons/5/51/Sirloin_Steak_with_Potato_Wedges.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/99/Milestone_-_Top_Sirloin_with_Peppercorn_Sauce_%285853156226%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/7e/Sirloin_Steak%2C_Otawara.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/8/82/Beef_Strip_Sirloin_Steak_with_Potato_Fries.jpg"
     ]
   },
   { 
@@ -791,7 +765,6 @@ const baseItems = [
     description: "마늘과 올리브유의 담백한 풍미", 
     tags: ["🍝 파스타", "🥛 순한맛", "🧄 마늘풍미"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/0/08/Aglio-e-olio.png",
       "https://upload.wikimedia.org/wikipedia/commons/8/88/Mussels_Spaghetti_aglio_e_olio_textures_Vikings_Luxury_Dinner_Buffet_26_January_2025_Philippines5.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/b4/Pasta_made_by_a_restaurant_named_%EC%97%B4%EB%91%90%EB%8B%AC_2.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/3e/Spaghetti_aglio_e_olio_KB.jpg",
@@ -803,11 +776,9 @@ const baseItems = [
     description: "해산물이 듬뿍 들어간 얼큰한 파스타", 
     tags: ["🌋 매운맛", "🍝 파스타", "🦐 해산물"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/6/6a/Seafood_pasta_01.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/dc/Seafood_pasta_%286792548256%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/e/e7/Pasta_with_Calamari%2C_Mussels_%26_Prawns_in_a_spicy_tomato_sauce._%2843496515810%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/5a/Pasta_with_Calamari%2C_Mussels_%26_Prawns_in_a_spicy_tomato_sauce._%2843496515800%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/76/Fra_Diavolo_%28Michele_Pezza%29.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/d/dc/Seafood_pasta_%286792548256%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/59/Pasta_with_seafood.jpg"
     ]
   },
   { 
@@ -817,7 +788,6 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/a/ae/Risotto_de_gambas%2C_restaurant_Danieli_%28Vienne%2C_Autriche%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/8/8a/Risotto_Weihnachten_2020_13.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/3/3d/Risotto_carottes_et_thym.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/a/a9/Risotto_with_truffles_in_Saudi_Arabia.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/0/0e/Risotto_de_verduras_acompa%C3%B1ado_con_salsa_de_tomate_y_queso_rallado.jpg"
     ]
@@ -828,7 +798,6 @@ const baseItems = [
     tags: ["🥩 소고기", "🥛 순한맛", "🍳 인기"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/e/e0/Hamburg-Steak.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/6/65/Tofu_Hamburg_steak_20141107.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/d/dd/Teriyaki_Hamburger_Steak_at_Suzuki_Kitchen%2C_Lidu_%2820201206171408%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/43/Hamburg_steak_%2830664320015%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/e/e5/Hamburg_steak_lunch_of_Nakau.jpg"
@@ -840,10 +809,7 @@ const baseItems = [
     tags: ["🍕 피자", "🥛 순한맛", "🧀 치즈듬뿍"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/2/2d/Bar_Pizza-_Cheese.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/b/b6/Pizza_cheese.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c5/Three_cheese_Pizza_Vikings_Luxury_Dinner_Buffet_platter_26_January_2025_Philippines4.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/4e/Pizza_Cheese_Jihadist_Flag.png",
-      "https://upload.wikimedia.org/wikipedia/commons/5/57/Three_cheese_Pizza_Vikings_Luxury_Dinner_Buffet_26_January_2025_Philippines1.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/c/c5/Three_cheese_Pizza_Vikings_Luxury_Dinner_Buffet_platter_26_January_2025_Philippines4.jpg"
     ]
   },
 
@@ -854,9 +820,7 @@ const baseItems = [
     tags: ["🍢 분식", "🌶️🌶️ 보통맛", "💰 가성비"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/e/e9/Homemade_hot_and_spicy_rice_cake.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/e/e8/Paniyaram_%28South_Indian_Rice_Dough_Cakes%29.JPG",
       "https://upload.wikimedia.org/wikipedia/commons/5/56/Korean.snacks-Tteokbokki-08.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/06/Tteokbokki_making_process_step_3.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/c/c5/Korean.snacks-Tteokbokki-01.jpg"
     ]
   },
@@ -867,7 +831,6 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/e/e4/Korean_blood_sausage-Sundae-01.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/42/Korean.food-Sundae-01.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c0/Soondae_at_Chilpal_Naengmyeon%2C_Xiyue_Paradise_Walk_%2820210924135156%29.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/9/94/Sundae_3.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/a/a4/Sundae_4.jpg"
     ]
@@ -877,11 +840,11 @@ const baseItems = [
     description: "바삭바삭한 다양한 튀김들", 
     tags: ["🍢 분식", "🥛 순한맛", "🥟 바삭함"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/3/39/Myanmar_fried_snacks_%28cropped%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/18/Lanna_cuisine_starters.JPG",
-      "https://upload.wikimedia.org/wikipedia/commons/b/b6/Bhaji_Chola.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Moori_daler_bora_bhaja.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/05/Gorengan_campur.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/f/fd/Korean.cuisine-Goguma_twigim-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/50/Korea-Sokcho-Daepo_Port-Twigim_and_Ojingeo_sundae-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/e/ec/Ojingeo-twigim_and_gochu-twigim.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f9/Gim-mari-twigim_2.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/7/76/Saeu-twigim.jpg"
     ]
   },
   { 
@@ -889,7 +852,6 @@ const baseItems = [
     description: "땀이 쏙 빠지는 매운맛의 진수", 
     tags: ["🌋 매운맛", "🍢 분식", "🔥 도전"],
     imageUrls: [
-      "https://upload.wikimedia.org/wikipedia/commons/0/01/Sweet_and_spicy_tteokbokki_crisps.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/ba/Tteokbokki_in_korea.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/0/01/Tteokbokki_Dukki_Berlin.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/7/7a/Korean.snacks-Tteokbokki-06.jpg",
@@ -929,9 +891,7 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/5/5d/Pho_Vietnamese_noodle_soup_in_Ho_Chi_Minh_City%2C_Vietnam.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/0/03/Vietnamese_Beef_Noodle_Soup_at_Ming_Viet_Vietnamese_Cuisine_in_Central.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c7/Rice_Noodle_With_Braised_Duck_And_Hard_Boiled_Egg_-_March_2024.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/e/e9/Rice_Noodle_With_Braised_Duck_And_Hard_Boiled_Egg_From_Ang_Mo_Kio_Central_Food_Centre%2C_Singapore.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/fa/Fried_tofu%2C_rice_noodle_with_shrimp_paste.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/c/c7/Rice_Noodle_With_Braised_Duck_And_Hard_Boiled_Egg_-_March_2024.jpg"
     ]
   },
   { 
@@ -965,9 +925,7 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/3/34/Nasi_goreng_pattaya_20231028_120535.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nasi_goreng_indonesia.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/b/b3/Nasi_Goreng_Ikan_Asin.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/08/Nasi_goreng_2.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/46/Nasi_Goreng_Kampung.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/b/b3/Nasi_Goreng_Ikan_Asin.jpg"
     ]
   },
   { 
@@ -1001,9 +959,7 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/4/43/Pu_Phat_Phong_Kari.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/48/Phunim_phat_pong_kari.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/10/Phuket_Style_Crab_Curry_Kanomjean_Vermicelli_rice_noodle_with_blue_crab%2C_crab_meat_curry%2C_served_with_hard_boiled_egg%2C_pickle_carrot_and_papaya_%2825136801546%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c0/Phuket_Style_Crab_Curry_Kanomjean_Vermicelli_rice_noodle_with_blue_crab%2C_crab_meat_curry%2C_served_with_hard_boiled_egg%2C_pickle_carrot_and_papaya_%2825069887921%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f3/Phuket_Style_Crab_Curry_Kanomjean_Vermicelli_rice_noodle_with_blue_crab%2C_crab_meat_curry%2C_served_with_hard_boiled_egg%2C_pickle_carrot_and_papaya_%2825163157475%29.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/1/10/Phuket_Style_Crab_Curry_Kanomjean_Vermicelli_rice_noodle_with_blue_crab%2C_crab_meat_curry%2C_served_with_hard_boiled_egg%2C_pickle_carrot_and_papaya_%2825136801546%29.jpg"
     ]
   },
 
@@ -1016,8 +972,7 @@ const baseItems = [
       "https://upload.wikimedia.org/wikipedia/commons/7/73/001_Tacos_de_carnitas%2C_carne_asada_y_al_pastor.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/bf/Tacos_al_pastor_prepa_1.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/1/15/Tacos_al_pastor_con_pi%C3%B1a.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/3/3a/Tacos_al_pastor.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/8/86/Tacos_al_Pastor.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/3/3a/Tacos_al_pastor.jpg"
     ]
   },
   { 
@@ -1051,9 +1006,7 @@ const baseItems = [
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/f/fd/Mozzarella_cheese_stick%2C_fries%2C_and_nachos_platter.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/4/4d/NachosPlatter_C2Cafe.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/97/MexicanPlatter_HomeMade_Mumbai.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/f/f2/SoupPlatter_HomeMade_Mumbai.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/d1/Ignacio_Anaya_Inventor_of_Nachos.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/f/f2/SoupPlatter_HomeMade_Mumbai.jpg"
     ]
   },
   { 
@@ -1062,10 +1015,279 @@ const baseItems = [
     tags: ["🌋 매운맛", "🌶️🌶️🌶️", "🌮 멕시칸"],
     imageUrls: [
       "https://upload.wikimedia.org/wikipedia/commons/6/6f/Enchiladas.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c1/Enchiladas_de_mole_caseras.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/b/ba/Festival_de_la_Enchilada_59.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/e/ec/Enchilada_Rice_Beans.jpg",
       "https://upload.wikimedia.org/wikipedia/commons/6/6c/Enchiladas_en_salsa_verde.jpg"
+    ]
+  },
+
+  // --- CHINESE (중식) ---
+  { 
+    id: 116, name: "훠궈", category: "chinese", priceRange: "premium", spiceLevel: "hot", price: 22000, 
+    description: "각종 재료를 끓여 먹는 중국식 전골", 
+    tags: ["🌋 매운맛", "🍲 전골", "🥢 중식"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/2/29/Hot_pot_in_Taiwanese_restaurant.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/da/Hai_Di_Lao_Hot_Pot_Food.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c7/Concentric_hot_pot_in_Chongqing_%2820180217165607%29.jpg"
+    ]
+  },
+  { 
+    id: 117, name: "딤섬 모둠", category: "chinese", priceRange: "moderate", spiceLevel: "mild", price: 14000, 
+    description: "한입 크기의 다양한 딤섬을 즐기는 구성", 
+    tags: ["🥛 순한맛", "🥟 딤섬", "🥢 중식"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/d/d6/Dim_sum_at_Golden_Unicorn%2C_Chinatown%2C_NYC%2C_April_2009.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f6/Dim_Sum_Breakfast.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/12/Dim_Sum_collection_in_Chinese_restaurant.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5e/Xionghejia_-_Dimsum_Rosa_2.jpg"
+    ]
+  },
+  { 
+    id: 118, name: "샤오롱바오", category: "chinese", priceRange: "moderate", spiceLevel: "mild", price: 13000, 
+    description: "육즙이 가득한 중국식 찐만두", 
+    tags: ["🥛 순한맛", "🥟 만두", "🥢 중식"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/d/d2/Xiao_Long_Bao_by_Junhao%21.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5e/Xiaolongbao_Shanghai.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/8/80/Xiaolongbao-breakfast.jpg"
+    ]
+  },
+
+  // --- JAPANESE (일식) ---
+  { 
+    id: 119, name: "오코노미야키", category: "japanese", priceRange: "moderate", spiceLevel: "mild", price: 12000, 
+    description: "철판에 구워낸 일본식 부침 요리", 
+    tags: ["🥛 순한맛", "🥞 철판", "🦑 해산물"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/5/59/Okonomiyaki_001.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/1b/Okonomiyaki_in_Hiroshima.JPG",
+      "https://upload.wikimedia.org/wikipedia/commons/3/3a/Okonomiyaki%2C_Nagata-Ya%2C_Hiroshima_%2835565845404%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/9b/Hiroshima-Style_Okonomiyaki_%2840283556800%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/27/Okonomiyaki_by_zezebono_in_Osaka.jpg"
+    ]
+  },
+  { 
+    id: 120, name: "가라아게 정식", category: "japanese", priceRange: "moderate", spiceLevel: "mild", price: 13000, 
+    description: "겉바속촉 일본식 닭튀김 정식", 
+    tags: ["🥛 순한맛", "🍗 닭고기", "🍚 든든한"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/b/b8/Chicken_karaage_002.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/e/e6/Chicken_karaage_003.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b1/Karaage_Set_20200421-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/7/78/Karaage_Set_20200806-01.jpg"
+    ]
+  },
+  { 
+    id: 121, name: "메밀소바", category: "japanese", priceRange: "budget", spiceLevel: "mild", price: 9000, 
+    description: "담백한 메밀면과 시원한 육수", 
+    tags: ["🥛 순한맛", "🍜 면요리", "❄️ 시원한"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/7/7a/Japanese_Zaru_Soba.JPG",
+      "https://upload.wikimedia.org/wikipedia/commons/d/dd/Zaru-Soba-1.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/cd/Zaru_Soba.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/69/Zaru_soba_by_spinachdip.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Juwari_Soba_%288067612263%29.jpg"
+    ]
+  },
+
+  // --- WESTERN (양식) ---
+  { 
+    id: 122, name: "라자냐", category: "western", priceRange: "moderate", spiceLevel: "mild", price: 15000, 
+    description: "치즈와 소스가 층층이 쌓인 파스타", 
+    tags: ["🥛 순한맛", "🧀 치즈", "🍝 파스타"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/a/a1/Lasagna_Bolognese_%2828840810053%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/66/Lasagna_Bolognese_%2828840811363%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/06/Meaty_Lasagna_8of8_%288736299782%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/16/Lasagna_with_minced_meat%2C_Brisbane.jpg"
+    ]
+  },
+  { 
+    id: 123, name: "클램 차우더", category: "western", priceRange: "moderate", spiceLevel: "mild", price: 14000, 
+    description: "조개가 듬뿍 들어간 크리미한 수프", 
+    tags: ["🥛 순한맛", "🥣 수프", "🦪 해산물"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/4/47/ManhattanClamChowder.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/98/Clam_Chowder.JPG",
+      "https://upload.wikimedia.org/wikipedia/commons/0/07/Clam_chowder_%2811030850154%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/4/49/Clam_chowder_with_whole_clams.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/ba/Quincy_Market_-_Boston_Chowda_clam_chowder.jpg"
+    ]
+  },
+  { 
+    id: 124, name: "치킨 파마산", category: "western", priceRange: "premium", spiceLevel: "mild", price: 20000, 
+    description: "치즈와 토마토 소스가 어우러진 치킨 요리", 
+    tags: ["🥛 순한맛", "🍗 닭고기", "🧀 치즈"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/3/34/Chicken_parmesan.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/12/Chicken_parmigiana.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/17/Chicken_parm_at_a_diner.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f6/Parmesan_chicken_filled_with_mozzarella_%288011631412%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/d8/Chicken_parmigiana_with_a_side_of_rigatoni_pasta.jpg"
+    ]
+  },
+
+  // --- STREET (분식/간식) ---
+  { 
+    id: 125, name: "어묵탕", category: "street", priceRange: "budget", spiceLevel: "mild", price: 6000, 
+    description: "따끈한 국물과 어묵이 어우러진 간식", 
+    tags: ["🥛 순한맛", "🍢 분식", "🥣 국물"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/2/2a/Eomuk-tang.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/7/7b/Eomuk-tang_1.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/67/Eomuk-tang_2.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/90/Korea_fish_cake_soup-Eomuk-Tang_%EC%96%B4%EB%AC%B5%ED%83%95-_%286768498759%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f8/Eomuk-kkochi.jpg"
+    ]
+  },
+  { 
+    id: 126, name: "호떡", category: "street", priceRange: "budget", spiceLevel: "mild", price: 4000, 
+    description: "달콤한 속이 가득한 겨울 간식", 
+    tags: ["🥛 순한맛", "🍯 달콤", "🍡 간식"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/9/94/Korean_snack-Hotteok-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/97/Hotteok.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/3c/Hotteok_1.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/37/Hotteok_3.jpg"
+    ]
+  },
+  { 
+    id: 127, name: "붕어빵", category: "street", priceRange: "budget", spiceLevel: "mild", price: 3500, 
+    description: "팥이 듬뿍 들어간 추억의 간식", 
+    tags: ["🥛 순한맛", "🐟 간식", "🍡 길거리"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/2/28/Bungeoppang-01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/a/ad/Boong_o_bbang.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/d3/%ED%95%9C%EA%B5%AD%EA%B8%B0%ED%96%89_%EA%B9%80%EC%9E%A5_%EC%9D%8C%EC%8B%9D_%EB%B6%95%EC%96%B4%EB%B9%B5.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/4/46/%EC%8B%9C%EC%9E%A5_2.jpg"
+    ]
+  },
+
+  // --- VIETNAMESE (베트남) ---
+  { 
+    id: 128, name: "고이꾸온", category: "vietnamese", priceRange: "moderate", spiceLevel: "mild", price: 11000, 
+    description: "쫀득한 라이스페이퍼의 베트남식 롤", 
+    tags: ["🥛 순한맛", "🥗 가벼운", "🌿 신선"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/0/03/Summer_roll.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f2/Goi_cuon_Phuongnhu.JPG",
+      "https://upload.wikimedia.org/wikipedia/commons/9/90/G%E1%BB%8Fi_cu%E1%BB%91n.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/02/G%E1%BB%8Fi_Cu%E1%BB%91n_Chay_Vietnamese_Fresh_Vegetarian_Spring_Roll_2019-1599.jpg"
+    ]
+  },
+  { 
+    id: 129, name: "반쎄오", category: "vietnamese", priceRange: "moderate", spiceLevel: "mild", price: 13000, 
+    description: "바삭한 베트남식 부침 요리", 
+    tags: ["🥛 순한맛", "🥞 부침", "🥬 야채"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/e/e5/B%C3%A1nh_x%C3%A8o_1.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/95/B%C3%A1nh_x%C3%A8o_2.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a5/B%C3%A1nh_x%C3%A8o_with_n%C6%B0%E1%BB%9Bc_m%E1%BA%AFm.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/59/Banh_Xeo_with_fish_sauce_and_vegetables.jpg"
+    ]
+  },
+
+  // --- ASIAN (아시안) ---
+  { 
+    id: 130, name: "락사", category: "asian", priceRange: "premium", spiceLevel: "hot", price: 18000, 
+    description: "코코넛과 향신료가 어우러진 매콤한 국수", 
+    tags: ["🌋 매운맛", "🍜 면요리", "🥥 코코넛"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/7/7a/Curry_Laksa.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/61/Laksa_Noodles.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b9/Laksa_Bihun.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/c/c8/Laksa_Noodle_Soup.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/34/Bowl_of_Katong_Laksa.jpg"
+    ]
+  },
+
+  // --- STREET (분식/간식) ---
+  { 
+    id: 131, name: "핫도그", category: "street", priceRange: "budget", spiceLevel: "mild", price: 4500, 
+    description: "겉은 바삭하고 속은 촉촉한 간편 간식", 
+    tags: ["🥛 순한맛", "🌭 간식", "🍞 간편"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/a/ac/Korean_potato_corn_dog.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5c/Korean_corn_dog_%26_fried_dumplings_-_KOGI_to-go_Korean_kitchen.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/7/77/Corn_dog_001.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/66/Corn_dog_1.jpg"
+    ]
+  },
+  { 
+    id: 132, name: "계란빵", category: "street", priceRange: "budget", spiceLevel: "mild", price: 3500, 
+    description: "따끈한 빵 속에 계란이 쏙 들어간 간식", 
+    tags: ["🥛 순한맛", "🥚 간식", "🍞 달콤"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/6/61/Gyeranppang_by_travel_oriented.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/99/Gyeranppang_%28egg_bread%29_%28Seoul_street_food%29.jpg"
+    ]
+  },
+
+  // --- VIETNAMESE (베트남) ---
+  { 
+    id: 133, name: "분보후에", category: "vietnamese", priceRange: "moderate", spiceLevel: "hot", price: 12000, 
+    description: "매콤한 향신료가 살아있는 진한 국물면", 
+    tags: ["🌋 매운맛", "🍜 면요리", "🥩 고기"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Bun_Bo_Hue_and_Bun_Thit_Nuong.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f5/Bun-Bo-Hue-2008.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/fa/Bun_Bo_Hue_1.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/00/Bun-Bo-Hue-from-Huong-Giang-2011.jpg"
+    ]
+  },
+  { 
+    id: 134, name: "짜조", category: "vietnamese", priceRange: "moderate", spiceLevel: "mild", price: 11000, 
+    description: "바삭하게 튀긴 베트남식 스프링롤", 
+    tags: ["🥛 순한맛", "🥟 튀김", "🥬 야채"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/6/6b/Cha_gio.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/14/M%C3%B3n_%C4%83n_c%C3%BAng_m%E1%BB%93ng_2_T%E1%BA%BFt_2022_%28nem_r%C3%A1n%29_%282%29.jpg"
+    ]
+  },
+
+  // --- MEXICAN (멕시칸) ---
+  { 
+    id: 135, name: "치미창가", category: "mexican", priceRange: "moderate", spiceLevel: "medium", price: 14000, 
+    description: "바삭하게 튀긴 든든한 멕시칸 랩", 
+    tags: ["🌶️🌶️ 보통맛", "🌯 멕시칸", "🥟 바삭함"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/c/c5/Chimichanga_%28188214820%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/27/Chimichanga2.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/9e/2010-02-14_Giant_steak_chimichanga_at_Cosmic_Cantina.jpg"
+    ]
+  },
+  { 
+    id: 136, name: "타말", category: "mexican", priceRange: "budget", spiceLevel: "mild", price: 9000, 
+    description: "옥수수 반죽에 속을 넣어 찐 전통 멕시칸", 
+    tags: ["🥛 순한맛", "🌽 옥수수", "🌮 멕시칸"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/3/3c/Tamales_tabasque%C3%B1os.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/64/La_Havane_%281%29_Tamales_pli%C3%A9s.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/9a/Tamales_Mexicanos_sweet_corn_tamales_01.jpg"
+    ]
+  },
+
+  // --- ASIAN (아시안) ---
+  { 
+    id: 137, name: "카오만까이", category: "asian", priceRange: "moderate", spiceLevel: "mild", price: 12000, 
+    description: "부드러운 닭고기와 향긋한 밥의 조합", 
+    tags: ["🥛 순한맛", "🍗 닭고기", "🍚 든든한"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/5/59/Hainanese_Chicken_Rice%2C_with_asparagus.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/0f/Hainanese_chicken_rice_%28in_Macau%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/9/94/Hainanese_chicken_rice_in_Singapore.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Hainanese_chicken_rice_at_Thai_Ten.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/2f/Hainanese_Chicken_Rice_on_Glass_Dish.jpg"
+    ]
+  },
+  { 
+    id: 138, name: "그린커리", category: "asian", priceRange: "moderate", spiceLevel: "medium", price: 13000, 
+    description: "코코넛 향이 감도는 태국식 커리", 
+    tags: ["🌶️🌶️ 보통맛", "🥥 코코넛", "🍛 커리"],
+    imageUrls: [
+      "https://upload.wikimedia.org/wikipedia/commons/e/e5/Thai_green_chicken_curry_and_roti.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/d/da/Yellow_curry_and_green_curry_-_Nok_Nok_Kitchen_at_The_Cow_2025-09-30.jpg"
     ]
   }
 ];
