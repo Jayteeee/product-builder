@@ -8,6 +8,7 @@ import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
 import { AdBanner } from "@/components/ad-banner";
+import { trackEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -191,6 +192,7 @@ export default function RPS() {
       return;
     }
 
+    trackEvent("rps_game_start", { mode });
     setIsPlaying(true);
     setComputerMove(null);
     setResultMessage("");
@@ -237,6 +239,12 @@ export default function RPS() {
       setResultMessage(t('rps_lose'));
       setScores(s => ({ ...s, lose: s.lose + 1 }));
     }
+    
+    trackEvent("rps_game_complete", { 
+      result, 
+      user_choice: userMove, 
+      ai_choice: compMove 
+    });
     
     setIsPlaying(false);
   };

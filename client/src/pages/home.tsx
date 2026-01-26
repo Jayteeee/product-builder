@@ -26,6 +26,13 @@ import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp,
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 import { ShareButtons } from "@/components/share-buttons";
 import { AdBanner } from "@/components/ad-banner";
+import { 
+  trackLandingView, 
+  trackStepView, 
+  trackOptionSelect, 
+  trackResultView, 
+  trackCtaClick 
+} from "@/lib/analytics";
 
 interface RecommendationResponse {
   recommendation: FoodRecommendation;
@@ -53,6 +60,19 @@ export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [shareUrl, setShareUrl] = useState(window.location.href);
   const shareTitle = t('title');
+
+  // Analytics: Landing View
+  useEffect(() => {
+    trackLandingView();
+  }, []);
+
+  // Analytics: Step View
+  useEffect(() => {
+    const stepNames = ["landing", "category", "price", "spice", "loading", "result"];
+    if (currentStep <= stepNames.length) {
+      trackStepView(stepNames[currentStep - 1] || `step_${currentStep}`, currentStep);
+    }
+  }, [currentStep]);
 
   // Update shareUrl when recommendation changes
   useEffect(() => {
@@ -144,6 +164,7 @@ export default function Home() {
         };
         setRecommendation({ recommendation: sharedRec, alternatives: [] });
         setCurrentStep(5);
+        trackResultView(sharedRec.id, sharedRec.name, sharedRec.category); // Track shared view
         return true;
       }
       return false;
@@ -196,6 +217,7 @@ export default function Home() {
       setRecommendation(data);
       setCurrentStep(5);
       saveToHistory(data.recommendation);
+      trackResultView(data.recommendation.id, data.recommendation.name, data.recommendation.category);
     },
     onError: (error) => {
       console.error("Recommendation failed:", error);
@@ -204,6 +226,7 @@ export default function Home() {
         title: "오류가 발생했습니다",
         description: "메뉴 추천 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
       });
+      trackCtaClick("error_retry_needed", "api_error");
     }
   });
 
@@ -212,6 +235,7 @@ export default function Home() {
     const updatedAlternatives = recommendation.alternatives.filter((alt: FoodRecommendation) => alt.id !== newRecommendation.id);
     updatedAlternatives.push(currentRecommendation);
     setRecommendation({ recommendation: newRecommendation, alternatives: updatedAlternatives });
+    trackCtaClick("swap_recommendation", "result_page");
   };
 
   useEffect(() => {
@@ -228,17 +252,20 @@ export default function Home() {
 
   const handleCategorySelect = (category: string) => {
     setSelections(prev => ({ ...prev, category: category as any }));
+    trackOptionSelect("category", category);
     setTimeout(() => setCurrentStep(2), 500);
   };
 
   const handlePriceSelect = (priceRange: string) => {
     setSelections(prev => ({ ...prev, priceRange: priceRange as any }));
+    trackOptionSelect("price", priceRange);
     setTimeout(() => setCurrentStep(3), 500);
   };
 
   const handleSpiceSelect = (spiceLevel: string) => {
     const newSelections = { ...selections, spiceLevel: spiceLevel as any };
     setSelections(newSelections);
+    trackOptionSelect("spice", spiceLevel);
     setTimeout(() => {
       setCurrentStep(4);
       setTimeout(() => recommendationMutation.mutate(newSelections), 2000);
@@ -249,10 +276,18 @@ export default function Home() {
     setRecommendation({ recommendation: item, alternatives: [] });
     setCurrentStep(5);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    trackCtaClick("history_click", "landing_history");
   };
 
-  const goBack = () => currentStep > 1 && setCurrentStep(currentStep - 1);
+  const goBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+      trackCtaClick("go_back", `step_${currentStep}`);
+    }
+  };
+  
   const startOver = () => {
+    trackCtaClick("start_over", "result_page");
     setCurrentStep(1);
     setRecommendation(null);
     setSelections({ category: "korean", priceRange: "budget", spiceLevel: "mild" });
@@ -274,6 +309,7 @@ export default function Home() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    trackCtaClick("scroll_top", "floating_button");
   };
 
   return (

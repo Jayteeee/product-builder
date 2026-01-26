@@ -20,6 +20,7 @@ import { compressData } from "@/lib/share-utils";
 import type { FoodRecommendation } from "@/lib/types";
 import { ShareButtons } from "./share-buttons";
 import { AdBanner } from "./ad-banner";
+import { trackMapSearch, trackShareClick } from "@/lib/analytics";
 
 interface RecommendationResultProps {
   recommendation: FoodRecommendation;
@@ -41,6 +42,9 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleSearchMap = (type: 'naver' | 'kakao') => {
+    // Analytics
+    trackMapSearch(type, recommendation.name);
+
     // For Korean searches, clean up the menu name by removing content in parentheses
     // e.g., "Kimchi Stew (Pork)" -> "Kimchi Stew"
     let menuName = recommendation.name;
@@ -61,6 +65,9 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
   };
 
   const handleShare = async () => {
+    // Analytics
+    trackShareClick("native_share", recommendation.id.toString());
+
     const url = shareUrl || window.location.href;
     const title = shareTitle || (language === 'ko' ? '오늘뭐먹지? 🍱' : 'Lunch Picker 🍱');
     
@@ -83,6 +90,7 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
           title: language === 'ko' ? "링크 복사 완료" : "Link Copied",
           description: language === 'ko' ? "클립보드에 링크가 복사되었습니다." : "Link has been copied to clipboard.",
         });
+        trackShareClick("clipboard_copy", recommendation.id.toString());
       }
     } catch (err) {
       console.error('Share failed', err);
