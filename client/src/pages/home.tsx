@@ -25,6 +25,7 @@ import { useGeolocation } from "@/hooks/use-geolocation";
 import { ArrowLeft, RotateCcw, Clock, Sun, Moon, Gamepad2, AlertCircle, ArrowUp, History, Share2, MapPin } from "lucide-react";
 import type { RecommendationRequest, FoodRecommendation } from "@/lib/types";
 import { ShareButtons } from "@/components/share-buttons";
+import { AdBanner } from "@/components/ad-banner";
 
 interface RecommendationResponse {
   recommendation: FoodRecommendation;
@@ -533,21 +534,88 @@ export default function Home() {
         )}
       </main>
 
+      {/* AdBanner Section */}
+      <div className="px-4 mb-8">
+        <AdBanner />
+      </div>
+
+      {/* Rich Content Section for AdSense & SEO */}
+      <section className="px-4 py-8 md:px-8 max-w-4xl mx-auto space-y-12">
+        
+        {/* Intro */}
+        <article className="prose dark:prose-invert max-w-none">
+          <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+            <span className="text-3xl">🍽️</span> {t('seo_title_1')}
+          </h2>
+          <p className="text-muted-foreground leading-relaxed text-base">
+            {t('seo_desc_1')}
+            매일 점심시간마다 반복되는 "오늘 뭐 먹지?"라는 고민, 이제 그만하세요. 
+            저희 <strong>점심 메뉴 추천 AI</strong>는 여러분의 현재 위치, 날씨, 그리고 그날의 기분에 딱 맞는 최적의 메뉴를 제안합니다.
+            단순한 랜덤 뽑기가 아닌, 빅데이터 기반의 알고리즘으로 실패 없는 한 끼를 약속드립니다.
+          </p>
+        </article>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-card/30 p-6 rounded-xl border border-border/50">
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <span className="bg-primary/20 p-1.5 rounded-lg text-primary">🎯</span> 맞춤형 추천
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              한식, 중식, 일식, 양식 등 다양한 카테고리와 매운맛 단계, 가격대를 설정하여 
+              나만의 완벽한 점심 메뉴를 찾아보세요.
+            </p>
+          </div>
+          <div className="bg-card/30 p-6 rounded-xl border border-border/50">
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <span className="bg-primary/20 p-1.5 rounded-lg text-primary">📍</span> 내 주변 맛집
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              추천받은 메뉴를 바로 근처에서 즐길 수 있도록, 현재 위치 기반으로 
+              가장 가까운 맛집 정보를 카카오맵과 네이버지도로 연결해드립니다.
+            </p>
+          </div>
+          <div className="bg-card/30 p-6 rounded-xl border border-border/50">
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <span className="bg-primary/20 p-1.5 rounded-lg text-primary">⚡</span> 빠른 결정
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              직장인에게 점심시간은 금입니다. 불필요한 고민 시간을 줄이고, 
+              더 여유로운 휴식 시간을 즐기세요.
+            </p>
+          </div>
+          <div className="bg-card/30 p-6 rounded-xl border border-border/50">
+            <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
+              <span className="bg-primary/20 p-1.5 rounded-lg text-primary">🎲</span> 재미있는 게임
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              동료들과 의견이 갈릴 땐? AI와 함께하는 가위바위보 게임으로 
+              공정하고 재미있게 메뉴를 정해보세요.
+            </p>
+          </div>
+        </div>
+
+        {/* Detailed Category Descriptions */}
+        <article className="prose dark:prose-invert max-w-none bg-card/20 p-6 rounded-2xl">
+          <h2 className="text-xl font-bold text-foreground mb-4">{t('seo_title_2')}</h2>
+          <div className="space-y-4 text-sm text-muted-foreground">
+            <p>{t('seo_desc_2')}</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 list-disc pl-5 mt-4">
+              <li><strong>한식:</strong> 든든한 집밥 느낌의 김치찌개, 된장찌개, 비빔밥 등 한국인의 소울 푸드.</li>
+              <li><strong>중식:</strong> 바삭한 탕수육과 얼큰한 짬뽕, 달콤한 짜장면의 조화.</li>
+              <li><strong>일식:</strong> 깔끔한 초밥, 바삭한 돈까스, 깊은 국물의 라멘과 우동.</li>
+              <li><strong>양식:</strong> 분위기 있는 파스타, 육즙 가득한 스테이크와 피자.</li>
+              <li><strong>분식:</strong> 출출할 때 생각나는 떡볶이, 순대, 튀김의 환상적인 조합.</li>
+              <li><strong>아시안:</strong> 쌀국수, 팟타이, 나시고랭 등 이국적인 맛의 향연.</li>
+            </ul>
+          </div>
+        </article>
+
+      </section>
+
       {/* Disqus Comments */}
       <section className="px-6 mb-8">
         <DisqusComments />
-      </section>
-
-      {/* SEO & Footer */}
-      <section className="p-8 mx-6 mb-8 rounded-2xl bg-card/40 backdrop-blur-md border border-border/30 shadow-sm transition-all hover:shadow-md">
-        <article className="mb-8">
-          <h2 className="text-xl font-bold text-foreground mb-4 leading-tight">{t('seo_title_1')}</h2>
-          <p className="text-muted-foreground text-sm leading-relaxed">{t('seo_desc_1')}</p>
-        </article>
-        <article>
-          <h2 className="text-xl font-bold text-foreground mb-4 leading-tight">{t('seo_title_2')}</h2>
-          <div className="text-muted-foreground text-sm leading-relaxed">{t('seo_desc_2')}</div>
-        </article>
       </section>
 
       <footer className="py-6 text-center text-xs text-muted-foreground mt-8">

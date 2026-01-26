@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTheme } from "@/components/theme-provider";
 import { useLanguage } from "@/components/language-provider";
 import { useToast } from "@/hooks/use-toast";
+import { AdBanner } from "@/components/ad-banner";
 
 declare global {
   interface Window {
@@ -432,6 +433,44 @@ export default function RPS() {
             <p className="leading-relaxed">{t('rps_psychology_desc')}</p>
           </section>
         </div>
+
+        <div className="my-8">
+          <AdBanner />
+        </div>
+
+        {/* Detailed RPS Info for AdSense/SEO */}
+        <section className="mt-12 space-y-8 max-w-none prose dark:prose-invert">
+          <article className="bg-card/20 p-6 rounded-2xl border border-white/5">
+            <h2 className="text-xl font-bold text-foreground mb-4">가위바위보의 역사와 유래</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              가위바위보는 전 세계적으로 가장 널리 알려진 손 게임 중 하나입니다. 
+              그 기원은 중국의 한나라 시대로 거슬러 올라가며, 당시에는 '수석충(수박, 돌, 벌레)'과 같은 형태로 불렸다고 합니다. 
+              이후 일본으로 전해져 '가위바위보(Jan-Ken-Pon)' 형태로 발전하였고, 19세기 서양으로 전파되면서 
+              오늘날 우리가 아는 Rock-Paper-Scissors가 되었습니다.
+            </p>
+          </article>
+
+          <article className="bg-card/20 p-6 rounded-2xl border border-white/5">
+            <h2 className="text-xl font-bold text-foreground mb-4">필승 전략 가이드</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-muted-foreground">
+              <div>
+                <h3 className="font-bold text-foreground mb-2">1. 승리한 사람은 같은 것을 낸다</h3>
+                <p>
+                  심리학 연구에 따르면, 가위바위보에서 이긴 사람은 무의식적으로 
+                  자신에게 승리를 안겨준 손 모양을 다시 낼 확률이 높습니다. 
+                  상대가 방금 '바위'로 이겼다면, 다음 판에 '보'를 내보세요.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-bold text-foreground mb-2">2. 진 사람은 바꾼다</h3>
+                <p>
+                  반대로 게임에서 진 사람은 본능적으로 다른 것을 내려 합니다. 
+                  이때 순서는 보통 가위 → 바위 → 보 순서로 가는 경향이 있다는 '반시계 방향 법칙'을 기억하세요.
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
       </div>
     </div>
   );

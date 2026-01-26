@@ -19,6 +19,7 @@ import { MapPin, Share2, Search, Map as MapIcon } from "lucide-react";
 import { compressData } from "@/lib/share-utils";
 import type { FoodRecommendation } from "@/lib/types";
 import { ShareButtons } from "./share-buttons";
+import { AdBanner } from "./ad-banner";
 
 interface RecommendationResultProps {
   recommendation: FoodRecommendation;
@@ -186,6 +187,10 @@ export function RecommendationResult({ recommendation, alternatives, onSwapRecom
             </div>
           )}
         </div>
+      </div>
+
+      <div className="mb-8">
+        <AdBanner />
       </div>
 
       {alternatives.length > 0 && (
