@@ -44,7 +44,7 @@ export function AdBanner({
     <div className={cn("ad-container my-4 overflow-hidden text-center", className)} ref={adRef}>
       <ins className="adsbygoogle"
         style={{ display: "block" }}
-        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" // User needs to set their ID
+        data-ad-client="ca-pub-9065869497785181"
         data-ad-slot={dataAdSlot}
         data-ad-format={dataAdFormat}
         data-full-width-responsive={dataFullWidthResponsive ? "true" : "false"}></ins>
