@@ -17,6 +17,10 @@ export function AdBanner({
   const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // If we are not rendering the ad unit (because slot ID is missing), 
+    // we should NOT push a request to AdSense.
+    if (dataAdSlot === "YOUR_AD_SLOT_ID") return;
+
     // This is where you would initialize the ad if needed for SPA
     // For AdSense, usually just the script tag in index.html + the ins tag here is enough
     // provided the script is loaded.
@@ -29,7 +33,7 @@ export function AdBanner({
     } catch (err) {
       console.error("AdSense error:", err);
     }
-  }, []);
+  }, [dataAdSlot]);
 
   if (process.env.NODE_ENV === 'development') {
     return (
