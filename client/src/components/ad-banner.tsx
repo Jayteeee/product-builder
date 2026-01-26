@@ -40,6 +40,13 @@ export function AdBanner({
     );
   }
 
+  // Safety check: If the user hasn't provided a specific Slot ID yet, 
+  // do not render the manual ad unit to prevent 400 errors.
+  // The page will still rely on the Auto Ads script in index.html.
+  if (dataAdSlot === "YOUR_AD_SLOT_ID") {
+    return null;
+  }
+
   return (
     <div className={cn("ad-container my-4 overflow-hidden text-center", className)} ref={adRef}>
       <ins className="adsbygoogle"
