@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/components/language-provider";
+import { HelmetProvider } from "react-helmet-async";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Privacy from "@/pages/privacy";
@@ -60,16 +61,18 @@ function AppRouter() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <LanguageProvider defaultLanguage="ko" storageKey="lunch_lang">
-          <QueryClientProvider client={queryClient}>
-            <TooltipProvider>
-              <Toaster />
-              <AppRouter />
-            </TooltipProvider>
-          </QueryClientProvider>
-        </LanguageProvider>
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <LanguageProvider defaultLanguage="ko" storageKey="lunch_lang">
+            <QueryClientProvider client={queryClient}>
+              <TooltipProvider>
+                <Toaster />
+                <AppRouter />
+              </TooltipProvider>
+            </QueryClientProvider>
+          </LanguageProvider>
+        </ThemeProvider>
+      </HelmetProvider>
     </ErrorBoundary>
   );
 }
