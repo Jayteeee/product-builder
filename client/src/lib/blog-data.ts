@@ -9,7 +9,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2024-02-10",
     author: "Lunch AI Editor",
     tags: ["Fine Dining", "Seoul", "Michelin Guide", "Korean Cuisine"],
-    imageUrl: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Seoul Food Guide: 7 Fine Dining Experiences You Can't Miss
 
@@ -71,7 +71,7 @@ More than just a restaurant, Onjium is a research institute dedicated to preserv
     date: "2024-02-09",
     author: "Lunch AI Editor",
     tags: ["Korean BBQ", "Street Food", "Traditional", "Seoul"],
-    imageUrl: "https://images.unsplash.com/photo-1594834749740-74b3f6764be4?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Authentic Korean Flavors: Best BBQ and Traditional Eats in Seoul
 
@@ -126,7 +126,7 @@ One of the oldest and most respected restaurants for *Naengmyeon* (cold buckwhea
     date: "2024-02-08",
     author: "Lunch AI Editor",
     tags: ["Cafe", "Nightlife", "Dessert", "Seoul"],
-    imageUrl: "https://images.unsplash.com/photo-1575429173062-8495066c075a?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1545642412-1d54203e3c03?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Seoul Nightlife and Cafes: Trendy Spots for 2024
 
@@ -170,7 +170,7 @@ A dedicated space for *Sool* (Korean alcohol). If you want to explore premium Ma
     date: "2024-02-07",
     author: "Lunch AI Editor",
     tags: ["Guide", "Education", "Food Culture"],
-    imageUrl: "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Understanding Korean Food: A Beginner's Guide
 
@@ -258,7 +258,7 @@ Mom's Touch (Korean KFC), Lotteria, and any convenience store (GS25, CU) are def
     date: "2024-02-05",
     author: "Lunch AI Editor",
     tags: ["Vegan", "Vegetarian", "Healthy", "Temple Food"],
-    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Plant-Based Seoul: A Guide for Vegans and Vegetarians
 
@@ -296,7 +296,7 @@ A traditional setting serving vegan versions of Korean classics like Jajangmyeon
     date: "2024-02-04",
     author: "Lunch AI Editor",
     tags: ["Convenience Store", "Budget", "Snacks", "Hacks"],
-    imageUrl: "https://images.unsplash.com/photo-1577308856961-8e9ec50d0c6b?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&q=80&w=1000",
     content: `
 # The Magic of Korean Convenience Stores: Must-Try Hacks
 
@@ -315,7 +315,7 @@ Not a hack, but a must-buy. The ramen cup comes with a pouch of *real* aged kimc
 Walk to the freezer, grab a cup of ice (approx 700 won), and choose a pouch drink (coffee, ade, hazelnut). Pour it in. It's the cheapest cafe experience you'll get.
 
 ## 4. Samgak-gimbap (Triangle Rice Ball)
-The perfect $1 breakfast.
+The perfect  breakfast.
 - **Best Flavor:** Jeonju Bibimbap or Tuna Mayo.
 `
   },
@@ -327,7 +327,7 @@ The perfect $1 breakfast.
     date: "2024-02-03",
     author: "Lunch AI Editor",
     tags: ["Delivery", "Tech", "Apps", "Culture"],
-    imageUrl: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1618213837799-25d5552f20f3?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Ordering In: How to Use Delivery Apps in Korea
 
@@ -357,7 +357,7 @@ Most apps require a Korean phone number for identity verification.
     date: "2024-02-02",
     author: "Lunch AI Editor",
     tags: ["Spicy", "Challenge", "Adventure", "Foodie"],
-    imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1585822818949-598e3b2dd17a?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Map-bu-sim: The Ultimate Spicy Food Challenge
 
@@ -390,7 +390,7 @@ You can buy this at any convenience store.
     date: "2024-02-01",
     author: "Lunch AI Editor",
     tags: ["Seasonal", "Winter", "Summer", "Culture"],
-    imageUrl: "https://images.unsplash.com/photo-1628157580637-236b29d49419?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1596450530752-64c8f553dc75?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Eat by the Season: Summer vs. Winter Delicacies
 
