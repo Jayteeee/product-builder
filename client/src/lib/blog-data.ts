@@ -214,5 +214,211 @@ The small plates that come with every meal.
 
 Understanding these categories will help you navigate any menu in Seoul. Don't be afraid to ask for recommendations—Koreans love sharing their food culture!
 `
+  },
+  {
+    id: "5",
+    slug: "seoul-solo-dining-honbap-guide",
+    title: "Honbap: The Ultimate Guide to Solo Dining in Seoul",
+    description: "Traveling alone? Don't worry. Seoul is becoming more solo-friendly. Here are the best places to eat comfortably by yourself.",
+    date: "2024-02-06",
+    author: "Lunch AI Editor",
+    tags: ["Solo Travel", "Honbap", "Budget Friendly"],
+    imageUrl: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=1000",
+    content: `
+# Honbap: The Ultimate Guide to Solo Dining in Seoul
+
+"Honbap" (혼밥) is a portmanteau of "honja" (alone) and "bap" (food/rice). While communal dining is huge in Korea, the solo dining trend is rapidly growing. Here is how to eat alone like a pro without feeling awkward.
+
+## 1. Kimbap Cheonguk (Anywhere)
+The orange sign is a beacon of hope for solo diners. It's the "Heaven of Kimbap."
+- **Menu:** Everything from Kimbap to Tonkatsu and Kimchi Stew.
+- **Vibe:** Quick, cheap, and zero judgement.
+
+## 2. Department Store Food Courts
+Head to the basement of Lotte, Shinsegae, or Hyundai department stores.
+- **Why:** High-quality food, bar seating is common, and you order from a central kiosk so no language barrier with servers.
+
+## 3. Ichiran-style Ramen Spots
+Restaurants like **Aori Ramen** often have individual partitioned booths designed specifically for privacy. You can slurp your noodles in complete peace.
+
+## 4. Fast Food & Convenience Stores
+Mom's Touch (Korean KFC), Lotteria, and any convenience store (GS25, CU) are default solo zones.
+
+## Tips for Honbap
+- **Look for Kiosks:** If a restaurant has an ordering machine at the front, it's 99% solo-friendly.
+- **Time it Right:** Avoid the peak office lunch rush (12:00 PM - 1:00 PM). Go at 1:30 PM for a relaxed meal.
+- **Bar Seating:** Look for places with "dachi" (counter) seating.
+`
+  },
+  {
+    id: "6",
+    slug: "vegan-vegetarian-seoul-guide",
+    title: "Plant-Based Seoul: A Guide for Vegans and Vegetarians",
+    description: "Finding meat-free food in Korea can be tricky, but the scene is booming. From temple food to modern vegan burgers.",
+    date: "2024-02-05",
+    author: "Lunch AI Editor",
+    tags: ["Vegan", "Vegetarian", "Healthy", "Temple Food"],
+    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1000",
+    content: `
+# Plant-Based Seoul: A Guide for Vegans and Vegetarians
+
+Korea is a meat-heavy country, but it also has a deep tradition of Buddhist temple food which is strictly vegan. Here is your survival guide.
+
+## Top Vegan Restaurants
+
+### 1. Balwoo Gongyang (Jongno-gu)
+**Michelin Star:** ⭐
+The pinnacle of Temple Cuisine. Run by the Jogye Order of Korean Buddhism.
+- **Experience:** A multi-course meal that is as spiritual as it is delicious. No garlic or onions are used (pungent spices are avoided in temple food).
+
+### 2. Plant (Itaewon)
+The OG vegan cafe in Seoul.
+- **Menu:** Lentil bowls, vegan burgers, and incredible cakes.
+- **Vibe:** Hip, English-friendly, and very popular with expats.
+
+### 3. Osegye Hyang (Insadong)
+A traditional setting serving vegan versions of Korean classics like Jajangmyeon (black bean noodles) and Tangsuyuk (sweet and sour "pork").
+
+## Survival Phrases
+- **"Gogi ppae-juseyo"** (Please take out the meat).
+- **"Jeo chaeshik-juui-ja yeyo"** (I am a vegetarian).
+
+## Hidden Traps
+- **Kimchi:** Often contains salted shrimp or fish sauce. Ask for "Vegan Kimchi."
+- **Broth:** Many vegetable soups use anchovy or beef broth bases.
+`
+  },
+  {
+    id: "7",
+    slug: "korean-convenience-store-hacks",
+    title: "The Magic of Korean Convenience Stores: Must-Try Hacks",
+    description: "GS25, CU, 7-Eleven... they are more than just shops. They are culinary destinations. Here are the best combinations to try.",
+    date: "2024-02-04",
+    author: "Lunch AI Editor",
+    tags: ["Convenience Store", "Budget", "Snacks", "Hacks"],
+    imageUrl: "https://images.unsplash.com/photo-1577308856961-8e9ec50d0c6b?auto=format&fit=crop&q=80&w=1000",
+    content: `
+# The Magic of Korean Convenience Stores: Must-Try Hacks
+
+Korean convenience stores (Pyeon-eui-jeom) are open 24/7 and offer incredible food quality. But the real fun is in the "combinations."
+
+## 1. The "Mark Meal" (GOT7 Mark Tuan)
+A viral sensation.
+- **Ingredients:** Giant spicy tteokbokki + Spaghetti cup noodle + String cheese + Sausage.
+- **Method:** Cook noodles and tteokbokki -> Mix together -> Add cheese and sausage -> Microwave for 1 min.
+- **Taste:** Cheesy, spicy, savory heaven.
+
+## 2. Omori Kimchi Stew Ramen
+Not a hack, but a must-buy. The ramen cup comes with a pouch of *real* aged kimchi, not just dried flakes. It's widely considered the best cup ramen in Korea.
+
+## 3. Pouch Drink + Ice Cup
+Walk to the freezer, grab a cup of ice (approx 700 won), and choose a pouch drink (coffee, ade, hazelnut). Pour it in. It's the cheapest cafe experience you'll get.
+
+## 4. Samgak-gimbap (Triangle Rice Ball)
+The perfect $1 breakfast.
+- **Best Flavor:** Jeonju Bibimbap or Tuna Mayo.
+`
+  },
+  {
+    id: "8",
+    slug: "korean-delivery-apps-guide",
+    title: "Ordering In: How to Use Delivery Apps in Korea",
+    description: "Fried chicken at the Han River? Jjajangmyeon in your hotel room? Welcome to the world's best delivery culture.",
+    date: "2024-02-03",
+    author: "Lunch AI Editor",
+    tags: ["Delivery", "Tech", "Apps", "Culture"],
+    imageUrl: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&q=80&w=1000",
+    content: `
+# Ordering In: How to Use Delivery Apps in Korea
+
+In Korea, you can get food delivered anywhere. Literally anywhere. Here is how to navigate the "Baedal" (Delivery) culture.
+
+## The Big Three Apps
+1.  **Baedal Minjok (Baemin):** The largest player. Iconic mint color.
+2.  **Yogiyo:** Runner up.
+3.  **Coupang Eats:** Known for "Cheetah Delivery" (one rider, one order) which is super fast.
+
+## For Tourists (The tricky part)
+Most apps require a Korean phone number for identity verification.
+- **Solution 1:** Use **"Shuttle Delivery"** or **"Creatrip"** which cater to English speakers and accept international cards.
+- **Solution 2:** Ask your hotel concierge. They are used to ordering fried chicken for guests.
+- **Solution 3:** Uber Eats does *not* exist in Korea (they pulled out).
+
+## Cultural Notes
+- **Disposables:** Check the box if you need disposable spoons/chopsticks.
+- **The Old Way:** In the past, food came on real plates and you left the dirty dishes outside your door for pickup later. This is rare now, but some traditional Chinese places still do it.
+`
+  },
+  {
+    id: "9",
+    slug: "spicy-food-challenge-seoul",
+    title: "Map-bu-sim: The Ultimate Spicy Food Challenge",
+    description: "Do you have 'Map-bu-sim' (Pride in eating spicy food)? Test your limits at these fiery restaurants.",
+    date: "2024-02-02",
+    author: "Lunch AI Editor",
+    tags: ["Spicy", "Challenge", "Adventure", "Foodie"],
+    imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&q=80&w=1000",
+    content: `
+# Map-bu-sim: The Ultimate Spicy Food Challenge
+
+Koreans love spicy food as a way to relieve stress. If you think you can handle the heat, try these.
+
+## 1. Onnuri Yeongol (Spicy Pork Feet)
+Located in Changsin-dong. The spicy sauce on these pig's trotters is sticky, sweet, and absolutely nuclear.
+- **Survival Item:** Coolpis (a peach yogurt drink) is mandatory.
+
+## 2. Sinjeon Tteokbokki
+A franchise found everywhere. Their "Spicy" level is not a joke. It's a piercing black pepper heat that lingers.
+- **Combo:** Dip their fried fish cake sticks into the sauce.
+
+## 3. Abiko Curry
+A Japanese-style curry house where you choose the spice level.
+- **Level "Baby":** Mild.
+- **Level "God":** Painful.
+- **Warning:** If you choose the highest level, the staff might double-check if you are sane.
+
+## 4. Fire Chicken Noodles (Buldak Bokkeum Myeon)
+You can buy this at any convenience store.
+- **Challenge:** Try the "2x Spicy" or "3x Spicy" version if you dare.
+`
+  },
+  {
+    id: "10",
+    slug: "seasonal-korean-foods-summer-winter",
+    title: "Eat by the Season: Summer vs. Winter Delicacies",
+    description: "Korea has four distinct seasons, and the food changes with the weather. Here is what to eat when.",
+    date: "2024-02-01",
+    author: "Lunch AI Editor",
+    tags: ["Seasonal", "Winter", "Summer", "Culture"],
+    imageUrl: "https://images.unsplash.com/photo-1628157580637-236b29d49419?auto=format&fit=crop&q=80&w=1000",
+    content: `
+# Eat by the Season: Summer vs. Winter Delicacies
+
+Korean food wisdom says you should eat "Yi-yeol-chi-yeol" (fight heat with heat) in summer and warm your core in winter.
+
+## Summer (June - August)
+### 1. Samgyetang (Ginseng Chicken Soup)
+Wait, hot soup in summer? Yes. It's believed that sweating cools you down and the ginseng replenishes energy lost to heat.
+- **Boknal:** The three hottest days of the year when everyone eats this.
+
+### 2. Naengmyeon (Cold Noodles)
+Icy beef broth or spicy sauce over chewy buckwheat noodles.
+- **Mul-naeng:** Soup version.
+- **Bibim-naeng:** Spicy mixed version.
+
+### 3. Patbingsu (Shaved Ice)
+The ultimate dessert. Fluffy shaved ice topped with sweet red bean paste (pat), condensed milk, and rice cakes.
+
+## Winter (December - February)
+### 1. Street Snacks (Bungeoppang & Hotteok)
+- **Bungeoppang:** Fish-shaped pastry filled with red bean or custard.
+- **Hotteok:** Fried dough pancake filled with melting brown sugar and nuts. WARNING: The filling is like molten lava.
+
+### 2. Roasted Sweet Potatoes (Gun-goguma)
+Often sold from drum barrels on street corners. They are incredibly sweet and warm your hands.
+
+### 3. Gukbap (Hot Rice Soup)
+Nothing beats a boiling clay pot of Sundae-guk (blood sausage soup) or Dwaeji-gukbap (pork soup) when it's -10°C outside.
+`
   }
 ];
