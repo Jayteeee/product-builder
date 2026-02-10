@@ -126,7 +126,7 @@ One of the oldest and most respected restaurants for *Naengmyeon* (cold buckwhea
     date: "2024-02-08",
     author: "Lunch AI Editor",
     tags: ["Cafe", "Nightlife", "Dessert", "Seoul"],
-    imageUrl: "https://images.unsplash.com/photo-1545642412-1d54203e3c03?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Seoul Nightlife and Cafes: Trendy Spots for 2024
 
@@ -327,7 +327,7 @@ The perfect  breakfast.
     date: "2024-02-03",
     author: "Lunch AI Editor",
     tags: ["Delivery", "Tech", "Apps", "Culture"],
-    imageUrl: "https://images.unsplash.com/photo-1618213837799-25d5552f20f3?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Ordering In: How to Use Delivery Apps in Korea
 
@@ -357,7 +357,7 @@ Most apps require a Korean phone number for identity verification.
     date: "2024-02-02",
     author: "Lunch AI Editor",
     tags: ["Spicy", "Challenge", "Adventure", "Foodie"],
-    imageUrl: "https://images.unsplash.com/photo-1585822818949-598e3b2dd17a?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Map-bu-sim: The Ultimate Spicy Food Challenge
 
@@ -390,7 +390,7 @@ You can buy this at any convenience store.
     date: "2024-02-01",
     author: "Lunch AI Editor",
     tags: ["Seasonal", "Winter", "Summer", "Culture"],
-    imageUrl: "https://images.unsplash.com/photo-1596450530752-64c8f553dc75?auto=format&fit=crop&q=80&w=1000",
+    imageUrl: "https://images.unsplash.com/photo-1617347454431-f49d7ff5c3b1?auto=format&fit=crop&q=80&w=1000",
     content: `
 # Eat by the Season: Summer vs. Winter Delicacies
 
