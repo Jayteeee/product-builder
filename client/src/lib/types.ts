@@ -25,3 +25,15 @@ export interface FoodRecommendation {
   tags: string[] | null;
   isAiGenerated?: boolean;
 }
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  date: string;
+  author: string;
+  imageUrl?: string;
+  tags: string[];
+}

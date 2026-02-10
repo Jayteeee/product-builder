@@ -10,6 +10,8 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import Privacy from "@/pages/privacy";
 import RPS from "@/pages/rps";
+import Blog from "@/pages/blog";
+import BlogPostPage from "@/pages/blog-post";
 import NotFound from "@/pages/not-found";
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
@@ -53,6 +55,8 @@ function AppRouter() {
       <Route path="/rps" component={RPS} />
       <Route path="/about" component={About} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/blog/:slug" component={BlogPostPage} />
       <Route component={NotFound} />
     </Switch>
   );
