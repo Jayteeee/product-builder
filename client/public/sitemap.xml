@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://product-builder-10l.pages.dev/</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://product-builder-10l.pages.dev/rps</loc>
@@ -19,5 +24,56 @@
     <loc>https://product-builder-10l.pages.dev/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/seoul-fine-dining-guide-2024</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/authentic-korean-bbq-traditional-eats</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/seoul-nightlife-cafes-2024</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/understanding-korean-food-types</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/seoul-solo-dining-honbap-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/vegan-vegetarian-seoul-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/korean-convenience-store-hacks</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/korean-delivery-apps-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/spicy-food-challenge-seoul</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://product-builder-10l.pages.dev/blog/seasonal-korean-foods-summer-winter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
