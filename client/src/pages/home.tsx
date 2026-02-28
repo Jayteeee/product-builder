@@ -656,7 +656,7 @@ export default function Home() {
 
       <footer className="py-6 text-center text-xs text-muted-foreground mt-8">
         <p className="mb-2">{t('footer_note')}</p>
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center flex-wrap gap-4">
           <Link href="/blog" className="underline hover:text-primary cursor-pointer">Blog</Link>
           <Link href="/about" className="underline hover:text-primary cursor-pointer">{t('about')}</Link>
           <button 
@@ -666,6 +666,7 @@ export default function Home() {
             {t('affiliate')}
           </button>
           <Link href="/privacy" className="underline hover:text-primary cursor-pointer">{t('privacy')}</Link>
+          <Link href="/terms" className="underline hover:text-primary cursor-pointer">{language === 'en' ? 'Terms of Service' : '이용약관'}</Link>
         </div>
       </footer>
 

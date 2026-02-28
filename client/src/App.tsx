@@ -13,6 +13,7 @@ import RPS from "@/pages/rps";
 import Blog from "@/pages/blog";
 import BlogPostPage from "@/pages/blog-post";
 import NotFound from "@/pages/not-found";
+import Terms from "@/pages/terms";
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -57,6 +58,7 @@ function AppRouter() {
       <Route path="/privacy" component={Privacy} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPostPage} />
+      <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>
   );
